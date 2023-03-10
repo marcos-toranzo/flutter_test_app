@@ -1,12 +1,23 @@
 {
   "dark": "Dark",
+  "dontHaveAnAccount": "Don't have an account?",
+  "email": "Email",
+  "errorLogingIn": "Oops! Something went wrong trying to login. Please, try again.",
+  "forgotYourPassowrd": "Forgot your password?",
   "goBack": "Go Back",
+  "home": "Home",
   "invalidScreenError": "Oops! Something went wrong!",
   "language": "Language",
   "light": "Light",
+  "login": "Login",
+  "logingIn": "Loging in",
+  "password": "Password",
   "pressBackAgainToExitApp": "Press Back again to exit App",
   "settings": "Settings",
   "signOut": "Sign out",
+  "signUp": "Sign Up",
   "system": "System",
-  "theme": "Theme"
+  "theme": "Theme",
+  "toLogin": "Login",
+  "toSignUp": "Sign Up"
 }

@@ -1,7 +1,7 @@
 # Flutter Test App
 
 <p align="center">
-   <img src="assets/images/app_logo.png" width="100" />
+   <img src="assets/images/app_logo.svg" width="200" />
 </p>
 
 ### Flutter test app.
