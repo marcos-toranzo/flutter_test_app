@@ -40,22 +40,6 @@ class Environment {
   static String get registerEndpoint => _getVariable('REGISTER_ENDPOINT');
 }
 
-// Class for bypassing CERTIFICATE_VERIFY_FAILED error on local develpment
-class _HttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-  }
-}
-
 Future<void> initConfig() async {
   await dotenv.load(fileName: Environment.fileName);
-
-  if (kDebugMode) {
-    // Override normal behavior with mock implementation to accept certificates
-    // on local development
-    HttpOverrides.global = _HttpOverrides();
-  }
 }
