@@ -1,0 +1,12 @@
+{
+  "dark": "Oscuro",
+  "goBack": "Regresar",
+  "invalidScreenError": "Ups! Ha ocurrido un error!",
+  "language": "Idioma",
+  "light": "Claro",
+  "pressBackAgainToExitApp": "Presiona Atrás otra vez para cerrar App",
+  "settings": "Ajustes",
+  "signOut": "Cerrar sesión",
+  "system": "Sistema",
+  "theme": "Tema"
+}
