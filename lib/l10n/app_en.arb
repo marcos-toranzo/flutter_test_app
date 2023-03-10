@@ -1,0 +1,12 @@
+{
+  "dark": "Dark",
+  "goBack": "Go Back",
+  "invalidScreenError": "Oops! Something went wrong!",
+  "language": "Language",
+  "light": "Light",
+  "pressBackAgainToExitApp": "Press Back again to exit App",
+  "settings": "Settings",
+  "signOut": "Sign out",
+  "system": "System",
+  "theme": "Theme"
+}
