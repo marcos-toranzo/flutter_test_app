@@ -1,12 +1,23 @@
 {
   "dark": "Oscuro",
+  "dontHaveAnAccount": "¿No tienes cuenta?",
+  "email": "Correo",
+  "errorLogingIn": "¡Ups! Ha ocurrido un error intentando iniciar sesión. Por favor, vuelva a intentarlo.",
+  "forgotYourPassowrd": "¿Olvidaste la contraseña?",
   "goBack": "Regresar",
-  "invalidScreenError": "Ups! Ha ocurrido un error!",
+  "home": "Inicio",
+  "invalidScreenError": "¡Ups, Ha ocurrido un error!",
   "language": "Idioma",
   "light": "Claro",
+  "login": "Inicia sesión",
+  "logingIn": "Iniciando sesión",
+  "password": "Contraseña",
   "pressBackAgainToExitApp": "Presiona Atrás otra vez para cerrar App",
   "settings": "Ajustes",
   "signOut": "Cerrar sesión",
+  "signUp": "Regístrate",
   "system": "Sistema",
-  "theme": "Tema"
+  "theme": "Tema",
+  "toLogin": "Iniciar sesión",
+  "toSignUp": "Registrarse"
 }

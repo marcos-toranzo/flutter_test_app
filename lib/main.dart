@@ -5,7 +5,7 @@ import 'package:flutter_test_app/app_configuration.dart';
 import 'package:flutter_test_app/controllers/app_configuration_controller.dart';
 import 'package:flutter_test_app/controllers/auth_controller.dart';
 import 'package:flutter_test_app/utils/localization.dart';
-import 'package:flutter_test_app/utils/themes.dart';
+import 'package:flutter_test_app/utils/styling.dart';
 import 'package:flutter_test_app/views/login/login_screen.dart';
 import 'package:flutter_test_app/widgets/app_logo.dart';
 import 'package:flutter_test_app/widgets/space.dart';
@@ -83,7 +83,7 @@ class _InitialScreenState extends State<_InitialScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: const [
-            AppLogo(),
+            AppLogo(size: 160),
             Space.vertical(50),
             CircularProgressIndicator(),
           ],

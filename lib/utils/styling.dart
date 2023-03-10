@@ -1,29 +1,35 @@
 import 'package:flutter/material.dart';
 
-const primaryColor = Color(0xFF5371FF);
+const primaryColor = Color(0xFF33C283);
 const secondaryColor = Color(0xFF37B6FF);
+const backgroundColor = Color(0xFFF3F3F3);
+const borderRadiusValue = 10.0;
 
-final darkAppTheme = ThemeData.dark(
+final _baseTheme = ThemeData(
   useMaterial3: true,
-).copyWith(
+  fontFamily: 'Inter',
   primaryColor: primaryColor,
+  primarySwatch: getMaterialColor(primaryColor),
+  scaffoldBackgroundColor: backgroundColor,
+);
+
+final darkAppTheme = _baseTheme.copyWith(
+  brightness: Brightness.dark,
   colorScheme: const ColorScheme.dark(
     primary: primaryColor,
     secondary: secondaryColor,
   ),
 );
 
-final lightAppTheme = ThemeData(
-  useMaterial3: true,
-  primaryColor: primaryColor,
-  primarySwatch: toMaterialColor(primaryColor),
+final lightAppTheme = _baseTheme.copyWith(
+  brightness: Brightness.light,
   colorScheme: const ColorScheme.light(
     primary: primaryColor,
     secondary: secondaryColor,
   ),
 );
 
-MaterialColor toMaterialColor(Color color) {
+MaterialColor getMaterialColor(Color color) {
   List strengths = <double>[.05];
   Map<int, Color> swatch = {};
 

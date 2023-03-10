@@ -4,13 +4,18 @@ void showSnackBar({
   required BuildContext context,
   required String text,
 }) {
-  ScaffoldMessenger.of(context).showSnackBar(
+  final scaffoldMessenger = ScaffoldMessenger.of(context);
+
+  scaffoldMessenger.clearSnackBars();
+
+  scaffoldMessenger.showSnackBar(
     SnackBar(
       content: Text(
         text,
         style: const TextStyle(color: Colors.white),
       ),
       backgroundColor: Colors.black54,
+      elevation: 0,
     ),
   );
 }

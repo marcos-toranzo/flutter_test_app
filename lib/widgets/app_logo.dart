@@ -1,24 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test_app/widgets/space.dart';
 
 class AppLogo extends StatelessWidget {
-  const AppLogo({super.key});
+  final bool includeText;
+  final double size;
+
+  const AppLogo({
+    required this.size,
+    this.includeText = true,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Image(
-          image: AssetImage('assets/images/app_logo.png'),
-          height: 160,
+        SvgPicture.asset(
+          'assets/images/app_logo.svg',
+          height: size,
+          width: size,
         ),
         const Space.vertical(20),
-        Text(
-          'Mobile App',
-          style: TextStyle(
-            fontSize: Theme.of(context).textTheme.displaySmall?.fontSize!,
+        if (includeText)
+          Text(
+            'Mobile App',
+            style: TextStyle(
+              fontSize: Theme.of(context).textTheme.displaySmall?.fontSize!,
+            ),
           ),
-        ),
       ],
     );
   }
