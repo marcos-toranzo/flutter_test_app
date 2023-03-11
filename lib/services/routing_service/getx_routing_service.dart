@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test_app/views/home/home_screen.dart';
-import 'package:flutter_test_app/views/login/login_screen.dart';
+import 'package:flutter_test_app/views/login_signup/login_signup_screen.dart';
 import 'package:get/get.dart';
 import 'package:flutter_test_app/app_configuration.dart';
 import 'package:flutter_test_app/services/routing_service/routing_service.dart';
 import 'package:flutter_test_app/widgets/unknown_page.dart';
 
 final routeBuilders = {
-  LoginScreen.routeName: () => LoginScreen(),
+  LoginSignUpScreen.routeName: () => LoginSignUpScreen(),
   HomeScreen.routeName: () => const HomeScreen(),
 };
 

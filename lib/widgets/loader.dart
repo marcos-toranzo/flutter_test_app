@@ -6,10 +6,10 @@ class Loader extends StatelessWidget {
   final bool show;
 
   const Loader({
-    key,
+    super.key,
     required this.show,
     required this.text,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
