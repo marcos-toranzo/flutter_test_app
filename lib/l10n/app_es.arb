@@ -1,18 +1,60 @@
 {
+  "alreadyHaveAnAccount": "¿Ya tienes cuenta?",
   "dark": "Oscuro",
   "dontHaveAnAccount": "¿No tienes cuenta?",
   "email": "Correo",
   "errorLogingIn": "¡Ups! Ha ocurrido un error intentando iniciar sesión. Por favor, vuelva a intentarlo.",
+  "errorSigningUp": "¡Ups! Ha ocurrido un error intentando crear cuenta. Por favor, vuelva a intentarlo.",
   "forgotYourPassowrd": "¿Olvidaste la contraseña?",
   "goBack": "Regresar",
   "home": "Inicio",
+  "invalidEmail": "Correo inválido",
   "invalidScreenError": "¡Ups, Ha ocurrido un error!",
   "language": "Idioma",
   "light": "Claro",
   "login": "Inicia sesión",
   "logingIn": "Iniciando sesión",
   "password": "Contraseña",
+  "passwordAtLeastNCharacters": "{count, plural, =0{No debe contener caracteres} =1{Debe contener al menos 1 caracter} other{Debe contener al menos {count} caracteres}}",
+  "@passwordAtLeastNCharacters": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "passwordAtLeastNNumericCharacters": "{count, plural, =0{No debe contener caracteres numéricos} =1{Debe contener al menos 1 caracter numérico} other{Debe contener al menos {count} caracteres numéricos}}",
+  "@passwordAtLeastNNumericCharacters": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "passwordAtLeastNSpecialCharacters": "{count, plural, =0{No debe contener caracteres especiales} =1{Debe contener al menos 1 caracter especial} other{Debe contener al menos {count} caracteres especiales characters}}",
+  "@passwordAtLeastNSpecialCharacters": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "passwordAtLeastNUppercaseCharacters": "{count, plural, =0{No debe contener mayúsculas} =1{Debe contener al menos 1 mayúscula} other{Debe contener al menos {count} mayúsculas}}",
+  "@passwordAtLeastNUppercaseCharacters": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "passwordsDontMatch": "Las contraseñas no son iguales",
   "pressBackAgainToExitApp": "Presiona Atrás otra vez para cerrar App",
+  "repeatPassword": "Repetir Contraseña",
+  "required": "Obligatorio",
   "settings": "Ajustes",
   "signOut": "Cerrar sesión",
   "signUp": "Regístrate",

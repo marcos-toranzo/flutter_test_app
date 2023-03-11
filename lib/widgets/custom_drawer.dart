@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_test_app/views/login/login_screen.dart';
+import 'package:flutter_test_app/views/login_signup/login_signup_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter_test_app/app_configuration.dart';
@@ -9,7 +9,7 @@ import 'package:flutter_test_app/utils/iterable_utils.dart';
 import 'package:flutter_test_app/utils/language_info.dart';
 import 'package:flutter_test_app/utils/localization.dart';
 import 'package:flutter_test_app/widgets/column_with_padding.dart';
-import 'package:flutter_test_app/widgets/custom_dropdown_menu.dart';
+import 'package:flutter_test_app/widgets/form_fields/custom_dropdown_menu.dart';
 import 'package:flutter_test_app/widgets/horizontally_scrollable_text.dart';
 import 'package:flutter_test_app/widgets/row_with_padding.dart';
 
@@ -138,7 +138,7 @@ class CustomDrawer extends StatelessWidget {
                 onLogOut: () {
                   routingService.popAllAndPushRoute(
                     context: context,
-                    routeName: LoginScreen.routeName,
+                    routeName: LoginSignUpScreen.routeName,
                   );
                 },
               );

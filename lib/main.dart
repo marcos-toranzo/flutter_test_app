@@ -6,7 +6,7 @@ import 'package:flutter_test_app/controllers/app_configuration_controller.dart';
 import 'package:flutter_test_app/controllers/auth_controller.dart';
 import 'package:flutter_test_app/utils/localization.dart';
 import 'package:flutter_test_app/utils/styling.dart';
-import 'package:flutter_test_app/views/login/login_screen.dart';
+import 'package:flutter_test_app/views/login_signup/login_signup_screen.dart';
 import 'package:flutter_test_app/widgets/app_logo.dart';
 import 'package:flutter_test_app/widgets/space.dart';
 
@@ -71,7 +71,7 @@ class _InitialScreenState extends State<_InitialScreen> {
   void onLoginError() {
     routingService.popAndPushRoute(
       context: context,
-      routeName: LoginScreen.routeName,
+      routeName: LoginSignUpScreen.routeName,
     );
   }
 

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test_app/utils/styling.dart';
+import 'package:flutter_test_app/utils/validators.dart';
 
 enum TextFormFieldPosition {
+  only,
   top,
   middle,
   bottom,
@@ -13,12 +15,20 @@ class CustomTextFormField extends StatelessWidget {
   final String hintText;
   final Widget? icon;
   final TextFormFieldPosition position;
+  final TextInputType? textInputType;
+  final bool obscureText;
+  final List<FormFieldValidator<String>> validators;
+  final AutovalidateMode? autovalidateMode;
 
   const CustomTextFormField({
     required this.controller,
     required this.hintText,
-    this.position = TextFormFieldPosition.middle,
+    this.position = TextFormFieldPosition.only,
+    this.textInputType,
+    this.validators = const [],
     this.textInputAction,
+    this.autovalidateMode,
+    this.obscureText = false,
     this.icon,
     super.key,
   });
@@ -27,8 +37,10 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     const borderRadius = Radius.circular(borderRadiusValue);
 
-    final isBottom = position == TextFormFieldPosition.bottom;
-    final isTop = position == TextFormFieldPosition.top;
+    final isBottom = position == TextFormFieldPosition.bottom ||
+        position == TextFormFieldPosition.only;
+    final isTop = position == TextFormFieldPosition.top ||
+        position == TextFormFieldPosition.only;
 
     final border = OutlineInputBorder(
       borderRadius: BorderRadius.only(
@@ -43,24 +55,37 @@ class CustomTextFormField extends StatelessWidget {
       ),
     );
 
+    final inputAction = textInputAction ??
+        (isBottom ? TextInputAction.done : TextInputAction.next);
+
     return TextFormField(
       controller: controller,
-      textInputAction: textInputAction,
+      textInputAction: inputAction,
       style: const TextStyle(fontWeight: FontWeight.w600),
+      keyboardType: textInputType,
+      obscureText: obscureText,
+      validator: FormValidators.compose(validators),
+      autovalidateMode: autovalidateMode,
       decoration: InputDecoration(
         filled: true,
         fillColor: const Color(0xFFFAFAFA),
-        prefixIcon: Padding(
-          padding: const EdgeInsets.only(right: 18.0, left: 24.0),
-          child: icon,
-        ),
+        prefixIcon: icon != null
+            ? Padding(
+                padding: const EdgeInsets.only(right: 18.0, left: 24.0),
+                child: icon,
+              )
+            : null,
         hintText: hintText,
         hintStyle: const TextStyle(
           fontWeight: FontWeight.w600,
           color: Color(0xFF8C8C8C),
         ),
         enabledBorder: border,
-        focusedBorder: border,
+        focusedBorder: border.copyWith(
+          borderSide: border.borderSide.copyWith(
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
         isDense: true,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 15,
