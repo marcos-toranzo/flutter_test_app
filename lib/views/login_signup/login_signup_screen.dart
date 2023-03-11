@@ -92,6 +92,12 @@ class LoginSignUpScreen extends StatelessWidget {
                                   errorMessage: translations
                                       .passwordAtLeastNUppercaseCharacters(1),
                                 ),
+                                lowercaseCharCountCheck:
+                                    PasswordValidationCheck(
+                                  count: 1,
+                                  errorMessage: translations
+                                      .passwordAtLeastNLowercaseCharacters(1),
+                                ),
                               ),
                             ),
                             if (!controller.isLogingIn)
@@ -167,7 +173,7 @@ class LoginSignUpScreen extends StatelessWidget {
                                   },
                                 );
                               }
-                            } else {}
+                            }
                           },
                         ),
                         const Space.vertical(10),

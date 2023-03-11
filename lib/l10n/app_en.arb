@@ -24,6 +24,15 @@
       }
     }
   },
+  "passwordAtLeastNLowercaseCharacters": "{count, plural, =0{Must contain no lowercase characters} =1{Must contain at least 1 lowercase character} other{Must contain at least {count} lowercase characters}}",
+  "@passwordAtLeastNLowercaseCharacters": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
   "passwordAtLeastNNumericCharacters": "{count, plural, =0{Must contain no numeric characters} =1{Must contain at least 1 numeric character} other{Must contain at least {count} numeric characters}}",
   "@passwordAtLeastNNumericCharacters": {
     "placeholders": {

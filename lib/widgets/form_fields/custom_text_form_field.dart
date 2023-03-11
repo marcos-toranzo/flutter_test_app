@@ -64,7 +64,7 @@ class CustomTextFormField extends StatelessWidget {
       style: const TextStyle(fontWeight: FontWeight.w600),
       keyboardType: textInputType,
       obscureText: obscureText,
-      validator: FormValidators.compose(validators),
+      validator: FormValidators.chain(validators),
       autovalidateMode: autovalidateMode,
       decoration: InputDecoration(
         filled: true,
