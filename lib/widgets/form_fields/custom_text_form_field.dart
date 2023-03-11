@@ -86,6 +86,8 @@ class CustomTextFormField extends StatelessWidget {
             color: Theme.of(context).primaryColor,
           ),
         ),
+        errorBorder: border,
+        border: border,
         isDense: true,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 15,

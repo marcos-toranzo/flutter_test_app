@@ -13,8 +13,8 @@ class DoubleDismissScreen extends StatefulWidget {
   const DoubleDismissScreen({
     required this.child,
     this.duration = const Duration(seconds: 2),
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<DoubleDismissScreen> createState() => _DoubleDismissScreenState();

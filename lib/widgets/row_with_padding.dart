@@ -17,7 +17,6 @@ class RowWithPadding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      key: key,
       padding: padding,
       child: Row(
         mainAxisAlignment: mainAxisAlignment,

@@ -22,8 +22,8 @@ class ModuleTile {
 
 class CustomDrawer extends StatelessWidget {
   CustomDrawer({
-    key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final AuthController _authController = Get.find();
   final AppConfigurationController _appConfigurationController = Get.find();
