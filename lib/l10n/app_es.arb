@@ -1,5 +1,50 @@
 {
   "alreadyHaveAnAccount": "¿Ya tienes cuenta?",
+  "atLeastNCharacters": "{count, plural, =0{No debe contener caracteres} =1{Debe contener al menos 1 caracter} other{Debe contener al menos {count} caracteres}}",
+  "@atLeastNCharacters": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "atLeastNLowercase": "{count, plural, =0{No debe contener minúsculas} =1{Debe contener al menos 1 minúscula} other{Debe contener al menos {count} minúsculas}}",
+  "@atLeastNLowercase": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "atLeastNNumeric": "{count, plural, =0{No debe contener caracteres numéricos} =1{Debe contener al menos 1 caracter numérico} other{Debe contener al menos {count} caracteres numéricos}}",
+  "@atLeastNNumeric": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "atLeastNSpecial": "{count, plural, =0{No debe contener caracteres especiales} =1{Debe contener al menos 1 caracter especial} other{Debe contener al menos {count} caracteres especiales characters}}",
+  "@atLeastNSpecial": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "atLeastNUppercase": "{count, plural, =0{No debe contener mayúsculas} =1{Debe contener al menos 1 mayúscula} other{Debe contener al menos {count} mayúsculas}}",
+  "@atLeastNUppercase": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
   "dark": "Oscuro",
   "dontHaveAnAccount": "¿No tienes cuenta?",
   "email": "Correo",
@@ -8,6 +53,7 @@
   "forgotYourPassowrd": "¿Olvidaste la contraseña?",
   "goBack": "Regresar",
   "home": "Inicio",
+  "invalidCredentials": "Invalid Credentials",
   "invalidEmail": "Correo inválido",
   "invalidScreenError": "¡Ups, Ha ocurrido un error!",
   "language": "Idioma",
@@ -15,51 +61,6 @@
   "login": "Inicia sesión",
   "logingIn": "Iniciando sesión",
   "password": "Contraseña",
-  "passwordAtLeastNCharacters": "{count, plural, =0{No debe contener caracteres} =1{Debe contener al menos 1 caracter} other{Debe contener al menos {count} caracteres}}",
-  "@passwordAtLeastNCharacters": {
-    "placeholders": {
-      "count": {
-        "type": "num",
-        "format": "compact"
-      }
-    }
-  },
-  "passwordAtLeastNLowercaseCharacters": "{count, plural, =0{No debe contener minúsculas} =1{Debe contener al menos 1 minúscula} other{Debe contener al menos {count} minúsculas}}",
-  "@passwordAtLeastNLowercaseCharacters": {
-    "placeholders": {
-      "count": {
-        "type": "num",
-        "format": "compact"
-      }
-    }
-  },
-  "passwordAtLeastNNumericCharacters": "{count, plural, =0{No debe contener caracteres numéricos} =1{Debe contener al menos 1 caracter numérico} other{Debe contener al menos {count} caracteres numéricos}}",
-  "@passwordAtLeastNNumericCharacters": {
-    "placeholders": {
-      "count": {
-        "type": "num",
-        "format": "compact"
-      }
-    }
-  },
-  "passwordAtLeastNSpecialCharacters": "{count, plural, =0{No debe contener caracteres especiales} =1{Debe contener al menos 1 caracter especial} other{Debe contener al menos {count} caracteres especiales characters}}",
-  "@passwordAtLeastNSpecialCharacters": {
-    "placeholders": {
-      "count": {
-        "type": "num",
-        "format": "compact"
-      }
-    }
-  },
-  "passwordAtLeastNUppercaseCharacters": "{count, plural, =0{No debe contener mayúsculas} =1{Debe contener al menos 1 mayúscula} other{Debe contener al menos {count} mayúsculas}}",
-  "@passwordAtLeastNUppercaseCharacters": {
-    "placeholders": {
-      "count": {
-        "type": "num",
-        "format": "compact"
-      }
-    }
-  },
   "passwordsDontMatch": "Las contraseñas no son iguales",
   "pressBackAgainToExitApp": "Presiona Atrás otra vez para cerrar App",
   "repeatPassword": "Repetir Contraseña",

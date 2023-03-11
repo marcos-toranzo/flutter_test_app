@@ -70,33 +70,35 @@ class LoginSignUpScreen extends StatelessWidget {
                                   ? TextFormFieldPosition.bottom
                                   : TextFormFieldPosition.middle,
                               isRequired: true,
-                              checks: [
-                                PasswordValidator.minLength(
-                                  count: 8,
-                                  errorMessage: translations
-                                      .passwordAtLeastNCharacters(8),
-                                ),
-                                PasswordValidator.lowercaseCount(
-                                  count: 1,
-                                  errorMessage: translations
-                                      .passwordAtLeastNLowercaseCharacters(1),
-                                ),
-                                PasswordValidator.uppercaseCount(
-                                  count: 1,
-                                  errorMessage: translations
-                                      .passwordAtLeastNUppercaseCharacters(1),
-                                ),
-                                PasswordValidator.numericCount(
-                                  count: 1,
-                                  errorMessage: translations
-                                      .passwordAtLeastNNumericCharacters(1),
-                                ),
-                                PasswordValidator.specialCount(
-                                  count: 1,
-                                  errorMessage: translations
-                                      .passwordAtLeastNSpecialCharacters(1),
-                                ),
-                              ],
+                              checks: controller.isLogingIn
+                                  ? []
+                                  : [
+                                      PasswordValidator.minLength(
+                                        count: 8,
+                                        errorMessage:
+                                            translations.atLeastNCharacters(8),
+                                      ),
+                                      PasswordValidator.lowercaseCount(
+                                        count: 1,
+                                        errorMessage:
+                                            translations.atLeastNLowercase(1),
+                                      ),
+                                      PasswordValidator.uppercaseCount(
+                                        count: 1,
+                                        errorMessage:
+                                            translations.atLeastNUppercase(1),
+                                      ),
+                                      PasswordValidator.numericCount(
+                                        count: 1,
+                                        errorMessage:
+                                            translations.atLeastNNumeric(1),
+                                      ),
+                                      PasswordValidator.specialCount(
+                                        count: 1,
+                                        errorMessage:
+                                            translations.atLeastNSpecial(1),
+                                      ),
+                                    ],
                             ),
                             if (!controller.isLogingIn)
                               PasswordFormField(
@@ -140,37 +142,28 @@ class LoginSignUpScreen extends StatelessWidget {
                               : translations.toSignUp,
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              if (controller.isLogingIn) {
-                                controller.onLoginPressed(
-                                  onError: () {
-                                    showSnackBar(
-                                      context: context,
-                                      text: translations.errorLogingIn,
-                                    );
-                                  },
-                                  onSuccess: () {
-                                    routingService.popAndPushRoute(
-                                      context: context,
-                                      routeName: HomeScreen.routeName,
-                                    );
-                                  },
-                                );
-                              } else {
-                                controller.onSignUpPressed(
-                                  onError: () {
-                                    showSnackBar(
-                                      context: context,
-                                      text: translations.errorSigningUp,
-                                    );
-                                  },
-                                  onSuccess: () {
-                                    routingService.popAndPushRoute(
-                                      context: context,
-                                      routeName: HomeScreen.routeName,
-                                    );
-                                  },
-                                );
-                              }
+                              controller.onSubmit(
+                                onError: () {
+                                  showSnackBar(
+                                    context: context,
+                                    text: controller.isLogingIn
+                                        ? translations.errorLogingIn
+                                        : translations.errorSigningUp,
+                                  );
+                                },
+                                onInvalidCredentials: () {
+                                  showSnackBar(
+                                    context: context,
+                                    text: translations.invalidCredentials,
+                                  );
+                                },
+                                onSuccess: () {
+                                  routingService.popAndPushRoute(
+                                    context: context,
+                                    routeName: HomeScreen.routeName,
+                                  );
+                                },
+                              );
                             }
                           },
                         ),

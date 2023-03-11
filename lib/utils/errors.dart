@@ -1,6 +1,4 @@
-enum Error {
-  invalidSession,
-  invalidTokenRefresh,
-  unauthorized,
-  userCancelledLoginFlow,
+enum Errors {
+  invalidCredentials,
+  httpRequestTimeout,
 }

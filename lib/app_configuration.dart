@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test_app/services/network_service/http_network_service.dart';
@@ -27,17 +25,15 @@ class Environment {
         fallback: valueOnNotFoundKey,
       );
 
-  static String get accessTokenKey => _getVariable('ACCESS_TOKEN_KEY');
+  static String get googleBooksApiBaseUrl =>
+      _getVariable('GOOGLE_BOOKS_API_BASE_URL');
+  static String get googleBooksApiVolumesEndpoint =>
+      _getVariable('GOOGLE_BOOKS_API_VOLUMES_ENDPOINT');
+  static String get googleBooksApiKey => _getVariable('GOOGLE_BOOKS_API_KEY');
+
+  static String get userIdKey => _getVariable('USER_ID_KEY');
   static String get savedLanguageKey => _getVariable('SAVED_LANGUAGE_KEY');
   static String get savedThemeKey => _getVariable('SAVED_THEME_KEY');
-
-  static String get apiBaseUrl => Platform.isAndroid
-      ? _getVariable('API_BASE_URL_ANDROID')
-      : _getVariable('API_BASE_URL_IOS');
-
-  static String get userEndpoint => _getVariable('USER_ENDPOINT');
-  static String get loginEndpoint => _getVariable('LOGIN_ENDPOINT');
-  static String get registerEndpoint => _getVariable('REGISTER_ENDPOINT');
 }
 
 Future<void> initConfig() async {

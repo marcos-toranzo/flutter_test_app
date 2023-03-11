@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test_app/controllers/auth_controller.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 
 class LoginSignUpController extends GetxController {
   final AuthController _authController;
@@ -25,28 +24,34 @@ class LoginSignUpController extends GetxController {
   final _isLoading = false.obs;
   bool get isLoading => _authController.isLoading || _isLoading.value;
 
-  void onLoginPressed({
-    Callback? onError,
-    Callback? onSuccess,
+  void onSubmit({
+    VoidCallback? onError,
+    VoidCallback? onSuccess,
+    VoidCallback? onInvalidCredentials,
   }) async {
     _isLoading.value = true;
 
-    await Future.delayed(const Duration(seconds: 2));
+    late final Future<bool> Function({
+      required String email,
+      required String password,
+      VoidCallback? onError,
+      VoidCallback? onInvalidCredentials,
+      VoidCallback? onSuccess,
+    }) function;
 
-    onSuccess?.call();
+    if (isLogingIn) {
+      function = _authController.login;
+    } else {
+      function = _authController.register;
+    }
 
-    _isLoading.value = false;
-  }
-
-  void onSignUpPressed({
-    Callback? onError,
-    Callback? onSuccess,
-  }) async {
-    _isLoading.value = true;
-
-    await Future.delayed(const Duration(seconds: 2));
-
-    onSuccess?.call();
+    await function(
+      email: emailController.text,
+      password: passwordController.text,
+      onError: onError,
+      onSuccess: onSuccess,
+      onInvalidCredentials: onInvalidCredentials,
+    );
 
     _isLoading.value = false;
   }

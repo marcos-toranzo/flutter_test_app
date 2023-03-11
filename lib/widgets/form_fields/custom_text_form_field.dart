@@ -61,14 +61,15 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       textInputAction: inputAction,
-      style: const TextStyle(fontWeight: FontWeight.w600),
+      style: TextStyle(
+        fontWeight: FontWeight.w600,
+        color: Theme.of(context).colorScheme.onBackground,
+      ),
       keyboardType: textInputType,
       obscureText: obscureText,
       validator: FormValidators.chain(validators),
       autovalidateMode: autovalidateMode,
       decoration: InputDecoration(
-        filled: true,
-        fillColor: const Color(0xFFFAFAFA),
         prefixIcon: icon != null
             ? Padding(
                 padding: const EdgeInsets.only(right: 18.0, left: 24.0),
@@ -76,10 +77,6 @@ class CustomTextFormField extends StatelessWidget {
               )
             : null,
         hintText: hintText,
-        hintStyle: const TextStyle(
-          fontWeight: FontWeight.w600,
-          color: Color(0xFF8C8C8C),
-        ),
         enabledBorder: border,
         focusedBorder: border.copyWith(
           borderSide: border.borderSide.copyWith(
@@ -88,11 +85,6 @@ class CustomTextFormField extends StatelessWidget {
         ),
         errorBorder: border,
         border: border,
-        isDense: true,
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 15,
-          vertical: 25,
-        ),
       ),
     );
   }

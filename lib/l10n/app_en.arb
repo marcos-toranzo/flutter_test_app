@@ -1,5 +1,50 @@
 {
   "alreadyHaveAnAccount": "Already have an account?",
+  "atLeastNCharacters": "{count, plural, =0{Must contain no characters} =1{Must contain at least 1 character} other{Must contain at least {count} characters}}",
+  "@atLeastNCharacters": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "atLeastNLowercase": "{count, plural, =0{Must contain no lowercase characters} =1{Must contain at least 1 lowercase character} other{Must contain at least {count} lowercase characters}}",
+  "@atLeastNLowercase": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "atLeastNNumeric": "{count, plural, =0{Must contain no numeric characters} =1{Must contain at least 1 numeric character} other{Must contain at least {count} numeric characters}}",
+  "@atLeastNNumeric": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "atLeastNSpecial": "{count, plural, =0{Must contain no special characters} =1{Must contain at least 1 special character} other{Must contain at least {count} special characters}}",
+  "@atLeastNSpecial": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "atLeastNUppercase": "{count, plural, =0{Must contain no uppercase characters} =1{Must contain at least 1 uppercase character} other{Must contain at least {count} uppercase characters}}",
+  "@atLeastNUppercase": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
   "dark": "Dark",
   "dontHaveAnAccount": "Don't have an account?",
   "email": "Email",
@@ -8,6 +53,7 @@
   "forgotYourPassowrd": "Forgot your password?",
   "goBack": "Go Back",
   "home": "Home",
+  "invalidCredentials": "Invalid Credentials",
   "invalidEmail": "Invalid email",
   "invalidScreenError": "Oops! Something went wrong!",
   "language": "Language",
@@ -15,51 +61,6 @@
   "login": "Log in",
   "logingIn": "Loging in",
   "password": "Password",
-  "passwordAtLeastNCharacters": "{count, plural, =0{Must contain no characters} =1{Must contain at least 1 character} other{Must contain at least {count} characters}}",
-  "@passwordAtLeastNCharacters": {
-    "placeholders": {
-      "count": {
-        "type": "num",
-        "format": "compact"
-      }
-    }
-  },
-  "passwordAtLeastNLowercaseCharacters": "{count, plural, =0{Must contain no lowercase characters} =1{Must contain at least 1 lowercase character} other{Must contain at least {count} lowercase characters}}",
-  "@passwordAtLeastNLowercaseCharacters": {
-    "placeholders": {
-      "count": {
-        "type": "num",
-        "format": "compact"
-      }
-    }
-  },
-  "passwordAtLeastNNumericCharacters": "{count, plural, =0{Must contain no numeric characters} =1{Must contain at least 1 numeric character} other{Must contain at least {count} numeric characters}}",
-  "@passwordAtLeastNNumericCharacters": {
-    "placeholders": {
-      "count": {
-        "type": "num",
-        "format": "compact"
-      }
-    }
-  },
-  "passwordAtLeastNSpecialCharacters": "{count, plural, =0{Must contain no special characters} =1{Must contain at least 1 special character} other{Must contain at least {count} special characters}}",
-  "@passwordAtLeastNSpecialCharacters": {
-    "placeholders": {
-      "count": {
-        "type": "num",
-        "format": "compact"
-      }
-    }
-  },
-  "passwordAtLeastNUppercaseCharacters": "{count, plural, =0{Must contain no uppercase characters} =1{Must contain at least 1 uppercase character} other{Must contain at least {count} uppercase characters}}",
-  "@passwordAtLeastNUppercaseCharacters": {
-    "placeholders": {
-      "count": {
-        "type": "num",
-        "format": "compact"
-      }
-    }
-  },
   "passwordsDontMatch": "Passwords don't match",
   "pressBackAgainToExitApp": "Press Back again to exit App",
   "repeatPassword": "Repeat Password",

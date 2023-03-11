@@ -1,17 +1,16 @@
 import 'package:flutter_test_app/app_configuration.dart';
+import 'package:flutter_test_app/utils/types.dart';
 
-Future<void> storeTokens({
-  required String accessToken,
-}) async {
-  await secureStorageService.write(Environment.accessTokenKey, accessToken);
+Future<void> storeUserId(Id id) async {
+  await secureStorageService.write(Environment.userIdKey, id);
 }
 
-Future<void> eraseTokens() async {
-  await secureStorageService.remove(Environment.accessTokenKey);
+Future<void> eraseUserId() async {
+  await secureStorageService.remove(Environment.userIdKey);
 }
 
-Future<String?> loadAccessToken() async {
-  return await secureStorageService.read(Environment.accessTokenKey);
+Future<String?> loadUserId() async {
+  return await secureStorageService.read(Environment.userIdKey);
 }
 
 Future<void> storeLanguage(String language) async {
