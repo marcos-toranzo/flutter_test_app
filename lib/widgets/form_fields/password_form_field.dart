@@ -12,7 +12,7 @@ class PasswordFormField extends StatelessWidget {
   final String? hintText;
   final bool isRequired;
   final bool obscureText;
-  final PasswordValidationChecks? checks;
+  final List<PasswordValidator> checks;
   final List<FormFieldValidator<String>> extraValidators;
 
   const PasswordFormField({
@@ -23,7 +23,7 @@ class PasswordFormField extends StatelessWidget {
     this.extraValidators = const [],
     this.textInputAction,
     this.autovalidateMode,
-    this.checks,
+    this.checks = const [],
     this.hintText,
     super.key,
   });
@@ -41,7 +41,7 @@ class PasswordFormField extends StatelessWidget {
       textInputAction: textInputAction,
       validators: [
         if (isRequired) FormValidators.required(translations.required),
-        if (checks != null) FormValidators.password(checks!),
+        FormValidators.password(checks),
         ...extraValidators,
       ],
     );

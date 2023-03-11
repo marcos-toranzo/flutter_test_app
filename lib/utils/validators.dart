@@ -1,32 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_test_app/utils/iterable_utils.dart';
 
-class PasswordValidationCheck {
-  final int count;
-  final String errorMessage;
+class PasswordValidator {
+  final FormFieldValidator<String> validator;
 
-  const PasswordValidationCheck({
-    required this.count,
-    required this.errorMessage,
-  });
-}
+  PasswordValidator.minLength({
+    required int count,
+    required String errorMessage,
+  }) : validator = ((value) =>
+            value != null && value.length >= count ? null : errorMessage);
 
-class PasswordValidationChecks {
-  final PasswordValidationCheck? minLengthCheck;
-  final PasswordValidationCheck? uppercaseCharCountCheck;
-  final PasswordValidationCheck? lowercaseCharCountCheck;
-  final PasswordValidationCheck? numericCharCountCheck;
-  final PasswordValidationCheck? specialCharCountCheck;
+  PasswordValidator.uppercaseCount({
+    required int count,
+    required String errorMessage,
+  }) : validator = ((value) => _checkPattern(
+              charactersToMatch: 'A-Z',
+              count: count,
+              value: value,
+              errorMessage: errorMessage,
+            ));
 
-  const PasswordValidationChecks({
-    this.minLengthCheck,
-    this.uppercaseCharCountCheck,
-    this.lowercaseCharCountCheck,
-    this.numericCharCountCheck,
-    this.specialCharCountCheck,
-  });
-}
+  PasswordValidator.lowercaseCount({
+    required int count,
+    required String errorMessage,
+  }) : validator = ((value) => _checkPattern(
+              charactersToMatch: 'a-z',
+              count: count,
+              value: value,
+              errorMessage: errorMessage,
+            ));
 
-class PasswordValidators {
+  PasswordValidator.numericCount({
+    required int count,
+    required String errorMessage,
+  }) : validator = ((value) => _checkPattern(
+              charactersToMatch: '0-9',
+              count: count,
+              value: value,
+              errorMessage: errorMessage,
+            ));
+
+  PasswordValidator.specialCount({
+    required int count,
+    required String errorMessage,
+  }) : validator = ((value) => _checkPattern(
+              charactersToMatch: r"$&+,\:;/=?@#|'<>.^*()_%!-",
+              count: count,
+              value: value,
+              errorMessage: errorMessage,
+            ));
+
   static String? _checkPattern({
     required String charactersToMatch,
     required int count,
@@ -38,56 +61,6 @@ class PasswordValidators {
     final pattern = '^(.*?[$charactersToMatch]){$count,}';
     return value.contains(RegExp(pattern)) ? null : errorMessage;
   }
-
-  static FormFieldValidator<String> minLength({
-    required count,
-    required errorMessage,
-  }) =>
-      (value) => value != null && value.length >= count ? null : errorMessage;
-
-  static FormFieldValidator<String> uppercaseCount({
-    required count,
-    required errorMessage,
-  }) =>
-      (value) => _checkPattern(
-            charactersToMatch: 'A-Z',
-            count: count,
-            value: value,
-            errorMessage: errorMessage,
-          );
-
-  static FormFieldValidator<String> lowercaseCount({
-    required count,
-    required errorMessage,
-  }) =>
-      (value) => _checkPattern(
-            charactersToMatch: 'a-z',
-            count: count,
-            value: value,
-            errorMessage: errorMessage,
-          );
-
-  static FormFieldValidator<String> numericCount({
-    required count,
-    required errorMessage,
-  }) =>
-      (value) => _checkPattern(
-            charactersToMatch: '0-9',
-            count: count,
-            value: value,
-            errorMessage: errorMessage,
-          );
-
-  static FormFieldValidator<String> specialCount({
-    required count,
-    required errorMessage,
-  }) =>
-      (value) => _checkPattern(
-            charactersToMatch: r"$&+,\:;/=?@#|'<>.^*()_%!-",
-            count: count,
-            value: value,
-            errorMessage: errorMessage,
-          );
 }
 
 class FormValidators {
@@ -110,43 +83,9 @@ class FormValidators {
   }
 
   static FormFieldValidator<String> password(
-    PasswordValidationChecks checks,
+    List<PasswordValidator> validators,
   ) {
-    final minLengthCheck = checks.minLengthCheck;
-    final uppercaseCharCountCheck = checks.uppercaseCharCountCheck;
-    final lowercaseCharCountCheck = checks.lowercaseCharCountCheck;
-    final numericCharCountCheck = checks.numericCharCountCheck;
-    final specialCharCountCheck = checks.specialCharCountCheck;
-
-    final List<FormFieldValidator<String>> validators = [
-      if (minLengthCheck != null)
-        PasswordValidators.minLength(
-          count: minLengthCheck.count,
-          errorMessage: minLengthCheck.errorMessage,
-        ),
-      if (uppercaseCharCountCheck != null)
-        PasswordValidators.uppercaseCount(
-          count: uppercaseCharCountCheck.count,
-          errorMessage: uppercaseCharCountCheck.errorMessage,
-        ),
-      if (lowercaseCharCountCheck != null)
-        PasswordValidators.lowercaseCount(
-          count: lowercaseCharCountCheck.count,
-          errorMessage: lowercaseCharCountCheck.errorMessage,
-        ),
-      if (numericCharCountCheck != null)
-        PasswordValidators.numericCount(
-          count: numericCharCountCheck.count,
-          errorMessage: numericCharCountCheck.errorMessage,
-        ),
-      if (specialCharCountCheck != null)
-        PasswordValidators.specialCount(
-          count: specialCharCountCheck.count,
-          errorMessage: specialCharCountCheck.errorMessage,
-        ),
-    ];
-
-    return chain(validators);
+    return chain(validators.mapList((validator) => validator.validator));
   }
 
   static FormFieldValidator<String> chain(

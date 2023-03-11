@@ -70,35 +70,33 @@ class LoginSignUpScreen extends StatelessWidget {
                                   ? TextFormFieldPosition.bottom
                                   : TextFormFieldPosition.middle,
                               isRequired: true,
-                              checks: PasswordValidationChecks(
-                                minLengthCheck: PasswordValidationCheck(
+                              checks: [
+                                PasswordValidator.minLength(
                                   count: 8,
                                   errorMessage: translations
                                       .passwordAtLeastNCharacters(8),
                                 ),
-                                numericCharCountCheck: PasswordValidationCheck(
-                                  count: 1,
-                                  errorMessage: translations
-                                      .passwordAtLeastNNumericCharacters(1),
-                                ),
-                                specialCharCountCheck: PasswordValidationCheck(
-                                  count: 1,
-                                  errorMessage: translations
-                                      .passwordAtLeastNSpecialCharacters(1),
-                                ),
-                                uppercaseCharCountCheck:
-                                    PasswordValidationCheck(
-                                  count: 1,
-                                  errorMessage: translations
-                                      .passwordAtLeastNUppercaseCharacters(1),
-                                ),
-                                lowercaseCharCountCheck:
-                                    PasswordValidationCheck(
+                                PasswordValidator.lowercaseCount(
                                   count: 1,
                                   errorMessage: translations
                                       .passwordAtLeastNLowercaseCharacters(1),
                                 ),
-                              ),
+                                PasswordValidator.uppercaseCount(
+                                  count: 1,
+                                  errorMessage: translations
+                                      .passwordAtLeastNUppercaseCharacters(1),
+                                ),
+                                PasswordValidator.numericCount(
+                                  count: 1,
+                                  errorMessage: translations
+                                      .passwordAtLeastNNumericCharacters(1),
+                                ),
+                                PasswordValidator.specialCount(
+                                  count: 1,
+                                  errorMessage: translations
+                                      .passwordAtLeastNSpecialCharacters(1),
+                                ),
+                              ],
                             ),
                             if (!controller.isLogingIn)
                               PasswordFormField(
