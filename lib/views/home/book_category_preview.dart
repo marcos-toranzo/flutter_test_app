@@ -8,6 +8,7 @@ import 'package:flutter_test_app/views/category/category_screen.dart';
 import 'package:flutter_test_app/widgets/book_preview.dart';
 import 'package:flutter_test_app/views/home/constants.dart';
 import 'package:flutter_test_app/widgets/column_with_padding.dart';
+import 'package:flutter_test_app/widgets/cutom_text.dart';
 import 'package:flutter_test_app/widgets/row_with_padding.dart';
 import 'package:flutter_test_app/widgets/space.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -50,11 +51,9 @@ class BookCategoryPreview extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: paddingValue),
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                OnBackgroundText(
                   translations.categoryName(bookCategory.name),
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.onBackground,
-                      ),
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 Material(
                   borderRadius: borderRadius,

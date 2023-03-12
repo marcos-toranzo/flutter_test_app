@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test_app/views/login_signup/login_signup_screen.dart';
+import 'package:flutter_test_app/widgets/cutom_text.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter_test_app/app_configuration.dart';
@@ -186,12 +187,9 @@ class _DrawerSectionElement extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: const EdgeInsets.only(left: 20, right: 10),
-      title: Text(
+      title: OnBackgroundText(
         title,
-        style: TextStyle(
-          fontSize: 16,
-          color: Theme.of(context).colorScheme.onBackground,
-        ),
+        style: const TextStyle(fontSize: 16),
       ),
       trailing: trailing,
       onTap: onTap,
@@ -209,11 +207,9 @@ class _DrawerSectionHeader extends StatelessWidget {
     return RowWithPadding(
       padding: const EdgeInsets.only(left: 10, top: 10, bottom: 4),
       children: [
-        Text(
+        OnBackgroundText(
           title,
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,
-              ),
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         const Expanded(
           child: _DrawerSectionSeparator(),

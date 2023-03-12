@@ -42,8 +42,6 @@ class CategoryController extends GetxController {
       );
     } else {
       onError?.call();
-      _isLoading.value = false;
-      return;
     }
 
     _isLoading.value = false;

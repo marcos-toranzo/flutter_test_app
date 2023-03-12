@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_test_app/controllers/auth_controller.dart';
 import 'package:flutter_test_app/services/routing_service/routing_service.dart';
 import 'package:flutter_test_app/utils/localization.dart';
 import 'package:flutter_test_app/utils/notifications.dart';
@@ -12,9 +11,7 @@ import 'package:get/get.dart';
 class CategoryScreen extends StatelessWidget {
   static const String routeName = '/category';
 
-  final AuthController _authController = Get.find();
-
-  CategoryScreen({super.key});
+  const CategoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +22,7 @@ class CategoryScreen extends StatelessWidget {
       CategoryController(
         categoryName: categoryName,
         onErrorFetchingBooks: () {
-          showSnackBar(
-            context: context,
-            text: translations.errorFetchingBooks,
-          );
+          showSnackBar(context: context, text: translations.errorFetchingBooks);
         },
       ),
     );
@@ -43,12 +37,11 @@ class CategoryScreen extends StatelessWidget {
           child: Scaffold(
             appBar: CustomAppBar(
               titleText: translations.categoryName(categoryName),
-              cart: _authController.user?.cart,
               onRefresh: controller.onRefresh,
-              onCartPressed: () {},
             ),
             body: books != null
                 ? GridView.builder(
+                    physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsets.all(8),
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(

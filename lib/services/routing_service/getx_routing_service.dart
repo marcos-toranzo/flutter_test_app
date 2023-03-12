@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_test_app/views/book/book_screen.dart';
 import 'package:flutter_test_app/views/category/category_screen.dart';
 import 'package:flutter_test_app/views/home/home_screen.dart';
 import 'package:flutter_test_app/views/login_signup/login_signup_screen.dart';
@@ -9,8 +10,9 @@ import 'package:flutter_test_app/widgets/unknown_page.dart';
 
 final routeBuilders = {
   LoginSignUpScreen.routeName: () => LoginSignUpScreen(),
-  HomeScreen.routeName: () => HomeScreen(),
-  CategoryScreen.routeName: () => CategoryScreen(),
+  HomeScreen.routeName: () => const HomeScreen(),
+  CategoryScreen.routeName: () => const CategoryScreen(),
+  BookScreen.routeName: () => const BookScreen(),
 };
 
 class GetXRoutingService extends RoutingService {

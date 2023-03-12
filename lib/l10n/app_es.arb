@@ -45,6 +45,16 @@
       }
     }
   },
+  "bookDetails": "Detalles del libro",
+  "categories": "{count, plural, =1{Categoría} other{Categorías}}",
+  "@categories": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
   "categoryName": "{name, select, Fiction{Ficción} Sports{Deportes} Poetry{Poesía} History{Historia} Education{Educación} Romance{Romance} Fantasy{Fantasía} Crime{Crimen} other{{name}}}",
   "@categoryName": {
     "placeholders": {
@@ -54,6 +64,8 @@
     }
   },
   "dark": "Oscuro",
+  "description": "Descripción",
+  "details": "Detalles",
   "dontHaveAnAccount": "¿No tienes cuenta?",
   "email": "Correo",
   "errorFetchingBook": "¡Ups! Ha ocurrido un error intentando obtener el libro. Por favor, vuelva a intentarlo.",
@@ -72,10 +84,29 @@
   "loading": "Cargando",
   "login": "Inicia sesión",
   "logingIn": "Iniciando sesión",
+  "nPages": "{count, select, 0{Sin Páginas} 1{1 Página} other{{count} Páginas}}",
+  "@nPages": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "nReviews": "{count, plural, =1{1 Reseña} other{{count} Reseñas}}",
+  "@nReviews": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
   "notForSale": "NO EN VENTA",
   "password": "Contraseña",
   "passwordsDontMatch": "Las contraseñas no son iguales",
   "pressBackAgainToExitApp": "Presiona Atrás otra vez para cerrar App",
+  "publishedDate": "Fecha de publicación",
+  "publisher": "Editor",
   "repeatPassword": "Repetir Contraseña",
   "required": "Obligatorio",
   "seeAll": "Ver todos",
@@ -86,5 +117,6 @@
   "theme": "Tema",
   "toLogin": "Iniciar sesión",
   "toSignUp": "Registrarse",
+  "unknownAuthors": "Autores Desconocidos",
   "untitled": "Sin título"
 }

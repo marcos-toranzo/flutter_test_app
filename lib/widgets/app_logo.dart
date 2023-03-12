@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_test_app/widgets/cutom_text.dart';
 import 'package:flutter_test_app/widgets/space.dart';
 
 class AppLogo extends StatelessWidget {
@@ -23,11 +24,10 @@ class AppLogo extends StatelessWidget {
         ),
         const Space.vertical(20),
         if (includeText)
-          Text(
+          OnBackgroundText(
             'Mobile App',
             style: TextStyle(
               fontSize: Theme.of(context).textTheme.displaySmall?.fontSize!,
-              color: Theme.of(context).colorScheme.onBackground,
             ),
           ),
       ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test_app/utils/iterable_utils.dart';
 import 'package:flutter_test_app/utils/types.dart';
+import 'package:flutter_test_app/widgets/cutom_text.dart';
 import 'package:flutter_test_app/widgets/space.dart';
 
 class CustomDropdownMenuElement<T> {
@@ -50,12 +51,9 @@ class CustomDropdownMenu<T> extends StatelessWidget {
                   child: Center(child: item.icon),
                 ),
                 const Space.horizontal(10),
-                Text(
+                OnBackgroundText(
                   item.text,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
+                  style: const TextStyle(fontWeight: FontWeight.w400),
                 ),
               ],
             ),
