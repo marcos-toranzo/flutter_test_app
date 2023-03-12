@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_test_app/models/book.dart';
 import 'package:flutter_test_app/services/routing_service/routing_service.dart';
@@ -274,20 +275,31 @@ class _BookDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final translations = AppTranslations.of(context);
 
-    const space = 3.0;
-
-    buildDetailHeader(String text) => Padding(
-          padding: const EdgeInsets.only(bottom: space),
-          child: OnBackgroundText(text),
-        );
-
-    buildDetailValue(String text) => Padding(
-          padding: const EdgeInsets.only(bottom: space),
-          child: Text(
-            text,
-            style: TextStyle(color: _getLighterTextColor(context)),
+    buildDetailRow({required String header, required List<String> values}) {
+      return TableRow(
+        children: [
+          TableCell(
+            child: OnBackgroundText(
+              header,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
-        );
+          TableCell(
+            child: ColumnWithPadding(
+              mainAxisSize: MainAxisSize.min,
+              padding: const EdgeInsets.only(left: 20, bottom: 3.0),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: values.mapList(
+                (value) => Text(
+                  value,
+                  style: TextStyle(color: _getLighterTextColor(context)),
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
 
     final publisher = book.publisher;
     final publishedDate = book.publishedDate;
@@ -303,41 +315,34 @@ class _BookDetails extends StatelessWidget {
         ),
         const Space.vertical(10),
         Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
           children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (publisher != null)
-                  buildDetailHeader(translations.publisher),
-                if (publishedDate != null)
-                  buildDetailHeader(translations.publishedDate),
-                if (language != null) buildDetailHeader(translations.language),
-                if (categories != null)
-                  buildDetailHeader(
-                    translations.categories(categories.length),
-                  ),
-              ],
-            ),
-            const Space.horizontal(14),
             Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Table(
+                defaultColumnWidth: const IntrinsicColumnWidth(),
                 children: [
-                  if (publisher != null) buildDetailValue(publisher),
-                  if (publishedDate != null) buildDetailValue(publishedDate),
-                  if (language != null) buildDetailValue(language),
+                  if (publisher != null)
+                    buildDetailRow(
+                      header: translations.publisher,
+                      values: [publisher],
+                    ),
+                  if (publishedDate != null)
+                    buildDetailRow(
+                      header: translations.publishedDate,
+                      values: [publishedDate],
+                    ),
+                  if (language != null)
+                    buildDetailRow(
+                      header: translations.language,
+                      values: [
+                        LocaleNames.of(context)!.nameOf(language) ?? language,
+                      ],
+                    ),
                   if (categories != null)
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: categories.mapList(
-                        (category) => buildDetailValue(
-                          '${categories.length > 1 ? '• ' : ''}$category',
-                        ),
+                    buildDetailRow(
+                      header: translations.categories(categories.length),
+                      values: categories.mapList(
+                        (category) =>
+                            '${categories.length > 1 ? '• ' : ''}$category',
                       ),
                     ),
                 ],

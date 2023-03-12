@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:flutter_test_app/views/home/home_screen.dart';
 import 'package:get/get.dart';
 import 'package:flutter_test_app/app_configuration.dart';
@@ -28,7 +29,10 @@ class FlutterTestApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => GetMaterialApp(
-        localizationsDelegates: Localization.localizationsDelegates,
+        localizationsDelegates: [
+          const LocaleNamesLocalizationsDelegate(),
+          ...Localization.localizationsDelegates,
+        ],
         supportedLocales: Localization.supportedLocales,
         locale: _appConfigurationController.selectedLocale,
         title: 'Flutter Test App',
