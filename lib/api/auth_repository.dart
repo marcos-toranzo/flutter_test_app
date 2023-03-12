@@ -1,46 +1,33 @@
-import 'package:flutter_test_app/app_configuration.dart';
+import 'package:flutter_test_app/api/user_repository.dart';
 import 'package:flutter_test_app/services/network_service/network_service.dart';
-
-final loginEndpoint = '${Environment.apiBaseUrl}/${Environment.loginEndpoint}';
-final registerEndpoint =
-    '${Environment.apiBaseUrl}/${Environment.registerEndpoint}';
+import 'package:flutter_test_app/utils/errors.dart';
+import 'package:flutter_test_app/utils/types.dart';
 
 class AuthRepository {
-  static Future<ApiResponse<Never>> login({
+  static Future<ApiResponse<Id>> login({
     required String email,
     required String password,
   }) async {
-    try {
-      final response = await networkService.post(
-        loginEndpoint,
-        body: {
-          'email': email,
-          'password': password,
-        },
-      );
-
-      return ApiResponse(success: response.statusCode == 200);
-    } catch (e) {
-      return ApiResponse(success: false, errorMessage: e.toString());
-    }
+    //! DELETE: use actual login method
+    return Future.delayed(
+      const Duration(seconds: 1),
+      () {
+        if (email == user.email) {
+          return ApiResponse(success: true, data: user.id);
+        }
+        return const ApiResponse(
+          success: false,
+          errorCode: Errors.invalidCredentials,
+        );
+      },
+    );
   }
 
-  static Future<ApiResponse<Never>> register({
+  static Future<ApiResponse<Id>> register({
     required String email,
     required String password,
   }) async {
-    try {
-      final response = await networkService.post(
-        registerEndpoint,
-        body: {
-          'email': email,
-          'password': password,
-        },
-      );
-
-      return ApiResponse(success: response.statusCode == 200);
-    } catch (e) {
-      return ApiResponse(success: false, errorMessage: e.toString());
-    }
+    //! DELETE: use actual login method
+    return login(email: email, password: password);
   }
 }

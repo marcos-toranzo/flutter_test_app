@@ -33,6 +33,7 @@ class FlutterTestApp extends StatelessWidget {
         locale: _appConfigurationController.selectedLocale,
         title: 'Flutter Test App',
         theme: lightAppTheme,
+        debugShowCheckedModeBanner: false,
         themeMode: _appConfigurationController.appThemeMode,
         darkTheme: darkAppTheme,
         onGenerateRoute: routingService.onGenerateRoute,

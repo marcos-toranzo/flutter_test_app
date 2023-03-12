@@ -27,6 +27,7 @@ class AppLogo extends StatelessWidget {
             'Mobile App',
             style: TextStyle(
               fontSize: Theme.of(context).textTheme.displaySmall?.fontSize!,
+              color: Theme.of(context).colorScheme.onBackground,
             ),
           ),
       ],

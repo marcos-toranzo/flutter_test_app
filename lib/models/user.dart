@@ -1,29 +1,15 @@
-import 'dart:convert';
-import 'package:flutter_test_app/utils/types.dart';
+import 'package:flutter_test_app/models/cart.dart';
+import 'package:flutter_test_app/models/model.dart';
 
-class User {
-  final Id id;
+class User extends Model {
   final String email;
+  final String username;
+  final Cart cart;
 
   const User({
-    required this.id,
+    required super.id,
     required this.email,
+    required this.username,
+    required this.cart,
   });
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'email': email,
-    };
-  }
-
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(
-      id: map['id'] as String,
-      email: map['email'] as String,
-    );
-  }
-
-  factory User.fromJson(String source) =>
-      User.fromMap(json.decode(source) as Map<String, dynamic>);
 }

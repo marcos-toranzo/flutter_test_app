@@ -39,9 +39,9 @@ class CustomDrawer extends StatelessWidget {
           Container(
             height: 200,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
+              color: Theme.of(context).primaryColor,
               borderRadius: const BorderRadius.only(
-                bottomRight: Radius.circular(100),
+                bottomRight: Radius.circular(20),
               ),
             ),
             child: ColumnWithPadding(
@@ -50,9 +50,17 @@ class CustomDrawer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 HorizontallyScrollableText(
-                  _authController.user?.email ?? '-',
-                  style: const TextStyle(
+                  _authController.user?.username ?? '',
+                  style: TextStyle(
                     fontSize: 28,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                ),
+                HorizontallyScrollableText(
+                  _authController.user?.email ?? '',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Theme.of(context).colorScheme.onPrimary,
                   ),
                 ),
               ],
@@ -156,7 +164,7 @@ class _DrawerSectionSeparator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Divider(
-      thickness: 0.8,
+      thickness: 0.1,
       indent: 10,
       endIndent: 10,
     );
@@ -180,7 +188,10 @@ class _DrawerSectionElement extends StatelessWidget {
       contentPadding: const EdgeInsets.only(left: 20, right: 10),
       title: Text(
         title,
-        style: const TextStyle(fontSize: 16),
+        style: TextStyle(
+          fontSize: 16,
+          color: Theme.of(context).colorScheme.onBackground,
+        ),
       ),
       trailing: trailing,
       onTap: onTap,
@@ -201,11 +212,11 @@ class _DrawerSectionHeader extends StatelessWidget {
         Text(
           title,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.w500,
+                color: Theme.of(context).colorScheme.onBackground,
               ),
         ),
         const Expanded(
-          child: Divider(thickness: 0.8, indent: 20, endIndent: 10),
+          child: _DrawerSectionSeparator(),
         ),
       ],
     );

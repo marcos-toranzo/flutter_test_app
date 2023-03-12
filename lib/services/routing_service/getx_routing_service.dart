@@ -8,7 +8,7 @@ import 'package:flutter_test_app/widgets/unknown_page.dart';
 
 final routeBuilders = {
   LoginSignUpScreen.routeName: () => LoginSignUpScreen(),
-  HomeScreen.routeName: () => const HomeScreen(),
+  HomeScreen.routeName: () => HomeScreen(),
 };
 
 class GetXRoutingService extends RoutingService {

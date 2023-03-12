@@ -1,4 +1,5 @@
 import 'package:flutter/animation.dart';
+import 'package:flutter_test_app/utils/errors.dart';
 import 'package:get/get.dart';
 import 'package:flutter_test_app/api/auth_repository.dart';
 import 'package:flutter_test_app/api/user_repository.dart';
@@ -16,8 +17,9 @@ class AuthController extends GetxController {
     VoidCallback? onError,
     VoidCallback? onSuccess,
   }) async {
-    final accessToken = await loadAccessToken();
-    bool validToken = accessToken != null && accessToken.isNotEmpty;
+    _user.value = null;
+    final userId = await loadUserId();
+    bool validToken = userId != null && userId.isNotEmpty;
 
     if (validToken) {
       final userInfoResponse = await UserRepository.fetchUser();
@@ -40,22 +42,34 @@ class AuthController extends GetxController {
     required String email,
     required String password,
     VoidCallback? onError,
+    VoidCallback? onInvalidCredentials,
     VoidCallback? onSuccess,
   }) async {
     _isLoading.value = true;
+    _user.value = null;
 
-    final userInfoResponse = await AuthRepository.login(
+    final response = await AuthRepository.login(
       email: email,
       password: password,
     );
 
-    if (userInfoResponse.success) {
-      await storeTokens(accessToken: 'accessToken');
+    if (response.success) {
+      final userInfoResponse = await UserRepository.fetchUser();
 
-      onSuccess?.call();
+      if (userInfoResponse.success) {
+        await storeUserId(response.data!);
+
+        _user.value = userInfoResponse.data!;
+        onSuccess?.call();
+        _isLoading.value = false;
+
+        return true;
+      }
+    } else if (response.errorCode == Errors.invalidCredentials) {
+      onInvalidCredentials?.call();
       _isLoading.value = false;
 
-      return true;
+      return false;
     }
 
     onError?.call();
@@ -68,22 +82,34 @@ class AuthController extends GetxController {
     required String email,
     required String password,
     VoidCallback? onError,
+    VoidCallback? onInvalidCredentials,
     VoidCallback? onSuccess,
   }) async {
     _isLoading.value = true;
+    _user.value = null;
 
-    final userInfoResponse = await AuthRepository.register(
+    final response = await AuthRepository.register(
       email: email,
       password: password,
     );
 
-    if (userInfoResponse.success) {
-      await storeTokens(accessToken: 'accessToken');
+    if (response.success) {
+      final userInfoResponse = await UserRepository.fetchUser();
 
-      onSuccess?.call();
+      if (userInfoResponse.success) {
+        await storeUserId(response.data!);
+
+        _user.value = userInfoResponse.data!;
+        onSuccess?.call();
+        _isLoading.value = false;
+
+        return true;
+      }
+    } else if (response.errorCode == Errors.invalidCredentials) {
+      onInvalidCredentials?.call();
       _isLoading.value = false;
 
-      return true;
+      return false;
     }
 
     onError?.call();
@@ -93,7 +119,7 @@ class AuthController extends GetxController {
   }
 
   Future<void> logout({VoidCallback? onLogOut}) async {
-    await eraseTokens();
+    await eraseUserId();
     _user.value = null;
     onLogOut?.call();
   }

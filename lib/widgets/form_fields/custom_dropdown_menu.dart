@@ -52,8 +52,9 @@ class CustomDropdownMenu<T> extends StatelessWidget {
                 const Space.horizontal(10),
                 Text(
                   item.text,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.w400,
+                    color: Theme.of(context).colorScheme.onBackground,
                   ),
                 ),
               ],

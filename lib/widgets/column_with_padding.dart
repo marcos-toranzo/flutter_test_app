@@ -6,6 +6,7 @@ class ColumnWithPadding extends StatelessWidget {
   final MainAxisAlignment mainAxisAlignment;
   final CrossAxisAlignment crossAxisAlignment;
   final MainAxisSize mainAxisSize;
+  final TextBaseline? textBaseline;
 
   const ColumnWithPadding({
     required this.padding,
@@ -13,6 +14,7 @@ class ColumnWithPadding extends StatelessWidget {
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.crossAxisAlignment = CrossAxisAlignment.center,
     this.mainAxisSize = MainAxisSize.max,
+    this.textBaseline,
     super.key,
   });
 

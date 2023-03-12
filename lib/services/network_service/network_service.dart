@@ -3,7 +3,7 @@ import 'package:flutter_test_app/utils/errors.dart';
 abstract class NetworkService {
   Future<NetworkResponse> get(
     String url, {
-    Map<String, dynamic>? params,
+    Map<String, dynamic> params = const {},
   });
 
   Future<NetworkResponse> post(
@@ -40,7 +40,7 @@ class ApiResponse<T> {
   final T? data;
   final bool success;
   final String? errorMessage;
-  final Error? errorCode;
+  final Errors? errorCode;
 
   const ApiResponse({
     this.data,

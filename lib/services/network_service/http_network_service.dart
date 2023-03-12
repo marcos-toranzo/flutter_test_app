@@ -1,14 +1,21 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter_test_app/utils/storage.dart';
+import 'package:flutter_test_app/utils/status_codes.dart';
 import 'package:http/http.dart';
 import 'package:flutter_test_app/app_configuration.dart';
 import 'package:flutter_test_app/services/network_service/network_service.dart';
 
-const timeoutDuration = Duration(seconds: 5);
+const _timeoutDuration = Duration(seconds: 5);
 
-Response timeoutResponse() => Response('timeout', 408);
+Response _timeoutResponse() => Response('timeout', timeoutStatusCode);
+
+typedef HttpMethod = Future<Response> Function(
+  Uri url, {
+  Map<String, String>? headers,
+  Object? body,
+  Encoding? encoding,
+});
 
 /// Network service that uses http Flutter package.
 ///
@@ -25,28 +32,17 @@ class HttpNetworkService implements NetworkService {
       HttpHeaders.contentTypeHeader: 'application/json',
     };
 
-    final accessToken = await loadAccessToken();
-
-    if (accessToken != null && accessToken.isNotEmpty) {
-      headers[HttpHeaders.authorizationHeader] = 'Bearer $accessToken';
-    }
-
     logger.printRequestAuthHeader(headers);
 
     return headers;
   }
 
-  Future<NetworkResponse> _requestWithBody(
-    Future<Response> Function(
-      Uri url, {
-      Map<String, String>? headers,
-      Object? body,
-      Encoding? encoding,
-    })
-        method,
+  Future<NetworkResponse> _request(
+    HttpMethod method,
     String url,
     String methodName, {
-    Map<String, dynamic> body = const <String, dynamic>{},
+    Map<String, dynamic> params = const {},
+    Map<String, dynamic>? body,
   }) async {
     logger.printRequestLogHeader(
       url: url,
@@ -54,12 +50,19 @@ class HttpNetworkService implements NetworkService {
       body: body,
     );
 
+    final paramsWithKey = Map<String, dynamic>.from({
+      ...params,
+      'key': Environment.googleBooksApiKey,
+    });
+
+    var urlWithParams = '$url?${Uri(queryParameters: paramsWithKey).query}';
+
     final response = await method(
-      Uri.parse(url),
+      Uri.parse(urlWithParams),
       headers: await _getHeaders(),
-      body: json.encode(body),
+      body: body != null ? json.encode(body) : null,
       encoding: _encoding,
-    ).timeout(timeoutDuration, onTimeout: timeoutResponse);
+    ).timeout(_timeoutDuration, onTimeout: _timeoutResponse);
 
     logger.printRequestLogResponse(
       statusCode: response.statusCode,
@@ -76,62 +79,38 @@ class HttpNetworkService implements NetworkService {
   @override
   Future<NetworkResponse> get(
     String url, {
-    Map<String, dynamic>? params,
-  }) async {
-    logger.printRequestLogHeader(
-      url: url,
-      type: 'GET',
-      params: params,
-    );
-
-    var urlWithParams = url;
-
-    if (params != null && params.isNotEmpty) {
-      final queryParams = Uri(queryParameters: params).query;
-      urlWithParams += '?$queryParams';
-    }
-
-    final response = await _httpClient
-        .get(
-          Uri.parse(urlWithParams),
-          headers: await _getHeaders(),
-        )
-        .timeout(timeoutDuration, onTimeout: timeoutResponse);
-
-    logger.printRequestLogResponse(
-      statusCode: response.statusCode,
-      body: response.body,
-      headers: response.headers,
-    );
-
-    return NetworkResponse(
-      statusCode: response.statusCode,
-      body: response.body,
-    );
-  }
+    Map<String, dynamic> params = const {},
+  }) =>
+      _request(
+        (url, {body, encoding, headers}) =>
+            _httpClient.get(url, headers: headers),
+        url,
+        'POST',
+        params: params,
+      );
 
   @override
   Future<NetworkResponse> post(
     String url, {
     Map<String, dynamic> body = const <String, dynamic>{},
   }) =>
-      _requestWithBody(_httpClient.post, url, 'POST', body: body);
+      _request(_httpClient.post, url, 'POST', body: body);
 
   @override
   Future<NetworkResponse> put(
     String url, {
     Map<String, dynamic> body = const <String, dynamic>{},
   }) =>
-      _requestWithBody(_httpClient.put, url, 'PUT', body: body);
+      _request(_httpClient.put, url, 'PUT', body: body);
 
   @override
   Future<NetworkResponse> patch(
     String url, {
     Map<String, dynamic> body = const <String, dynamic>{},
   }) =>
-      _requestWithBody(_httpClient.patch, url, 'PATCH', body: body);
+      _request(_httpClient.patch, url, 'PATCH', body: body);
 
   @override
   Future<NetworkResponse> delete(String url) =>
-      _requestWithBody(_httpClient.delete, url, 'DELETE');
+      _request(_httpClient.delete, url, 'DELETE');
 }

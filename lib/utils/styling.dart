@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 const primaryColor = Color(0xFF33C283);
 const secondaryColor = Color(0xFF37B6FF);
-const backgroundColor = Color(0xFFF3F3F3);
 const borderRadiusValue = 10.0;
 
 final _baseTheme = ThemeData(
@@ -10,7 +9,20 @@ final _baseTheme = ThemeData(
   fontFamily: 'Inter',
   primaryColor: primaryColor,
   primarySwatch: getMaterialColor(primaryColor),
-  scaffoldBackgroundColor: backgroundColor,
+);
+
+const _baseInputDecorationTheme = InputDecorationTheme(
+  fillColor: Color(0xFFFAFAFA),
+  filled: true,
+  hintStyle: TextStyle(
+    fontWeight: FontWeight.w600,
+    color: Color(0xFF8C8C8C),
+  ),
+  isDense: true,
+  contentPadding: EdgeInsets.symmetric(
+    horizontal: 15,
+    vertical: 25,
+  ),
 );
 
 final darkAppTheme = _baseTheme.copyWith(
@@ -18,7 +30,14 @@ final darkAppTheme = _baseTheme.copyWith(
   colorScheme: const ColorScheme.dark(
     primary: primaryColor,
     secondary: secondaryColor,
+    onPrimary: Colors.white,
   ),
+  inputDecorationTheme: _baseInputDecorationTheme.copyWith(
+    fillColor: Colors.grey[900],
+  ),
+  scaffoldBackgroundColor: const Color.fromARGB(255, 48, 48, 48),
+  canvasColor: const Color.fromARGB(255, 48, 48, 48),
+  cardColor: Colors.grey[900],
 );
 
 final lightAppTheme = _baseTheme.copyWith(
@@ -26,7 +45,13 @@ final lightAppTheme = _baseTheme.copyWith(
   colorScheme: const ColorScheme.light(
     primary: primaryColor,
     secondary: secondaryColor,
+    onPrimary: Colors.white,
   ),
+  inputDecorationTheme: _baseInputDecorationTheme.copyWith(
+    fillColor: const Color(0xFFFAFAFA),
+  ),
+  scaffoldBackgroundColor: const Color(0xFFF3F3F3),
+  canvasColor: const Color(0xFFF3F3F3),
 );
 
 MaterialColor getMaterialColor(Color color) {
