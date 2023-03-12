@@ -3,7 +3,7 @@ import 'package:flutter_test_app/api/book_repository.dart';
 import 'package:flutter_test_app/models/book.dart';
 import 'package:get/get.dart';
 
-class BookController extends GetxController {
+class BookScreenController extends GetxController {
   final _isLoading = false.obs;
   bool get isLoading => _isLoading.value;
 
@@ -13,7 +13,7 @@ class BookController extends GetxController {
   final VoidCallback? _onErrorFetchingBook;
   final String _bookId;
 
-  BookController({
+  BookScreenController({
     required String bookId,
     void Function()? onErrorFetchingBook,
   })  : _bookId = bookId,

@@ -3,7 +3,7 @@ import 'package:flutter_test_app/api/book_repository.dart';
 import 'package:flutter_test_app/utils/book_category.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
+class HomeScreenController extends GetxController {
   final _isLoading = false.obs;
   bool get isLoading => _isLoading.value;
 
@@ -12,7 +12,7 @@ class HomeController extends GetxController {
 
   final VoidCallback? _onErrorFetchingBooks;
 
-  HomeController({void Function()? onErrorFetchingBooks})
+  HomeScreenController({void Function()? onErrorFetchingBooks})
       : _onErrorFetchingBooks = onErrorFetchingBooks;
 
   @override

@@ -3,7 +3,7 @@ import 'package:flutter_test_app/app_configuration.dart';
 import 'package:flutter_test_app/utils/notifications.dart';
 import 'package:flutter_test_app/utils/validators.dart';
 import 'package:flutter_test_app/views/home/home_screen.dart';
-import 'package:flutter_test_app/views/login_signup/login_signup_controller.dart';
+import 'package:flutter_test_app/views/login_signup/login_signup_screen_controller.dart';
 import 'package:flutter_test_app/widgets/form_fields/custom_form.dart';
 import 'package:flutter_test_app/widgets/form_fields/email_form_field.dart';
 import 'package:flutter_test_app/widgets/form_fields/password_form_field.dart';
@@ -28,7 +28,7 @@ class LoginSignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(LoginSignUpController(_authController));
+    final controller = Get.put(LoginSignUpScreenController(_authController));
     final translations = AppTranslations.of(context);
 
     const verticalPadding = 100.0;

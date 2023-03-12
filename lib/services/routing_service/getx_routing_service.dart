@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test_app/views/book/book_screen.dart';
+import 'package:flutter_test_app/views/cart/cart_screen.dart';
 import 'package:flutter_test_app/views/category/category_screen.dart';
 import 'package:flutter_test_app/views/home/home_screen.dart';
 import 'package:flutter_test_app/views/login_signup/login_signup_screen.dart';
@@ -13,6 +14,7 @@ final routeBuilders = {
   HomeScreen.routeName: () => const HomeScreen(),
   CategoryScreen.routeName: () => const CategoryScreen(),
   BookScreen.routeName: () => const BookScreen(),
+  CartScreen.routeName: () => const CartScreen(),
 };
 
 class GetXRoutingService extends RoutingService {

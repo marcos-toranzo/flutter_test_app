@@ -8,7 +8,7 @@ import 'package:flutter_test_app/utils/iterable_utils.dart';
 import 'package:flutter_test_app/utils/localization.dart';
 import 'package:flutter_test_app/utils/notifications.dart';
 import 'package:flutter_test_app/utils/styling.dart';
-import 'package:flutter_test_app/views/book/book_controller.dart';
+import 'package:flutter_test_app/views/book/book_screen_controller.dart';
 import 'package:flutter_test_app/widgets/book_image.dart';
 import 'package:flutter_test_app/widgets/book_price_tag.dart';
 import 'package:flutter_test_app/widgets/column_with_padding.dart';
@@ -39,7 +39,7 @@ class BookScreen extends StatelessWidget {
     final bookId = RouteArguments.of(context).bookId!;
 
     final controller = Get.put(
-      BookController(
+      BookScreenController(
         bookId: bookId,
         onErrorFetchingBook: () {
           showSnackBar(context: context, text: translations.errorFetchingBook);
