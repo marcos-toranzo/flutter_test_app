@@ -1,4 +1,5 @@
 {
+  "addToCart": "Add to Cart",
   "alreadyHaveAnAccount": "Already have an account?",
   "atLeastNCharacters": "{count, plural, =0{Must contain no characters} =1{Must contain at least 1 character} other{Must contain at least {count} characters}}",
   "@atLeastNCharacters": {
@@ -45,6 +46,16 @@
       }
     }
   },
+  "bookDetails": "Book Details",
+  "categories": "{count, plural, =1{Category} other{Categories}}",
+  "@categories": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
   "categoryName": "{name, select, other{{name}}}",
   "@categoryName": {
     "placeholders": {
@@ -54,6 +65,8 @@
     }
   },
   "dark": "Dark",
+  "description": "Description",
+  "details": "Details",
   "dontHaveAnAccount": "Don't have an account?",
   "email": "Email",
   "errorFetchingBook": "Oops! Something went wrong trying to fetch the book. Please, try again.",
@@ -72,10 +85,29 @@
   "loading": "Loading",
   "login": "Log in",
   "logingIn": "Loging in",
+  "nPages": "{count, select, 0{No Pages} 1{1 Page} other{{count} Pages}}",
+  "@nPages": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "nReviews": "{count, plural, =0{No Reviews} =1{1 Review} other{{count} Reviews}}",
+  "@nReviews": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
   "notForSale": "NOT FOR SALE",
   "password": "Password",
   "passwordsDontMatch": "Passwords don't match",
   "pressBackAgainToExitApp": "Press Back again to exit App",
+  "publishedDate": "Published Date",
+  "publisher": "Publisher",
   "repeatPassword": "Repeat Password",
   "required": "Required",
   "seeAll": "See All",
@@ -86,5 +118,6 @@
   "theme": "Theme",
   "toLogin": "Login",
   "toSignUp": "Sign Up",
+  "unknownAuthors": "Unknown Authors",
   "untitled": "Untitled"
 }

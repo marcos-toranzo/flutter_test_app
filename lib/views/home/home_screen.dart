@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_test_app/controllers/auth_controller.dart';
 import 'package:flutter_test_app/utils/iterable_utils.dart';
 import 'package:flutter_test_app/utils/localization.dart';
 import 'package:flutter_test_app/utils/notifications.dart';
@@ -15,9 +14,7 @@ import 'package:get/get.dart';
 class HomeScreen extends StatelessWidget {
   static const String routeName = '/home';
 
-  final AuthController _authController = Get.find();
-
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +23,7 @@ class HomeScreen extends StatelessWidget {
     final controller = Get.put(
       HomeController(
         onErrorFetchingBooks: () {
-          showSnackBar(
-            context: context,
-            text: translations.errorFetchingBooks,
-          );
+          showSnackBar(context: context, text: translations.errorFetchingBooks);
         },
       ),
     );
@@ -42,9 +36,7 @@ class HomeScreen extends StatelessWidget {
           child: Scaffold(
             appBar: CustomAppBar(
               titleText: translations.home,
-              cart: _authController.user?.cart,
               onRefresh: controller.onRefresh,
-              onCartPressed: () {},
             ),
             drawer: CustomDrawer(),
             body: ListView(

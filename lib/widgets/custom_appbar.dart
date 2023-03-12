@@ -1,31 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_test_app/models/cart.dart';
+import 'package:flutter_test_app/controllers/auth_controller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String titleText;
   final List<Widget>? actions;
   final VoidCallback? onRefresh;
-  final Cart? cart;
-  final VoidCallback? onCartPressed;
 
-  const CustomAppBar({
+  final AuthController _authController = Get.find();
+
+  CustomAppBar({
     required this.titleText,
-    this.cart,
-    this.onCartPressed,
     this.actions,
     this.onRefresh,
     super.key,
-  }) : assert(cart == null || onCartPressed != null);
+  });
 
   @override
   final Size preferredSize = const Size.fromHeight(kToolbarHeight);
 
   Widget _buildCartButton(BuildContext context) {
-    final booksCount = cart!.books.length;
+    final booksCount = _authController.user?.cart.books.length;
+
+    if (booksCount == null) return const Placeholder();
 
     return IconButton(
-      onPressed: onCartPressed,
+      // TODO: go to cart screen
+      onPressed: () {},
       icon: Stack(
         alignment: Alignment.center,
         children: [
@@ -74,7 +76,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             onPressed: onRefresh,
             icon: const Icon(FontAwesomeIcons.arrowsRotate),
           ),
-        if (cart != null) _buildCartButton(context),
+        _buildCartButton(context),
       ],
     );
   }

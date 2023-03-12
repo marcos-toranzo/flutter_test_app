@@ -9,7 +9,7 @@ class Localization {
       AppLocalizations.localizationsDelegates;
 }
 
-class AppTranslations {
+abstract class AppTranslations {
   static Translations of(BuildContext context) {
     return AppLocalizations.of(context);
   }

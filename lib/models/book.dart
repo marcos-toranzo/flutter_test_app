@@ -4,6 +4,16 @@ import 'dart:convert';
 import 'package:flutter_test_app/models/model.dart';
 import 'package:flutter_test_app/utils/currency.dart';
 
+class BookRatings {
+  final double? average;
+  final int? count;
+
+  const BookRatings({
+    required this.average,
+    required this.count,
+  });
+}
+
 enum BookSaleability {
   forSale,
   free,
@@ -13,15 +23,13 @@ enum BookSaleability {
 
 class Book extends Model {
   final String? title;
-  final String? subtitle;
   final List<String>? authors;
   final String? publisher;
   final String? publishedDate;
   final String? description;
   final int? pageCount;
   final List<String>? categories;
-  final double? averageRating;
-  final int? ratingsCount;
+  final BookRatings? ratings;
   final String? imageLink;
   final String? language;
   final Currency? price;
@@ -30,15 +38,13 @@ class Book extends Model {
   const Book({
     required super.id,
     this.title,
-    this.subtitle,
     this.authors,
     this.publisher,
     this.publishedDate,
     this.description,
     this.pageCount,
     this.categories,
-    this.averageRating,
-    this.ratingsCount,
+    this.ratings,
     this.imageLink,
     this.language,
     this.price,
@@ -97,15 +103,23 @@ class Book extends Model {
       }
     }
 
+    BookRatings? ratings;
+
+    if (volumeInfo['averageRating'] != null ||
+        volumeInfo['ratingsCount'] != null) {
+      ratings = BookRatings(
+        average: volumeInfo['averageRating'].toDouble(),
+        count: volumeInfo['ratingsCount'],
+      );
+    }
+
     return Book(
       id: map['id'] as String,
       title: volumeInfo['title'],
-      subtitle: volumeInfo['subtitle'],
       publisher: volumeInfo['publisher'],
       description: volumeInfo['description'],
       pageCount: volumeInfo['pageCount'],
-      averageRating: volumeInfo['averageRating']?.toDouble(),
-      ratingsCount: volumeInfo['ratingsCount'],
+      ratings: ratings,
       language: volumeInfo['language'],
       publishedDate: volumeInfo['publishedDate'],
       authors: authors,

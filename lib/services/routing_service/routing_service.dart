@@ -7,10 +7,12 @@ enum ScreenTransitions {
 class RouteArguments {
   late final ScreenTransitions? screenTransitionType;
   late final String? categoryName;
+  late final String? bookId;
 
   RouteArguments({
     this.screenTransitionType,
     this.categoryName,
+    this.bookId,
   });
 
   RouteArguments.of(BuildContext context) {
@@ -19,9 +21,11 @@ class RouteArguments {
     if (args != null && args is RouteArguments) {
       screenTransitionType = args.screenTransitionType;
       categoryName = args.categoryName;
+      bookId = args.bookId;
     } else {
       screenTransitionType = null;
       categoryName = null;
+      bookId = null;
     }
   }
 }
