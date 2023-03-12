@@ -1,4 +1,5 @@
 {
+  "addToCart": "Añadir a la cesta",
   "alreadyHaveAnAccount": "¿Ya tienes cuenta?",
   "atLeastNCharacters": "{count, plural, =0{No debe contener caracteres} =1{Debe contener al menos 1 caracter} other{Debe contener al menos {count} caracteres}}",
   "@atLeastNCharacters": {

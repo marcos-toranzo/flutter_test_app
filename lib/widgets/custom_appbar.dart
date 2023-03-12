@@ -26,6 +26,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     if (booksCount == null) return const Placeholder();
 
     return IconButton(
+      // TODO: go to cart screen
       onPressed: () {},
       icon: Stack(
         alignment: Alignment.center,

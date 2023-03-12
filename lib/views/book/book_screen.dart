@@ -15,6 +15,8 @@ import 'package:flutter_test_app/widgets/custom_appbar.dart';
 import 'package:flutter_test_app/widgets/cutom_text.dart';
 import 'package:flutter_test_app/widgets/page_with_loader.dart';
 import 'package:flutter_test_app/widgets/space.dart';
+import 'package:flutter_test_app/widgets/wide_button.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 Color _getLighterTextColor(BuildContext context) =>
@@ -48,6 +50,9 @@ class BookScreen extends StatelessWidget {
       () {
         final book = controller.book;
 
+        final isForSale = book?.saleability == BookSaleability.forSale ||
+            book?.saleability == BookSaleability.free;
+
         return PageWithLoader(
           loaderText: translations.loading,
           showLoader: controller.isLoading,
@@ -56,9 +61,20 @@ class BookScreen extends StatelessWidget {
               titleText: translations.bookDetails,
               onRefresh: controller.onRefresh,
             ),
+            floatingActionButton: isForSale
+                ? WideButton(
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    text: translations.addToCart,
+                    iconData: FontAwesomeIcons.cartShopping,
+                    // TODO: go to cart screen
+                    onPressed: () {},
+                  )
+                : null,
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
             body: book != null
                 ? ListView(
-                    padding: const EdgeInsets.only(bottom: 60),
+                    padding: EdgeInsets.only(bottom: isForSale ? 120 : 60),
                     physics: const BouncingScrollPhysics(),
                     children: [
                       _BookHeader(
