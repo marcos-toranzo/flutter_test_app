@@ -1,23 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_test_app/app_configuration.dart';
+import 'package:flutter_test_app/services/routing_service/routing_service.dart';
+import 'package:flutter_test_app/utils/book_category.dart';
 import 'package:flutter_test_app/utils/localization.dart';
 import 'package:flutter_test_app/utils/styling.dart';
-import 'package:flutter_test_app/views/home/book_preview.dart';
+import 'package:flutter_test_app/views/category/category_screen.dart';
+import 'package:flutter_test_app/widgets/book_preview.dart';
 import 'package:flutter_test_app/views/home/constants.dart';
-import 'package:flutter_test_app/views/home/home_controller.dart';
 import 'package:flutter_test_app/widgets/column_with_padding.dart';
 import 'package:flutter_test_app/widgets/row_with_padding.dart';
 import 'package:flutter_test_app/widgets/space.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class BookCategoryView extends StatelessWidget {
+class BookCategoryPreview extends StatelessWidget {
   final BookCategory bookCategory;
 
-  const BookCategoryView({required this.bookCategory, super.key});
+  const BookCategoryPreview({required this.bookCategory, super.key});
 
   @override
   Widget build(BuildContext context) {
     final translations = AppTranslations.of(context);
     final borderRadius = BorderRadius.circular(borderRadiusValue);
+
+    goToCategoryView() {
+      routingService.pushRoute(
+        context: context,
+        routeName: CategoryScreen.routeName,
+        routeArguments: RouteArguments(
+          screenTransitionType: ScreenTransitions.slide,
+          categoryName: bookCategory.name,
+        ),
+      );
+    }
 
     return Material(
       elevation: 0.5,
@@ -45,7 +59,7 @@ class BookCategoryView extends StatelessWidget {
                 Material(
                   borderRadius: borderRadius,
                   child: InkWell(
-                    onTap: () {},
+                    onTap: goToCategoryView,
                     borderRadius: borderRadius,
                     child: RowWithPadding(
                       padding: const EdgeInsets.symmetric(
@@ -94,7 +108,7 @@ class BookCategoryView extends StatelessWidget {
                       : Material(
                           borderRadius: borderRadius,
                           child: InkWell(
-                            onTap: () {},
+                            onTap: goToCategoryView,
                             borderRadius: borderRadius,
                             child: SizedBox(
                               width: 100,

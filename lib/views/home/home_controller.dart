@@ -1,14 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test_app/api/book_repository.dart';
-import 'package:flutter_test_app/models/book.dart';
+import 'package:flutter_test_app/utils/book_category.dart';
 import 'package:get/get.dart';
-
-class BookCategory {
-  final String name;
-  final List<Book> books;
-
-  const BookCategory({required this.name, required this.books});
-}
 
 class HomeController extends GetxController {
   final _isLoading = false.obs;
@@ -17,18 +10,19 @@ class HomeController extends GetxController {
   final _bookCategories = RxList<BookCategory>([]);
   List<BookCategory> get bookCategories => _bookCategories;
 
-  final VoidCallback? onErrorFetchingBooks;
+  final VoidCallback? _onErrorFetchingBooks;
 
-  HomeController({this.onErrorFetchingBooks});
+  HomeController({void Function()? onErrorFetchingBooks})
+      : _onErrorFetchingBooks = onErrorFetchingBooks;
 
   @override
   void onInit() {
     super.onInit();
 
-    loadBooks(onError: onErrorFetchingBooks);
+    _loadBooks(onError: _onErrorFetchingBooks);
   }
 
-  Future<void> loadBooks({VoidCallback? onError}) async {
+  Future<void> _loadBooks({VoidCallback? onError}) async {
     _isLoading.value = true;
 
     const categories = [
@@ -47,7 +41,7 @@ class HomeController extends GetxController {
     for (var category in categories) {
       final categoryBooksResult = await BookRepository.searchBooks(
         searchTerm: category,
-        maxResults: 20,
+        maxResults: 10,
       );
 
       if (categoryBooksResult.success) {
@@ -72,6 +66,6 @@ class HomeController extends GetxController {
   }
 
   void onRefresh({VoidCallback? onError}) {
-    loadBooks(onError: onError);
+    _loadBooks(onError: onError ?? _onErrorFetchingBooks);
   }
 }

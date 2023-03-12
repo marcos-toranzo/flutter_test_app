@@ -16,11 +16,10 @@ class BookRepository {
     int? maxResults,
   }) async {
     try {
-      final params = {'q': searchTerm};
-
-      if (maxResults != null) {
-        params['maxResults'] = maxResults.toString();
-      }
+      final params = {
+        'q': searchTerm,
+        'maxResults': maxResults?.toString() ?? '40',
+      };
 
       final response = await networkService.get(
         _volumesEndpoint,

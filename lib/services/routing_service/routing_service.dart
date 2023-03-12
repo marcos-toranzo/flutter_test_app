@@ -5,11 +5,25 @@ enum ScreenTransitions {
 }
 
 class RouteArguments {
-  final ScreenTransitions? screenTransitionType;
+  late final ScreenTransitions? screenTransitionType;
+  late final String? categoryName;
 
-  const RouteArguments({
+  RouteArguments({
     this.screenTransitionType,
+    this.categoryName,
   });
+
+  RouteArguments.of(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments;
+
+    if (args != null && args is RouteArguments) {
+      screenTransitionType = args.screenTransitionType;
+      categoryName = args.categoryName;
+    } else {
+      screenTransitionType = null;
+      categoryName = null;
+    }
+  }
 }
 
 abstract class RoutingService {

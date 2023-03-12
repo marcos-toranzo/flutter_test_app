@@ -3,7 +3,7 @@ import 'package:flutter_test_app/controllers/auth_controller.dart';
 import 'package:flutter_test_app/utils/iterable_utils.dart';
 import 'package:flutter_test_app/utils/localization.dart';
 import 'package:flutter_test_app/utils/notifications.dart';
-import 'package:flutter_test_app/views/home/book_category_view.dart';
+import 'package:flutter_test_app/views/home/book_category_preview.dart';
 import 'package:flutter_test_app/views/home/constants.dart';
 import 'package:flutter_test_app/views/home/home_controller.dart';
 import 'package:flutter_test_app/widgets/custom_appbar.dart';
@@ -21,8 +21,18 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(HomeController());
     final translations = AppTranslations.of(context);
+
+    final controller = Get.put(
+      HomeController(
+        onErrorFetchingBooks: () {
+          showSnackBar(
+            context: context,
+            text: translations.errorFetchingBooks,
+          );
+        },
+      ),
+    );
 
     return DoubleDismissScreen(
       child: Obx(
@@ -33,16 +43,7 @@ class HomeScreen extends StatelessWidget {
             appBar: CustomAppBar(
               titleText: translations.home,
               cart: _authController.user?.cart,
-              onRefresh: () {
-                controller.onRefresh(
-                  onError: () {
-                    showSnackBar(
-                      context: context,
-                      text: translations.errorFetchingBooks,
-                    );
-                  },
-                );
-              },
+              onRefresh: controller.onRefresh,
               onCartPressed: () {},
             ),
             drawer: CustomDrawer(),
@@ -56,7 +57,7 @@ class HomeScreen extends StatelessWidget {
                     left: 10,
                     right: 10,
                   ),
-                  child: BookCategoryView(bookCategory: bookCategory),
+                  child: BookCategoryPreview(bookCategory: bookCategory),
                 ),
               ),
             ),
