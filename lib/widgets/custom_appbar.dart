@@ -6,26 +6,25 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String titleText;
   final List<Widget>? actions;
   final VoidCallback? onRefresh;
-  final Cart cart;
-  final VoidCallback onCartPressed;
+  final Cart? cart;
+  final VoidCallback? onCartPressed;
 
   const CustomAppBar({
     required this.titleText,
-    required this.cart,
-    required this.onCartPressed,
+    this.cart,
+    this.onCartPressed,
     this.actions,
     this.onRefresh,
     super.key,
-  });
+  }) : assert(cart == null || onCartPressed != null);
 
   @override
   final Size preferredSize = const Size.fromHeight(kToolbarHeight);
 
-  @override
-  Widget build(BuildContext context) {
-    final booksCount = cart.books.length;
+  Widget _buildCartButton(BuildContext context) {
+    final booksCount = cart!.books.length;
 
-    final cartButton = IconButton(
+    return IconButton(
       onPressed: onCartPressed,
       icon: Stack(
         alignment: Alignment.center,
@@ -62,7 +61,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
     );
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return AppBar(
       title: Text(titleText),
       actions: [
@@ -72,7 +74,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             onPressed: onRefresh,
             icon: const Icon(FontAwesomeIcons.arrowsRotate),
           ),
-        cartButton,
+        if (cart != null) _buildCartButton(context),
       ],
     );
   }

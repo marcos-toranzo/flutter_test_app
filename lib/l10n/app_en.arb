@@ -45,12 +45,23 @@
       }
     }
   },
+  "categoryName": "{name, select, other{{name}}}",
+  "@categoryName": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "dark": "Dark",
   "dontHaveAnAccount": "Don't have an account?",
   "email": "Email",
+  "errorFetchingBook": "Oops! Something went wrong trying to fetch the book. Please, try again.",
+  "errorFetchingBooks": "Oops! Something went wrong trying to fetch the books. Please, try again.",
   "errorLogingIn": "Oops! Something went wrong trying to log in. Please, try again.",
   "errorSigningUp": "Oops! Something went wrong trying to sign up. Please, try again.",
   "forgotYourPassowrd": "Forgot your password?",
+  "free": "FREE",
   "goBack": "Go Back",
   "home": "Home",
   "invalidCredentials": "Invalid Credentials",
@@ -58,18 +69,22 @@
   "invalidScreenError": "Oops! Something went wrong!",
   "language": "Language",
   "light": "Light",
+  "loading": "Loading",
   "login": "Log in",
   "logingIn": "Loging in",
+  "notForSale": "NOT FOR SALE",
   "password": "Password",
   "passwordsDontMatch": "Passwords don't match",
   "pressBackAgainToExitApp": "Press Back again to exit App",
   "repeatPassword": "Repeat Password",
   "required": "Required",
+  "seeAll": "See All",
   "settings": "Settings",
   "signOut": "Sign out",
   "signUp": "Sign Up",
   "system": "System",
   "theme": "Theme",
   "toLogin": "Login",
-  "toSignUp": "Sign Up"
+  "toSignUp": "Sign Up",
+  "untitled": "Untitled"
 }

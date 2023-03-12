@@ -30,12 +30,14 @@ final darkAppTheme = _baseTheme.copyWith(
   colorScheme: const ColorScheme.dark(
     primary: primaryColor,
     secondary: secondaryColor,
+    onPrimary: Colors.white,
   ),
   inputDecorationTheme: _baseInputDecorationTheme.copyWith(
     fillColor: Colors.grey[900],
   ),
   scaffoldBackgroundColor: const Color.fromARGB(255, 48, 48, 48),
   canvasColor: const Color.fromARGB(255, 48, 48, 48),
+  cardColor: Colors.grey[900],
 );
 
 final lightAppTheme = _baseTheme.copyWith(
@@ -43,6 +45,7 @@ final lightAppTheme = _baseTheme.copyWith(
   colorScheme: const ColorScheme.light(
     primary: primaryColor,
     secondary: secondaryColor,
+    onPrimary: Colors.white,
   ),
   inputDecorationTheme: _baseInputDecorationTheme.copyWith(
     fillColor: const Color(0xFFFAFAFA),

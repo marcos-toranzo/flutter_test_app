@@ -45,12 +45,23 @@
       }
     }
   },
+  "categoryName": "{name, select, Fiction{Ficción} Sports{Deportes} Poetry{Poesía} History{Historia} Education{Educación} Romance{Romance} Fantasy{Fantasía} Crime{Crimen} other{{name}}}",
+  "@categoryName": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "dark": "Oscuro",
   "dontHaveAnAccount": "¿No tienes cuenta?",
   "email": "Correo",
+  "errorFetchingBook": "¡Ups! Ha ocurrido un error intentando obtener el libro. Por favor, vuelva a intentarlo.",
+  "errorFetchingBooks": "¡Ups! Ha ocurrido un error intentando obtener los libros. Por favor, vuelva a intentarlo.",
   "errorLogingIn": "¡Ups! Ha ocurrido un error intentando iniciar sesión. Por favor, vuelva a intentarlo.",
   "errorSigningUp": "¡Ups! Ha ocurrido un error intentando crear cuenta. Por favor, vuelva a intentarlo.",
   "forgotYourPassowrd": "¿Olvidaste la contraseña?",
+  "free": "GRATIS",
   "goBack": "Regresar",
   "home": "Inicio",
   "invalidCredentials": "Invalid Credentials",
@@ -58,18 +69,22 @@
   "invalidScreenError": "¡Ups, Ha ocurrido un error!",
   "language": "Idioma",
   "light": "Claro",
+  "loading": "Cargando",
   "login": "Inicia sesión",
   "logingIn": "Iniciando sesión",
+  "notForSale": "NO EN VENTA",
   "password": "Contraseña",
   "passwordsDontMatch": "Las contraseñas no son iguales",
   "pressBackAgainToExitApp": "Presiona Atrás otra vez para cerrar App",
   "repeatPassword": "Repetir Contraseña",
   "required": "Obligatorio",
+  "seeAll": "Ver todos",
   "settings": "Ajustes",
   "signOut": "Cerrar sesión",
   "signUp": "Regístrate",
   "system": "Sistema",
   "theme": "Tema",
   "toLogin": "Iniciar sesión",
-  "toSignUp": "Registrarse"
+  "toSignUp": "Registrarse",
+  "untitled": "Sin título"
 }

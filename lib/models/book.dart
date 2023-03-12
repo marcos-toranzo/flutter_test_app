@@ -48,21 +48,11 @@ class Book extends Model {
   factory Book.fromMap(Map<String, dynamic> map) {
     final volumeInfo = map['volumeInfo'];
 
-    var authorsData = volumeInfo['authors'];
-    List<String>? authors;
+    final authors = volumeInfo['authors']?.cast<String>().toList();
 
-    if (authorsData != null) {
-      authors = authorsData as List<String>;
-    }
+    final categories = volumeInfo['categories']?.cast<String>().toList();
 
-    final categoriesData = volumeInfo['categories'];
-    List<String>? categories;
-
-    if (categoriesData != null) {
-      authors = categoriesData as List<String>;
-    }
-
-    final imageLinks = volumeInfo['imageLink'];
+    final imageLinks = volumeInfo['imageLinks'];
     String? imageLink;
 
     if (imageLinks != null) {
@@ -80,7 +70,7 @@ class Book extends Model {
 
     if (retailPrice != null) {
       price = Currency(
-        amount: retailPrice['amount'],
+        amount: retailPrice['amount'].toDouble(),
         code: retailPrice['currencyCode'],
       );
     }
@@ -114,7 +104,7 @@ class Book extends Model {
       publisher: volumeInfo['publisher'],
       description: volumeInfo['description'],
       pageCount: volumeInfo['pageCount'],
-      averageRating: volumeInfo['averageRating'],
+      averageRating: volumeInfo['averageRating']?.toDouble(),
       ratingsCount: volumeInfo['ratingsCount'],
       language: volumeInfo['language'],
       publishedDate: volumeInfo['publishedDate'],
