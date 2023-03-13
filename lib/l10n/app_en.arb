@@ -100,11 +100,12 @@
   "loading": "Loading",
   "login": "Log in",
   "logingIn": "Loging in",
-  "nPages": "{count, select, 0{No Pages} 1{1 Page} other{{count} Pages}}",
+  "nPages": "{count, plural, =0{No Pages} =1{1 Page} other{{count} Pages}}",
   "@nPages": {
     "placeholders": {
       "count": {
-        "type": "String"
+        "type": "num",
+        "format": "compact"
       }
     }
   },
@@ -143,6 +144,7 @@
   "toSignUp": "Sign Up",
   "total": "Total",
   "unknownAuthors": "Unknown Authors",
+  "unknownPageCount": "? Pages",
   "untitled": "Untitled",
   "zipCode": "ZIP code"
 }

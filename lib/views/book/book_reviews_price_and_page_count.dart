@@ -68,7 +68,9 @@ class BookPriceReviewAndPageCount extends StatelessWidget {
         ),
         Expanded(
           child: OnBackgroundText(
-            translations.nPages(pageCount?.toString() ?? '?'),
+            pageCount != null
+                ? translations.nPages(pageCount!)
+                : translations.unknownPageCount,
             textAlign: TextAlign.center,
           ),
         )
