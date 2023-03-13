@@ -51,6 +51,7 @@ class BookPriceTag extends StatelessWidget {
 
     return Material(
       borderRadius: borderRadius,
+      color: Colors.transparent,
       elevation: 2,
       child: Chip(
         label: Text(priceText),

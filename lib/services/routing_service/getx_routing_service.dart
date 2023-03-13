@@ -13,8 +13,8 @@ final routeBuilders = {
   LoginSignUpScreen.routeName: () => LoginSignUpScreen(),
   HomeScreen.routeName: () => const HomeScreen(),
   CategoryScreen.routeName: () => const CategoryScreen(),
-  BookScreen.routeName: () => const BookScreen(),
-  CartScreen.routeName: () => const CartScreen(),
+  BookScreen.routeName: () => BookScreen(),
+  CartScreen.routeName: () => CartScreen(),
 };
 
 class GetXRoutingService extends RoutingService {
@@ -28,8 +28,7 @@ class GetXRoutingService extends RoutingService {
       Transition? screenTransition;
 
       if (arguments is RouteArguments) {
-        screenTransition =
-            _screenTransitionsMap[arguments.screenTransitionType];
+        screenTransition = _screenTransitionsMap[arguments.transition];
       }
 
       return GetPageRoute(

@@ -9,6 +9,7 @@ import 'package:flutter_test_app/widgets/book_image.dart';
 import 'package:flutter_test_app/widgets/book_price_tag.dart';
 import 'package:flutter_test_app/widgets/column_with_padding.dart';
 import 'package:flutter_test_app/widgets/cutom_text.dart';
+import 'package:flutter_test_app/widgets/ink_well_button.dart';
 import 'package:flutter_test_app/widgets/space.dart';
 
 class BookPreview extends StatelessWidget {
@@ -26,50 +27,46 @@ class BookPreview extends StatelessWidget {
     const imageWidth = 100.0;
     final borderRadius = BorderRadius.circular(borderRadiusValue);
 
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: () {
-          routingService.pushRoute(
-            context: context,
-            routeName: BookScreen.routeName,
-            routeArguments: RouteArguments(
-              bookId: book.id,
-              screenTransitionType: ScreenTransitions.slide,
-            ),
-          );
-        },
-        borderRadius: borderRadius,
-        splashColor: Theme.of(context).primaryColor.withAlpha(100),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor.withAlpha(40),
-            borderRadius: borderRadius,
+    return InkWellButton(
+      onTap: () {
+        routingService.pushRoute(
+          context: context,
+          routeName: BookScreen.routeName,
+          routeArguments: RouteArguments(
+            bookId: book.id,
+            transition: ScreenTransitions.slide,
           ),
-          child: ColumnWithPadding(
-            padding: const EdgeInsets.all(8),
-            children: [
-              Expanded(
-                child: BookImage(
-                  imageUrl: book.imageLink,
-                  elevation: 2,
-                  width: imageWidth,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              const Space.vertical(5),
-              SizedBox(
+        );
+      },
+      borderRadius: borderRadius,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).primaryColor.withAlpha(40),
+          borderRadius: borderRadius,
+        ),
+        child: ColumnWithPadding(
+          padding: const EdgeInsets.all(8),
+          children: [
+            Expanded(
+              child: BookImage(
+                imageUrl: book.imageLink,
+                elevation: 2,
                 width: imageWidth,
-                child: OnBackgroundText(
-                  book.title ?? translations.untitled,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                fit: BoxFit.cover,
               ),
-              const Space.vertical(15),
-              BookPriceTag(price: book.price, saleability: book.saleability),
-            ],
-          ),
+            ),
+            const Space.vertical(5),
+            SizedBox(
+              width: imageWidth,
+              child: OnBackgroundText(
+                book.title ?? translations.untitled,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            const Space.vertical(15),
+            BookPriceTag(price: book.price, saleability: book.saleability),
+          ],
         ),
       ),
     );

@@ -32,6 +32,7 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final translations = AppTranslations.of(context);
+    final theme = Theme.of(context);
 
     return Drawer(
       child: ListView(
@@ -40,7 +41,7 @@ class CustomDrawer extends StatelessWidget {
           Container(
             height: 200,
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
+              color: theme.primaryColor,
               borderRadius: const BorderRadius.only(
                 bottomRight: Radius.circular(20),
               ),
@@ -54,14 +55,14 @@ class CustomDrawer extends StatelessWidget {
                   _authController.user?.username ?? '',
                   style: TextStyle(
                     fontSize: 28,
-                    color: Theme.of(context).colorScheme.onPrimary,
+                    color: theme.colorScheme.onPrimary,
                   ),
                 ),
                 HorizontallyScrollableText(
                   _authController.user?.email ?? '',
                   style: TextStyle(
                     fontSize: 18,
-                    color: Theme.of(context).colorScheme.onPrimary,
+                    color: theme.colorScheme.onPrimary,
                   ),
                 ),
               ],

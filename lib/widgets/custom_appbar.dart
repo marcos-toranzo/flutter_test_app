@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_test_app/app_configuration.dart';
 import 'package:flutter_test_app/controllers/cart_controller.dart';
+import 'package:flutter_test_app/services/routing_service/routing_service.dart';
+import 'package:flutter_test_app/views/cart/cart_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
@@ -7,12 +10,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String titleText;
   final List<Widget>? actions;
   final VoidCallback? onRefresh;
+  final bool showCartButton;
 
   final CartController _cartController = Get.find();
 
   CustomAppBar({
     required this.titleText,
     this.actions,
+    this.showCartButton = true,
     this.onRefresh,
     super.key,
   });
@@ -21,13 +26,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Size preferredSize = const Size.fromHeight(kToolbarHeight);
 
   Widget _buildCartButton(BuildContext context) {
-    final total = _cartController.cart?.total;
-
-    if (total == null) return const Placeholder();
+    final total = _cartController.totalCount;
 
     return IconButton(
-      // TODO: go to cart screen
-      onPressed: () {},
+      onPressed: () {
+        routingService.pushRoute(
+          context: context,
+          routeName: CartScreen.routeName,
+          routeArguments: RouteArguments(
+            transition: ScreenTransitions.slide,
+          ),
+        );
+      },
       icon: Stack(
         alignment: Alignment.center,
         children: [
@@ -67,17 +77,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      title: Text(titleText),
-      actions: [
-        if (actions != null) ...actions!,
-        if (onRefresh != null)
-          IconButton(
-            onPressed: onRefresh,
-            icon: const Icon(FontAwesomeIcons.arrowsRotate),
-          ),
-        Obx(() => _buildCartButton(context)),
-      ],
+    return Obx(
+      () => AppBar(
+        title: Text(titleText),
+        actions: [
+          if (actions != null) ...actions!,
+          if (onRefresh != null)
+            IconButton(
+              onPressed: onRefresh,
+              icon: const Icon(FontAwesomeIcons.arrowsRotate),
+            ),
+          if (_cartController.cart != null && showCartButton)
+            _buildCartButton(context),
+        ],
+      ),
     );
   }
 }

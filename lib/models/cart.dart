@@ -1,5 +1,4 @@
 import 'package:flutter_test_app/models/model.dart';
-import 'package:flutter_test_app/utils/iterable_utils.dart';
 import 'package:flutter_test_app/utils/types.dart';
 
 class CartEntry {
@@ -16,7 +15,4 @@ class Cart extends Model {
     required super.id,
     this.entries = const [],
   });
-
-  int get total =>
-      entries.reduceAndCompute((acc, entry) => acc + entry.count, 0);
 }

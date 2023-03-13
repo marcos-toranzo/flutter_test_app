@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_test_app/app_configuration.dart';
+import 'package:flutter_test_app/controllers/cart_controller.dart';
 import 'package:flutter_test_app/models/book.dart';
 import 'package:flutter_test_app/services/routing_service/routing_service.dart';
 import 'package:flutter_test_app/utils/currency.dart';
@@ -9,6 +11,7 @@ import 'package:flutter_test_app/utils/localization.dart';
 import 'package:flutter_test_app/utils/notifications.dart';
 import 'package:flutter_test_app/utils/styling.dart';
 import 'package:flutter_test_app/views/book/book_screen_controller.dart';
+import 'package:flutter_test_app/views/cart/cart_screen.dart';
 import 'package:flutter_test_app/widgets/book_image.dart';
 import 'package:flutter_test_app/widgets/book_price_tag.dart';
 import 'package:flutter_test_app/widgets/column_with_padding.dart';
@@ -31,7 +34,9 @@ TextStyle? _getBigTextStyle(BuildContext context) =>
 class BookScreen extends StatelessWidget {
   static const String routeName = '/book';
 
-  const BookScreen({super.key});
+  final CartController _cartController = Get.find();
+
+  BookScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +46,7 @@ class BookScreen extends StatelessWidget {
     final controller = Get.put(
       BookScreenController(
         bookId: bookId,
+        cartController: _cartController,
         onErrorFetchingBook: () {
           showSnackBar(context: context, text: translations.errorFetchingBook);
         },
@@ -67,8 +73,25 @@ class BookScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 40),
                     text: translations.addToCart,
                     iconData: FontAwesomeIcons.cartShopping,
-                    // TODO: go to cart screen
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.onAddToCart(
+                        onError: () {
+                          showSnackBar(
+                            context: context,
+                            text: translations.errorAddingToCart,
+                          );
+                        },
+                        onSuccess: () {
+                          routingService.pushRoute(
+                            context: context,
+                            routeName: CartScreen.routeName,
+                            routeArguments: RouteArguments(
+                              transition: ScreenTransitions.slide,
+                            ),
+                          );
+                        },
+                      );
+                    },
                   )
                 : null,
             floatingActionButtonLocation:
