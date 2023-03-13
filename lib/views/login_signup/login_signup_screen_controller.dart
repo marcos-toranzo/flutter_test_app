@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test_app/controllers/auth_controller.dart';
 import 'package:get/get.dart';
 
-class LoginSignUpController extends GetxController {
+class LoginSignUpScreenController extends GetxController {
   final AuthController _authController;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final repeatPasswordController = TextEditingController();
 
-  LoginSignUpController(this._authController);
+  LoginSignUpScreenController(this._authController);
 
   @override
   void onClose() {

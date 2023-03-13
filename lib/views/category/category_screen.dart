@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test_app/services/routing_service/routing_service.dart';
 import 'package:flutter_test_app/utils/localization.dart';
 import 'package:flutter_test_app/utils/notifications.dart';
-import 'package:flutter_test_app/views/category/category_controller.dart';
-import 'package:flutter_test_app/widgets/book_preview.dart';
+import 'package:flutter_test_app/views/category/category_screen_controller.dart';
+import 'package:flutter_test_app/widgets/book/book_preview.dart';
 import 'package:flutter_test_app/widgets/custom_appbar.dart';
 import 'package:flutter_test_app/widgets/page_with_loader.dart';
 import 'package:get/get.dart';
@@ -19,7 +19,7 @@ class CategoryScreen extends StatelessWidget {
     final categoryName = RouteArguments.of(context).categoryName!;
 
     final controller = Get.put(
-      CategoryController(
+      CategoryScreenController(
         categoryName: categoryName,
         onErrorFetchingBooks: () {
           showSnackBar(context: context, text: translations.errorFetchingBooks);

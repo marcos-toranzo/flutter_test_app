@@ -47,6 +47,7 @@
     }
   },
   "bookDetails": "Detalles del libro",
+  "cart": "Cesta",
   "categories": "{count, plural, =1{Categoría} other{Categorías}}",
   "@categories": {
     "placeholders": {
@@ -64,14 +65,17 @@
       }
     }
   },
+  "checkout": "Tramitar",
   "dark": "Oscuro",
   "description": "Descripción",
   "details": "Detalles",
   "dontHaveAnAccount": "¿No tienes cuenta?",
   "email": "Correo",
+  "errorAddingToCart": "¡Ups! Ha ocurrido un error intentando añadir el libro a la cesta. Por favor, vuelva a intentarlo.",
   "errorFetchingBook": "¡Ups! Ha ocurrido un error intentando obtener el libro. Por favor, vuelva a intentarlo.",
   "errorFetchingBooks": "¡Ups! Ha ocurrido un error intentando obtener los libros. Por favor, vuelva a intentarlo.",
   "errorLogingIn": "¡Ups! Ha ocurrido un error intentando iniciar sesión. Por favor, vuelva a intentarlo.",
+  "errorRemovingFromCart": "¡Ups! Ha ocurrido un error intentando remover el libro de la cesta. Por favor, vuelva a intentarlo.",
   "errorSigningUp": "¡Ups! Ha ocurrido un error intentando crear cuenta. Por favor, vuelva a intentarlo.",
   "forgotYourPassowrd": "¿Olvidaste la contraseña?",
   "free": "GRATIS",
@@ -108,6 +112,7 @@
   "pressBackAgainToExitApp": "Presiona Atrás otra vez para cerrar App",
   "publishedDate": "Fecha de publicación",
   "publisher": "Editor",
+  "remove": "Remover",
   "repeatPassword": "Repetir Contraseña",
   "required": "Obligatorio",
   "seeAll": "Ver todos",
@@ -118,6 +123,7 @@
   "theme": "Tema",
   "toLogin": "Iniciar sesión",
   "toSignUp": "Registrarse",
+  "total": "Total",
   "unknownAuthors": "Autores Desconocidos",
   "untitled": "Sin título"
 }

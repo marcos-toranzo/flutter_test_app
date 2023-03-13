@@ -3,7 +3,7 @@ import 'package:flutter_test_app/api/book_repository.dart';
 import 'package:flutter_test_app/utils/book_category.dart';
 import 'package:get/get.dart';
 
-class CategoryController extends GetxController {
+class CategoryScreenController extends GetxController {
   final _isLoading = false.obs;
   bool get isLoading => _isLoading.value;
 
@@ -13,7 +13,7 @@ class CategoryController extends GetxController {
   final VoidCallback? _onErrorFetchingBooks;
   final String _categoryName;
 
-  CategoryController({
+  CategoryScreenController({
     required String categoryName,
     void Function()? onErrorFetchingBooks,
   })  : _categoryName = categoryName,

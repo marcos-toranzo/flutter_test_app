@@ -1,19 +1,22 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test_app/models/book.dart';
 import 'package:flutter_test_app/utils/currency.dart';
 import 'package:flutter_test_app/utils/localization.dart';
 import 'package:flutter_test_app/utils/styling.dart';
-import 'package:intl/intl.dart';
 
 class BookPriceTag extends StatelessWidget {
   final Currency? price;
   final BookSaleability saleability;
+  final double size;
 
   const BookPriceTag({
     required this.price,
-    required this.saleability,
+    this.size = 14,
+    this.saleability = BookSaleability.forSale,
     super.key,
-  });
+  }) : assert(size > 4);
 
   @override
   Widget build(BuildContext context) {
@@ -21,20 +24,13 @@ class BookPriceTag extends StatelessWidget {
 
     var priceText = '-';
     var priceTextStyle = TextStyle(
-      fontSize: 10,
+      fontSize: size - 4,
       color: Theme.of(context).colorScheme.onPrimary,
     );
 
     if (price != null) {
-      final formatter = NumberFormat.simpleCurrency(
-        decimalDigits: 2,
-        name: price!.code,
-      );
-
-      priceText = formatter.format(price!.amount);
-      priceTextStyle = priceTextStyle.copyWith(
-        fontSize: 14,
-      );
+      priceText = price!.format();
+      priceTextStyle = priceTextStyle.copyWith(fontSize: size);
     } else {
       switch (saleability) {
         case BookSaleability.free:
@@ -51,12 +47,16 @@ class BookPriceTag extends StatelessWidget {
 
     return Material(
       borderRadius: borderRadius,
+      color: Colors.transparent,
       elevation: 2,
       child: Chip(
         label: Text(priceText),
         side: BorderSide.none,
         backgroundColor: Theme.of(context).primaryColor,
-        labelPadding: const EdgeInsets.symmetric(horizontal: 10),
+        labelPadding: EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: max(size - 14.0, 0.0),
+        ),
         visualDensity: VisualDensity.compact,
         padding: EdgeInsets.zero,
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,

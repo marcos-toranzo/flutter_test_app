@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
+import 'package:flutter_test_app/controllers/cart_controller.dart';
 import 'package:flutter_test_app/views/home/home_screen.dart';
 import 'package:get/get.dart';
 import 'package:flutter_test_app/app_configuration.dart';
@@ -21,6 +22,7 @@ class FlutterTestApp extends StatelessWidget {
 
   FlutterTestApp({super.key}) {
     Get.put(AuthController());
+    Get.put(CartController());
     _appConfigurationController =
         Get.put(AppConfigurationController(Localization.supportedLocales));
   }
@@ -56,24 +58,31 @@ class _InitialScreen extends StatefulWidget {
 
 class _InitialScreenState extends State<_InitialScreen> {
   final AuthController _authController = Get.find();
+  final CartController _cartController = Get.find();
 
   @override
   void initState() {
     super.initState();
     _authController.checkLoggedInSession(
       onSuccess: onLoginSuccess,
-      onError: onLoginError,
+      onError: onError,
     );
   }
 
-  void onLoginSuccess() {
-    routingService.popAndPushRoute(
-      context: context,
-      routeName: HomeScreen.routeName,
+  Future<void> onLoginSuccess() async {
+    _cartController.fetchCart(
+      id: _authController.user!.cartId,
+      onError: onError,
+      onSuccess: () {
+        routingService.popAndPushRoute(
+          context: context,
+          routeName: HomeScreen.routeName,
+        );
+      },
     );
   }
 
-  void onLoginError() {
+  void onError() {
     routingService.popAndPushRoute(
       context: context,
       routeName: LoginSignUpScreen.routeName,

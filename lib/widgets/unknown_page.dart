@@ -3,7 +3,7 @@ import 'package:flutter_test_app/app_configuration.dart';
 import 'package:flutter_test_app/utils/localization.dart';
 import 'package:flutter_test_app/widgets/cutom_text.dart';
 import 'package:flutter_test_app/widgets/space.dart';
-import 'package:flutter_test_app/widgets/wide_button.dart';
+import 'package:flutter_test_app/widgets/buttons/wide_button.dart';
 
 class UnknownPage extends StatelessWidget {
   const UnknownPage({super.key});

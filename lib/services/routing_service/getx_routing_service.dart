@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test_app/views/book/book_screen.dart';
+import 'package:flutter_test_app/views/cart/cart_screen.dart';
 import 'package:flutter_test_app/views/category/category_screen.dart';
 import 'package:flutter_test_app/views/home/home_screen.dart';
 import 'package:flutter_test_app/views/login_signup/login_signup_screen.dart';
@@ -12,7 +13,8 @@ final routeBuilders = {
   LoginSignUpScreen.routeName: () => LoginSignUpScreen(),
   HomeScreen.routeName: () => const HomeScreen(),
   CategoryScreen.routeName: () => const CategoryScreen(),
-  BookScreen.routeName: () => const BookScreen(),
+  BookScreen.routeName: () => BookScreen(),
+  CartScreen.routeName: () => CartScreen(),
 };
 
 class GetXRoutingService extends RoutingService {
@@ -26,8 +28,7 @@ class GetXRoutingService extends RoutingService {
       Transition? screenTransition;
 
       if (arguments is RouteArguments) {
-        screenTransition =
-            _screenTransitionsMap[arguments.screenTransitionType];
+        screenTransition = _screenTransitionsMap[arguments.transition];
       }
 
       return GetPageRoute(

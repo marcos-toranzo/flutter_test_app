@@ -5,12 +5,12 @@ enum ScreenTransitions {
 }
 
 class RouteArguments {
-  late final ScreenTransitions? screenTransitionType;
+  late final ScreenTransitions? transition;
   late final String? categoryName;
   late final String? bookId;
 
   RouteArguments({
-    this.screenTransitionType,
+    this.transition,
     this.categoryName,
     this.bookId,
   });
@@ -19,11 +19,11 @@ class RouteArguments {
     final args = ModalRoute.of(context)!.settings.arguments;
 
     if (args != null && args is RouteArguments) {
-      screenTransitionType = args.screenTransitionType;
+      transition = args.transition;
       categoryName = args.categoryName;
       bookId = args.bookId;
     } else {
-      screenTransitionType = null;
+      transition = null;
       categoryName = null;
       bookId = null;
     }
