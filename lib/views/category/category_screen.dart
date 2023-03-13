@@ -3,7 +3,7 @@ import 'package:flutter_test_app/services/routing_service/routing_service.dart';
 import 'package:flutter_test_app/utils/localization.dart';
 import 'package:flutter_test_app/utils/notifications.dart';
 import 'package:flutter_test_app/views/category/category_screen_controller.dart';
-import 'package:flutter_test_app/widgets/book_preview.dart';
+import 'package:flutter_test_app/widgets/book/book_preview.dart';
 import 'package:flutter_test_app/widgets/custom_appbar.dart';
 import 'package:flutter_test_app/widgets/page_with_loader.dart';
 import 'package:get/get.dart';

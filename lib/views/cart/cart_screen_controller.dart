@@ -19,10 +19,11 @@ class CartScreenController extends GetxController {
 
   Currency get total => _cartBooksEntries.reduceAndCompute(
         (acc, element) => Currency(
-          amount: acc.amount + (element.book.price?.amount ?? 0),
-          code: element.book.price?.code ?? '',
+          amount:
+              acc.amount + (element.book.price?.amount ?? 0) * element.count,
+          code: element.book.price?.code ?? Currency.defaultCode,
         ),
-        const Currency.none(),
+        const Currency.zero(),
       );
 
   CartScreenController({

@@ -65,6 +65,7 @@
       }
     }
   },
+  "checkout": "Tramitar",
   "dark": "Oscuro",
   "description": "Descripción",
   "details": "Detalles",
@@ -122,6 +123,7 @@
   "theme": "Tema",
   "toLogin": "Iniciar sesión",
   "toSignUp": "Registrarse",
+  "total": "Total",
   "unknownAuthors": "Autores Desconocidos",
   "untitled": "Sin título"
 }

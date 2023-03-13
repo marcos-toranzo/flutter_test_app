@@ -12,14 +12,14 @@ import 'package:flutter_test_app/utils/notifications.dart';
 import 'package:flutter_test_app/utils/styling.dart';
 import 'package:flutter_test_app/views/book/book_screen_controller.dart';
 import 'package:flutter_test_app/views/cart/cart_screen.dart';
-import 'package:flutter_test_app/widgets/book_image.dart';
-import 'package:flutter_test_app/widgets/book_price_tag.dart';
+import 'package:flutter_test_app/widgets/book/book_image.dart';
+import 'package:flutter_test_app/widgets/book/book_price_tag.dart';
 import 'package:flutter_test_app/widgets/column_with_padding.dart';
 import 'package:flutter_test_app/widgets/custom_appbar.dart';
 import 'package:flutter_test_app/widgets/cutom_text.dart';
 import 'package:flutter_test_app/widgets/page_with_loader.dart';
 import 'package:flutter_test_app/widgets/space.dart';
-import 'package:flutter_test_app/widgets/wide_button.dart';
+import 'package:flutter_test_app/widgets/buttons/wide_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 

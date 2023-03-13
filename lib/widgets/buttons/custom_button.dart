@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_test_app/widgets/ink_well_button.dart';
+import 'package:flutter_test_app/widgets/buttons/ink_well_button.dart';
 import 'package:flutter_test_app/widgets/row_with_padding.dart';
 import 'package:flutter_test_app/widgets/space.dart';
 
@@ -20,6 +20,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWellButton(
+      transparent: false,
       onTap: onPressed,
       borderRadius: borderRadius,
       child: RowWithPadding(

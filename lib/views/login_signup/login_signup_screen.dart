@@ -7,7 +7,7 @@ import 'package:flutter_test_app/views/login_signup/login_signup_screen_controll
 import 'package:flutter_test_app/widgets/form_fields/custom_form.dart';
 import 'package:flutter_test_app/widgets/form_fields/email_form_field.dart';
 import 'package:flutter_test_app/widgets/form_fields/password_form_field.dart';
-import 'package:flutter_test_app/widgets/wide_button.dart';
+import 'package:flutter_test_app/widgets/buttons/wide_button.dart';
 import 'package:get/get.dart';
 import 'package:flutter_test_app/controllers/auth_controller.dart';
 import 'package:flutter_test_app/utils/localization.dart';

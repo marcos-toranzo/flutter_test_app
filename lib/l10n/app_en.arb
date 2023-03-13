@@ -65,6 +65,7 @@
       }
     }
   },
+  "checkout": "Checkout",
   "dark": "Dark",
   "description": "Description",
   "details": "Details",
@@ -122,6 +123,7 @@
   "theme": "Theme",
   "toLogin": "Login",
   "toSignUp": "Sign Up",
+  "total": "Total",
   "unknownAuthors": "Unknown Authors",
   "untitled": "Untitled"
 }

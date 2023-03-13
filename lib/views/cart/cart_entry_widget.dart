@@ -8,11 +8,11 @@ import 'package:flutter_test_app/utils/styling.dart';
 import 'package:flutter_test_app/views/book/book_screen.dart';
 import 'package:flutter_test_app/views/cart/cart_book_entry.dart';
 import 'package:flutter_test_app/views/cart/cart_screen_controller.dart';
-import 'package:flutter_test_app/widgets/book_image.dart';
-import 'package:flutter_test_app/widgets/book_price_tag.dart';
-import 'package:flutter_test_app/widgets/custom_button.dart';
+import 'package:flutter_test_app/widgets/book/book_image.dart';
+import 'package:flutter_test_app/widgets/book/book_price_tag.dart';
+import 'package:flutter_test_app/widgets/buttons/custom_button.dart';
 import 'package:flutter_test_app/widgets/cutom_text.dart';
-import 'package:flutter_test_app/widgets/ink_well_button.dart';
+import 'package:flutter_test_app/widgets/buttons/ink_well_button.dart';
 import 'package:flutter_test_app/widgets/row_with_padding.dart';
 import 'package:flutter_test_app/widgets/simple_card.dart';
 import 'package:flutter_test_app/widgets/space.dart';
@@ -61,20 +61,9 @@ class CartEntryWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        OnBackgroundText(
-                          book.title ?? translations.untitled,
-                          maxLines: 3,
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        ...(book.authors != null
-                            ? book.authors!.mapList(
-                                (author) => OnBackgroundText(author),
-                              )
-                            : [OnBackgroundText(translations.unknownAuthors)]),
-                      ],
+                    _BookTitleAndAuthors(
+                      title: book.title,
+                      authors: book.authors,
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -85,53 +74,42 @@ class CartEntryWidget extends StatelessWidget {
                           saleability: book.saleability,
                         ),
                         const Space.vertical(10),
-                        RowWithPadding(
-                          padding: const EdgeInsets.all(2),
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            _BookCounter(
-                              onMinusPressed: () {
-                                _cartScreenController.removeBook(
-                                  book.id,
-                                  onError: () {
-                                    showSnackBar(
-                                      context: context,
-                                      text: translations.errorRemovingFromCart,
-                                    );
-                                  },
+                        _AddRemoveBook(
+                          count: entry.count,
+                          onMinusPressed: () {
+                            _cartScreenController.removeBook(
+                              book.id,
+                              onError: () {
+                                showSnackBar(
+                                  context: context,
+                                  text: translations.errorRemovingFromCart,
                                 );
                               },
-                              onPlusPressed: () {
-                                _cartScreenController.addBook(
-                                  book.id,
-                                  onError: () {
-                                    showSnackBar(
-                                      context: context,
-                                      text: translations.errorAddingToCart,
-                                    );
-                                  },
+                            );
+                          },
+                          onPlusPressed: () {
+                            _cartScreenController.addBook(
+                              book.id,
+                              onError: () {
+                                showSnackBar(
+                                  context: context,
+                                  text: translations.errorAddingToCart,
                                 );
                               },
+                            );
+                          },
+                          onRemovePressed: () {
+                            _cartScreenController.removeBook(
+                              book.id,
                               count: entry.count,
-                            ),
-                            CustomButton(
-                              onPressed: () {
-                                _cartScreenController.removeBook(
-                                  book.id,
-                                  count: entry.count,
-                                  onError: () {
-                                    showSnackBar(
-                                      context: context,
-                                      text: translations.errorAddingToCart,
-                                    );
-                                  },
+                              onError: () {
+                                showSnackBar(
+                                  context: context,
+                                  text: translations.errorAddingToCart,
                                 );
                               },
-                              text: translations.remove,
-                              iconData: FontAwesomeIcons.trash,
-                              borderRadius: borderRadius,
-                            ),
-                          ],
+                            );
+                          },
                         ),
                       ],
                     ),
@@ -142,6 +120,73 @@ class CartEntryWidget extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _BookTitleAndAuthors extends StatelessWidget {
+  final String? title;
+  final List<String>? authors;
+
+  const _BookTitleAndAuthors({
+    required this.title,
+    required this.authors,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final translations = AppTranslations.of(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        OnBackgroundText(
+          title ?? translations.untitled,
+          maxLines: 3,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        ...(authors != null
+            ? authors!.mapList(
+                (author) => OnBackgroundText(author),
+              )
+            : [OnBackgroundText(translations.unknownAuthors)]),
+      ],
+    );
+  }
+}
+
+class _AddRemoveBook extends StatelessWidget {
+  final int count;
+  final VoidCallback onMinusPressed;
+  final VoidCallback onPlusPressed;
+  final VoidCallback onRemovePressed;
+
+  const _AddRemoveBook({
+    required this.count,
+    required this.onMinusPressed,
+    required this.onPlusPressed,
+    required this.onRemovePressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final translations = AppTranslations.of(context);
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        _BookCounter(
+          onMinusPressed: onMinusPressed,
+          onPlusPressed: onPlusPressed,
+          count: count,
+        ),
+        CustomButton(
+          onPressed: onRemovePressed,
+          text: translations.remove,
+          iconData: FontAwesomeIcons.solidTrashCan,
+          borderRadius: BorderRadius.circular(borderRadiusValue),
+        ),
+      ],
     );
   }
 }

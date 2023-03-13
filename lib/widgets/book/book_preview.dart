@@ -5,11 +5,11 @@ import 'package:flutter_test_app/services/routing_service/routing_service.dart';
 import 'package:flutter_test_app/utils/localization.dart';
 import 'package:flutter_test_app/utils/styling.dart';
 import 'package:flutter_test_app/views/book/book_screen.dart';
-import 'package:flutter_test_app/widgets/book_image.dart';
-import 'package:flutter_test_app/widgets/book_price_tag.dart';
+import 'package:flutter_test_app/widgets/book/book_image.dart';
+import 'package:flutter_test_app/widgets/book/book_price_tag.dart';
 import 'package:flutter_test_app/widgets/column_with_padding.dart';
 import 'package:flutter_test_app/widgets/cutom_text.dart';
-import 'package:flutter_test_app/widgets/ink_well_button.dart';
+import 'package:flutter_test_app/widgets/buttons/ink_well_button.dart';
 import 'package:flutter_test_app/widgets/space.dart';
 
 class BookPreview extends StatelessWidget {
