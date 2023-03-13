@@ -85,14 +85,25 @@ class CheckoutScreen extends StatelessWidget {
                           text: translations.errorPaying,
                         );
                       },
-                      onSuccess: () {
-                        routingService.popUntil(
+                      onSuccess: () async {
+                        showDialog(
                           context: context,
-                          untilRouteName: HomeScreen.routeName,
-                        );
-                        showSnackBar(
-                          context: context,
-                          text: translations.paymentSuccessful,
+                          barrierDismissible: false,
+                          builder: (context) => AlertDialog(
+                            title: Text(translations.congrats),
+                            content: Text(translations.paymentSuccessful),
+                            actions: [
+                              WideButton(
+                                onPressed: () {
+                                  routingService.popUntil(
+                                    context: context,
+                                    untilRouteName: HomeScreen.routeName,
+                                  );
+                                },
+                                text: translations.ok,
+                              ),
+                            ],
+                          ),
                         );
                       },
                     );
