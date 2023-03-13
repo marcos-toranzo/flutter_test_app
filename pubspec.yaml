@@ -23,6 +23,7 @@ dependencies:
   flutter_svg: ^1.1.6
   flutter_rating_bar: ^4.0.1
   flutter_localized_locales: ^2.0.4
+  flutter_multi_formatter: ^2.10.2
 
 dev_dependencies:
   flutter_test:

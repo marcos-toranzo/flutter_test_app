@@ -10,7 +10,7 @@ final user = User(
   username: 'User',
 );
 
-class UserRepository {
+abstract class UserRepository {
   static Future<ApiResponse<User>> fetchUser() async {
     return Future.delayed(
       const Duration(seconds: 1),

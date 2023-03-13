@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test_app/views/book/book_screen.dart';
 import 'package:flutter_test_app/views/cart/cart_screen.dart';
 import 'package:flutter_test_app/views/category/category_screen.dart';
+import 'package:flutter_test_app/views/checkout/checkout_screen.dart';
 import 'package:flutter_test_app/views/home/home_screen.dart';
 import 'package:flutter_test_app/views/login_signup/login_signup_screen.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ final routeBuilders = {
   CategoryScreen.routeName: () => const CategoryScreen(),
   BookScreen.routeName: () => BookScreen(),
   CartScreen.routeName: () => CartScreen(),
+  CheckoutScreen.routeName: () => CheckoutScreen(),
 };
 
 class GetXRoutingService extends RoutingService {
@@ -87,6 +89,14 @@ class GetXRoutingService extends RoutingService {
         arguments: routeArguments,
       );
     }
+  }
+
+  @override
+  Future<void> popUntil<T>({
+    required BuildContext context,
+    required String untilRouteName,
+  }) async {
+    Get.until((_) => Get.currentRoute == untilRouteName);
   }
 
   @override

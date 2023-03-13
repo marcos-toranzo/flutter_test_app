@@ -52,6 +52,7 @@ class CategoryScreen extends StatelessWidget {
                     ),
                     itemCount: books.length,
                     itemBuilder: (_, index) => BookPreview(
+                      key: Key('book#${books[index].id}'),
                       book: books[index],
                     ),
                   )

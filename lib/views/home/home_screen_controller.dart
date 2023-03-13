@@ -10,16 +10,15 @@ class HomeScreenController extends GetxController {
   final _bookCategories = RxList<BookCategory>([]);
   List<BookCategory> get bookCategories => _bookCategories;
 
-  final VoidCallback? _onErrorFetchingBooks;
+  final VoidCallback? onErrorFetchingBooks;
 
-  HomeScreenController({void Function()? onErrorFetchingBooks})
-      : _onErrorFetchingBooks = onErrorFetchingBooks;
+  HomeScreenController({this.onErrorFetchingBooks});
 
   @override
   void onInit() {
     super.onInit();
 
-    _loadBooks(onError: _onErrorFetchingBooks);
+    _loadBooks(onError: onErrorFetchingBooks);
   }
 
   Future<void> _loadBooks({VoidCallback? onError}) async {
@@ -66,6 +65,6 @@ class HomeScreenController extends GetxController {
   }
 
   void onRefresh({VoidCallback? onError}) {
-    _loadBooks(onError: onError ?? _onErrorFetchingBooks);
+    _loadBooks(onError: onError ?? onErrorFetchingBooks);
   }
 }

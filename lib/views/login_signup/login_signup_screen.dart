@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test_app/app_configuration.dart';
 import 'package:flutter_test_app/utils/notifications.dart';
-import 'package:flutter_test_app/utils/validators.dart';
 import 'package:flutter_test_app/views/home/home_screen.dart';
+import 'package:flutter_test_app/views/login_signup/login_signup_form/login_signup_form.dart';
 import 'package:flutter_test_app/views/login_signup/login_signup_screen_controller.dart';
-import 'package:flutter_test_app/widgets/form_fields/custom_form.dart';
-import 'package:flutter_test_app/widgets/form_fields/email_form_field.dart';
-import 'package:flutter_test_app/widgets/form_fields/password_form_field.dart';
 import 'package:flutter_test_app/widgets/buttons/wide_button.dart';
 import 'package:get/get.dart';
 import 'package:flutter_test_app/controllers/auth_controller.dart';
 import 'package:flutter_test_app/utils/localization.dart';
-import 'package:flutter_test_app/widgets/form_fields/custom_text_form_field.dart';
 import 'package:flutter_test_app/widgets/double_dismiss_screen.dart';
 import 'package:flutter_test_app/widgets/page_with_loader.dart';
 import 'package:flutter_test_app/widgets/app_logo.dart';
@@ -28,7 +24,10 @@ class LoginSignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(LoginSignUpScreenController(_authController));
+    final controller = Get.put(
+      LoginSignUpScreenController(authController: _authController),
+    );
+
     final translations = AppTranslations.of(context);
 
     const verticalPadding = 100.0;
@@ -55,83 +54,15 @@ class LoginSignUpScreen extends StatelessWidget {
                       children: [
                         const AppLogo(size: 110, includeText: false),
                         const Space.vertical(80),
-                        CustomForm(
+                        LoginSignUpForm(
                           formKey: _formKey,
+                          emailController: controller.emailController,
+                          passwordController: controller.passwordController,
+                          repeatPasswordController:
+                              controller.repeatPasswordController,
+                          isLogingIn: controller.isLogingIn,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          fields: [
-                            EmailFormField(
-                              controller: controller.emailController,
-                              position: TextFormFieldPosition.top,
-                              isRequired: true,
-                            ),
-                            PasswordFormField(
-                              controller: controller.passwordController,
-                              position: controller.isLogingIn
-                                  ? TextFormFieldPosition.bottom
-                                  : TextFormFieldPosition.middle,
-                              isRequired: true,
-                              checks: controller.isLogingIn
-                                  ? []
-                                  : [
-                                      PasswordValidator.minLength(
-                                        count: 8,
-                                        errorMessage:
-                                            translations.atLeastNCharacters(8),
-                                      ),
-                                      PasswordValidator.lowercaseCount(
-                                        count: 1,
-                                        errorMessage:
-                                            translations.atLeastNLowercase(1),
-                                      ),
-                                      PasswordValidator.uppercaseCount(
-                                        count: 1,
-                                        errorMessage:
-                                            translations.atLeastNUppercase(1),
-                                      ),
-                                      PasswordValidator.numericCount(
-                                        count: 1,
-                                        errorMessage:
-                                            translations.atLeastNNumeric(1),
-                                      ),
-                                      PasswordValidator.specialCount(
-                                        count: 1,
-                                        errorMessage:
-                                            translations.atLeastNSpecial(1),
-                                      ),
-                                    ],
-                            ),
-                            if (!controller.isLogingIn)
-                              PasswordFormField(
-                                hintText: translations.repeatPassword,
-                                controller: controller.repeatPasswordController,
-                                position: TextFormFieldPosition.bottom,
-                                isRequired: true,
-                                extraValidators: [
-                                  (value) => value !=
-                                          controller.passwordController.text
-                                      ? translations.passwordsDontMatch
-                                      : null,
-                                ],
-                              ),
-                          ],
                         ),
-                        if (controller.isLogingIn)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10.0),
-                            child: TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                translations.forgotYourPassowrd,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Color(0xFF8C8C8C),
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 0,
-                                ),
-                              ),
-                            ),
-                          ),
                       ],
                     ),
                     Column(

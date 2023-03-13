@@ -6,7 +6,6 @@ import 'package:flutter_test_app/utils/localization.dart';
 import 'package:flutter_test_app/utils/styling.dart';
 import 'package:flutter_test_app/views/category/category_screen.dart';
 import 'package:flutter_test_app/widgets/book/book_preview.dart';
-import 'package:flutter_test_app/views/home/constants.dart';
 import 'package:flutter_test_app/widgets/column_with_padding.dart';
 import 'package:flutter_test_app/widgets/buttons/custom_button.dart';
 import 'package:flutter_test_app/widgets/cutom_text.dart';
@@ -18,8 +17,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BookCategoryPreview extends StatelessWidget {
   final BookCategory bookCategory;
+  final double paddingValue;
 
-  const BookCategoryPreview({required this.bookCategory, super.key});
+  const BookCategoryPreview({
+    required this.bookCategory,
+    required this.paddingValue,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +46,12 @@ class BookCategoryPreview extends StatelessWidget {
       elevation: 0.5,
       borderRadius: borderRadius,
       child: ColumnWithPadding(
-        padding: const EdgeInsets.only(top: 10, bottom: paddingValue),
+        padding: EdgeInsets.only(top: 10, bottom: paddingValue),
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           RowWithPadding(
-            padding: const EdgeInsets.symmetric(horizontal: paddingValue),
+            padding: EdgeInsets.symmetric(horizontal: paddingValue),
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               OnBackgroundText(
@@ -57,7 +61,6 @@ class BookCategoryPreview extends StatelessWidget {
               CustomButton(
                 onPressed: goToCategoryView,
                 text: translations.seeAll,
-                borderRadius: borderRadius,
                 iconData: FontAwesomeIcons.chevronRight,
               ),
             ],
@@ -79,6 +82,7 @@ class BookCategoryPreview extends StatelessWidget {
                 ),
                 child: index < bookCategory.books.length
                     ? BookPreview(
+                        key: Key('book#${bookCategory.books[index].id}'),
                         book: bookCategory.books[index],
                       )
                     : InkWellButton(

@@ -8,11 +8,11 @@ import 'package:flutter_test_app/views/cart/cart_book_entry.dart';
 import 'package:get/get.dart';
 
 class CartScreenController extends GetxController {
-  final VoidCallback? _onErrorFetchingBooks;
-  final CartController _cartController;
+  final VoidCallback? onErrorFetchingBooks;
+  final CartController cartController;
 
   final _isLoading = false.obs;
-  bool get isLoading => _isLoading.value || _cartController.isLoading;
+  bool get isLoading => _isLoading.value || cartController.isLoading;
 
   final _cartBooksEntries = RxList<CartBookEntry>([]);
   List<CartBookEntry> get cartBooksEntries => _cartBooksEntries;
@@ -27,16 +27,15 @@ class CartScreenController extends GetxController {
       );
 
   CartScreenController({
-    required CartController cartController,
-    void Function()? onErrorFetchingBooks,
-  })  : _cartController = cartController,
-        _onErrorFetchingBooks = onErrorFetchingBooks;
+    required this.cartController,
+    this.onErrorFetchingBooks,
+  });
 
   @override
   void onInit() {
     super.onInit();
 
-    _loadBooks(onError: _onErrorFetchingBooks);
+    _loadBooks(onError: onErrorFetchingBooks);
   }
 
   Future<void> _loadBooks({VoidCallback? onError}) async {
@@ -44,7 +43,7 @@ class CartScreenController extends GetxController {
 
     final newCartBookEntries = <CartBookEntry>[];
 
-    for (var entry in _cartController.cart!.entries) {
+    for (var entry in cartController.cart!.entries) {
       final bookFetchingResult = await BookRepository.fetchBook(entry.bookId);
 
       if (bookFetchingResult.success) {
@@ -69,14 +68,14 @@ class CartScreenController extends GetxController {
   }
 
   void onRefresh({VoidCallback? onError}) {
-    _loadBooks(onError: onError ?? _onErrorFetchingBooks);
+    _loadBooks(onError: onError ?? onErrorFetchingBooks);
   }
 
   Future<bool> addBook(
     Id id, {
     VoidCallback? onError,
   }) =>
-      _cartController.addBook(
+      cartController.addBook(
         id,
         onError: onError,
         onSuccess: () {
@@ -89,7 +88,7 @@ class CartScreenController extends GetxController {
     int count = 1,
     VoidCallback? onError,
   }) =>
-      _cartController.removeBook(
+      cartController.removeBook(
         id,
         count: count,
         onError: onError,

@@ -10,34 +10,33 @@ class CategoryScreenController extends GetxController {
   final _bookCategory = Rx<BookCategory?>(null);
   BookCategory? get bookCategory => _bookCategory.value;
 
-  final VoidCallback? _onErrorFetchingBooks;
-  final String _categoryName;
+  final VoidCallback? onErrorFetchingBooks;
+  final String categoryName;
 
   CategoryScreenController({
-    required String categoryName,
-    void Function()? onErrorFetchingBooks,
-  })  : _categoryName = categoryName,
-        _onErrorFetchingBooks = onErrorFetchingBooks;
+    required this.categoryName,
+    this.onErrorFetchingBooks,
+  });
 
   @override
   void onInit() {
     super.onInit();
 
-    _loadBooks(onError: _onErrorFetchingBooks);
+    _loadBooks(onError: onErrorFetchingBooks);
   }
 
   Future<void> _loadBooks({VoidCallback? onError}) async {
     _isLoading.value = true;
 
     final categoryBooksResult = await BookRepository.searchBooks(
-      searchTerm: _categoryName,
+      searchTerm: categoryName,
     );
 
     if (categoryBooksResult.success) {
       final categoryBooks = categoryBooksResult.data!;
 
       _bookCategory.value = BookCategory(
-        name: _categoryName,
+        name: categoryName,
         books: categoryBooks,
       );
     } else {
@@ -48,6 +47,6 @@ class CategoryScreenController extends GetxController {
   }
 
   void onRefresh({VoidCallback? onError}) {
-    _loadBooks(onError: onError ?? _onErrorFetchingBooks);
+    _loadBooks(onError: onError ?? onErrorFetchingBooks);
   }
 }

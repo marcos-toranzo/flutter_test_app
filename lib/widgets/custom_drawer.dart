@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_test_app/utils/types.dart';
 import 'package:flutter_test_app/views/login_signup/login_signup_screen.dart';
 import 'package:flutter_test_app/widgets/cutom_text.dart';
+import 'package:flutter_test_app/widgets/space.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter_test_app/app_configuration.dart';
@@ -10,7 +12,6 @@ import 'package:flutter_test_app/utils/iterable_utils.dart';
 import 'package:flutter_test_app/utils/language_info.dart';
 import 'package:flutter_test_app/utils/localization.dart';
 import 'package:flutter_test_app/widgets/column_with_padding.dart';
-import 'package:flutter_test_app/widgets/form_fields/custom_dropdown_menu.dart';
 import 'package:flutter_test_app/widgets/horizontally_scrollable_text.dart';
 import 'package:flutter_test_app/widgets/row_with_padding.dart';
 
@@ -71,7 +72,7 @@ class CustomDrawer extends StatelessWidget {
           _DrawerSectionHeader(title: translations.settings),
           _DrawerSectionElement(
             title: translations.language,
-            trailing: CustomDropdownMenu(
+            trailing: _CustomDropdownMenu(
               value: _appConfigurationController.selectedLocale?.languageCode ??
                   getCurrentLanguageCode(context),
               onChanged: (value) async {
@@ -85,7 +86,7 @@ class CustomDrawer extends StatelessWidget {
                 (locale) {
                   final languageInfo = languageInfoMap[locale.languageCode];
 
-                  return CustomDropdownMenuElement(
+                  return _CustomDropdownMenuElement(
                     value: locale.languageCode,
                     icon: ClipRRect(
                       borderRadius: BorderRadius.circular(100.0),
@@ -100,7 +101,7 @@ class CustomDrawer extends StatelessWidget {
           _DrawerSectionElement(
             title: translations.theme,
             trailing: Obx(
-              () => CustomDropdownMenu(
+              () => _CustomDropdownMenu(
                 value: _appConfigurationController.appThemeMode,
                 onChanged: (value) async {
                   if (value != null) {
@@ -108,7 +109,7 @@ class CustomDrawer extends StatelessWidget {
                   }
                 },
                 items: [
-                  CustomDropdownMenuElement(
+                  _CustomDropdownMenuElement(
                     value: ThemeMode.light,
                     icon: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
@@ -116,7 +117,7 @@ class CustomDrawer extends StatelessWidget {
                     ),
                     text: translations.light,
                   ),
-                  CustomDropdownMenuElement(
+                  _CustomDropdownMenuElement(
                     value: ThemeMode.dark,
                     icon: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
@@ -124,7 +125,7 @@ class CustomDrawer extends StatelessWidget {
                     ),
                     text: translations.dark,
                   ),
-                  CustomDropdownMenuElement(
+                  _CustomDropdownMenuElement(
                     value: ThemeMode.system,
                     icon: const Icon(
                       FontAwesomeIcons.mobileScreen,
@@ -216,6 +217,67 @@ class _DrawerSectionHeader extends StatelessWidget {
           child: _DrawerSectionSeparator(),
         ),
       ],
+    );
+  }
+}
+
+class _CustomDropdownMenuElement<T> {
+  final String text;
+  final Widget icon;
+  final double? iconSize;
+  final T value;
+
+  const _CustomDropdownMenuElement({
+    required this.icon,
+    required this.value,
+    required this.text,
+    this.iconSize,
+  });
+}
+
+class _CustomDropdownMenu<T> extends StatelessWidget {
+  final OnChangedCallback<T?> onChanged;
+  final T value;
+  final List<_CustomDropdownMenuElement> items;
+
+  const _CustomDropdownMenu({
+    super.key,
+    required this.onChanged,
+    required this.value,
+    required this.items,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonHideUnderline(
+      child: DropdownButton<T>(
+        alignment: Alignment.centerRight,
+        isDense: true,
+        icon: const Padding(
+          padding: EdgeInsets.only(left: 8.0),
+          child: Icon(Icons.expand_more),
+        ),
+        value: value,
+        items: items.mapList(
+          (item) => DropdownMenuItem(
+            value: item.value,
+            child: Row(
+              children: [
+                SizedBox.square(
+                  dimension: item.iconSize ?? 20,
+                  child: Center(child: item.icon),
+                ),
+                const Space.horizontal(10),
+                OnBackgroundText(
+                  item.text,
+                  style: const TextStyle(fontWeight: FontWeight.w400),
+                ),
+              ],
+            ),
+          ),
+        ),
+        onChanged: onChanged,
+      ),
     );
   }
 }

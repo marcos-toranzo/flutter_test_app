@@ -89,4 +89,27 @@ class CartController extends GetxController {
 
     return false;
   }
+
+  Future<bool> emptyCart({
+    VoidCallback? onError,
+    VoidCallback? onSuccess,
+  }) async {
+    _isLoading.value = true;
+
+    final response = await CartRepository.empty();
+
+    if (response.success) {
+      _cart.value = response.data!;
+
+      onSuccess?.call();
+      _isLoading.value = false;
+
+      return true;
+    }
+
+    onError?.call();
+    _isLoading.value = false;
+
+    return false;
+  }
 }

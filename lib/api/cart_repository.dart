@@ -6,7 +6,7 @@ import 'package:flutter_test_app/utils/types.dart';
 //! DELETE: fetch cart correctly from service
 var cart = const Cart(id: 'cart1');
 
-class CartRepository {
+abstract class CartRepository {
   static Future<ApiResponse<Cart>> fetchCart(Id id) async {
     return Future.delayed(
       const Duration(seconds: 1),
@@ -79,6 +79,22 @@ class CartRepository {
         cart = Cart(
           id: cart.id,
           entries: newEntries,
+        );
+
+        return ApiResponse(
+          success: true,
+          data: cart,
+        );
+      },
+    );
+  }
+
+  static Future<ApiResponse<Cart>> empty() async {
+    return Future.delayed(
+      const Duration(seconds: 1),
+      () {
+        cart = Cart(
+          id: cart.id,
         );
 
         return ApiResponse(

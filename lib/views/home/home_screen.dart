@@ -3,7 +3,6 @@ import 'package:flutter_test_app/utils/iterable_utils.dart';
 import 'package:flutter_test_app/utils/localization.dart';
 import 'package:flutter_test_app/utils/notifications.dart';
 import 'package:flutter_test_app/views/home/book_category_preview.dart';
-import 'package:flutter_test_app/views/home/constants.dart';
 import 'package:flutter_test_app/views/home/home_screen_controller.dart';
 import 'package:flutter_test_app/widgets/custom_appbar.dart';
 import 'package:flutter_test_app/widgets/custom_drawer.dart';
@@ -28,6 +27,8 @@ class HomeScreen extends StatelessWidget {
       ),
     );
 
+    const paddingValue = 12.0;
+
     return DoubleDismissScreen(
       child: Obx(
         () => PageWithLoader(
@@ -49,7 +50,10 @@ class HomeScreen extends StatelessWidget {
                     left: 10,
                     right: 10,
                   ),
-                  child: BookCategoryPreview(bookCategory: bookCategory),
+                  child: BookCategoryPreview(
+                    bookCategory: bookCategory,
+                    paddingValue: paddingValue,
+                  ),
                 ),
               ),
             ),

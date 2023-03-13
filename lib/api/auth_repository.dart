@@ -3,7 +3,7 @@ import 'package:flutter_test_app/services/network_service/network_service.dart';
 import 'package:flutter_test_app/utils/errors.dart';
 import 'package:flutter_test_app/utils/types.dart';
 
-class AuthRepository {
+abstract class AuthRepository {
   static Future<ApiResponse<Id>> login({
     required String email,
     required String password,

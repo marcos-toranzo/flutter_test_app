@@ -1,5 +1,6 @@
 {
   "addToCart": "Add to Cart",
+  "addressLine": "Address line",
   "alreadyHaveAnAccount": "Already have an account?",
   "atLeastNCharacters": "{count, plural, =0{Must contain no characters} =1{Must contain at least 1 character} other{Must contain at least {count} characters}}",
   "@atLeastNCharacters": {
@@ -47,7 +48,10 @@
     }
   },
   "bookDetails": "Book Details",
+  "cardHolderName": "Card holder name",
+  "cardInformation": "Card information",
   "cart": "Cart",
+  "cartIsEmpty": "The cart is empty",
   "categories": "{count, plural, =1{Category} other{Categories}}",
   "@categories": {
     "placeholders": {
@@ -66,6 +70,8 @@
     }
   },
   "checkout": "Checkout",
+  "city": "City",
+  "country": "Country",
   "dark": "Dark",
   "description": "Description",
   "details": "Details",
@@ -75,12 +81,16 @@
   "errorFetchingBook": "Oops! Something went wrong trying to fetch the book. Please, try again.",
   "errorFetchingBooks": "Oops! Something went wrong trying to fetch the books. Please, try again.",
   "errorLogingIn": "Oops! Something went wrong trying to log in. Please, try again.",
+  "errorPaying": "Oops! Something went wrong trying to pay. Please, check your information and try again.",
   "errorRemovingFromCart": "Oops! Something went wrong trying to remove the book from the cart. Please, try again.",
   "errorSigningUp": "Oops! Something went wrong trying to sign up. Please, try again.",
   "forgotYourPassowrd": "Forgot your password?",
   "free": "FREE",
   "goBack": "Go Back",
   "home": "Home",
+  "invalidCardCvc": "Invalid CVC",
+  "invalidCardExpirationDate": "Invalid expiration date",
+  "invalidCardNumber": "Invalid number",
   "invalidCredentials": "Invalid Credentials",
   "invalidEmail": "Invalid email",
   "invalidScreenError": "Oops! Something went wrong!",
@@ -106,9 +116,13 @@
       }
     }
   },
+  "name": "Name",
   "notForSale": "NOT FOR SALE",
   "password": "Password",
   "passwordsDontMatch": "Passwords don't match",
+  "pay": "Pay",
+  "paymentDetails": "Payment details",
+  "paymentSuccessful": "Congrats! The purchase has been successful!",
   "pressBackAgainToExitApp": "Press Back again to exit App",
   "publishedDate": "Published Date",
   "publisher": "Publisher",
@@ -117,6 +131,8 @@
   "required": "Required",
   "seeAll": "See All",
   "settings": "Settings",
+  "shippingAddress": "Shipping address",
+  "shippingInformation": "Shipping information",
   "signOut": "Sign out",
   "signUp": "Sign Up",
   "system": "System",
@@ -125,5 +141,6 @@
   "toSignUp": "Sign Up",
   "total": "Total",
   "unknownAuthors": "Unknown Authors",
-  "untitled": "Untitled"
+  "untitled": "Untitled",
+  "zipCode": "ZIP code"
 }

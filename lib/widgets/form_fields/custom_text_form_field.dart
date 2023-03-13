@@ -1,53 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test_app/utils/styling.dart';
 import 'package:flutter_test_app/utils/validators.dart';
 
 enum TextFormFieldPosition {
   only,
   top,
-  middle,
+  topLeft,
+  topRight,
+  center,
   bottom,
+  bottomLeft,
+  bottomRight,
 }
 
 class CustomTextFormField extends StatelessWidget {
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final TextInputAction? textInputAction;
-  final String hintText;
+  final String? hintText;
   final Widget? icon;
   final TextFormFieldPosition position;
   final TextInputType? textInputType;
   final bool obscureText;
   final List<FormFieldValidator<String>> validators;
   final AutovalidateMode? autovalidateMode;
+  final bool readOnly;
+  final String? value;
+  final List<TextInputFormatter>? inputFormatters;
+  final VisualDensity visualDensity;
 
   const CustomTextFormField({
-    required this.controller,
-    required this.hintText,
+    this.hintText,
+    this.controller,
+    this.value,
     this.position = TextFormFieldPosition.only,
     this.textInputType,
     this.validators = const [],
     this.textInputAction,
     this.autovalidateMode,
     this.obscureText = false,
+    this.readOnly = false,
     this.icon,
+    this.inputFormatters,
+    this.visualDensity = VisualDensity.standard,
     super.key,
-  });
+  }) : assert(controller != null || value != null);
 
   @override
   Widget build(BuildContext context) {
     const borderRadius = Radius.circular(borderRadiusValue);
 
-    final isBottom = position == TextFormFieldPosition.bottom ||
-        position == TextFormFieldPosition.only;
-    final isTop = position == TextFormFieldPosition.top ||
-        position == TextFormFieldPosition.only;
+    final isOnly = position == TextFormFieldPosition.only;
+    final isBottom = position == TextFormFieldPosition.bottom || isOnly;
+    final isBottomLeft =
+        position == TextFormFieldPosition.bottomLeft || isBottom;
+    final isBottomRight =
+        position == TextFormFieldPosition.bottomRight || isBottom;
+    final isTop = position == TextFormFieldPosition.top || isOnly;
+    final isTopLeft = position == TextFormFieldPosition.topLeft || isTop;
+    final isTopRight = position == TextFormFieldPosition.topRight || isTop;
 
     final border = OutlineInputBorder(
       borderRadius: BorderRadius.only(
-        topLeft: isTop ? borderRadius : Radius.zero,
-        topRight: isTop ? borderRadius : Radius.zero,
-        bottomLeft: isBottom ? borderRadius : Radius.zero,
-        bottomRight: isBottom ? borderRadius : Radius.zero,
+        topLeft: isTopLeft ? borderRadius : Radius.zero,
+        topRight: isTopRight ? borderRadius : Radius.zero,
+        bottomLeft: isBottomLeft ? borderRadius : Radius.zero,
+        bottomRight: isBottomRight ? borderRadius : Radius.zero,
       ),
       borderSide: const BorderSide(
         color: Color(0xFFD2D2D2),
@@ -56,9 +74,12 @@ class CustomTextFormField extends StatelessWidget {
     );
 
     final inputAction = textInputAction ??
-        (isBottom ? TextInputAction.done : TextInputAction.next);
+        (isBottomRight ? TextInputAction.done : TextInputAction.next);
 
     return TextFormField(
+      inputFormatters: inputFormatters,
+      readOnly: readOnly,
+      initialValue: value,
       controller: controller,
       textInputAction: inputAction,
       style: TextStyle(
@@ -67,7 +88,7 @@ class CustomTextFormField extends StatelessWidget {
       ),
       keyboardType: textInputType,
       obscureText: obscureText,
-      validator: FormValidators.chain(validators),
+      validator: FormFieldValidators.chain(validators),
       autovalidateMode: autovalidateMode,
       decoration: InputDecoration(
         prefixIcon: icon != null
@@ -83,6 +104,9 @@ class CustomTextFormField extends StatelessWidget {
             color: Theme.of(context).primaryColor,
           ),
         ),
+        contentPadding: visualDensity == VisualDensity.compact
+            ? const EdgeInsets.all(10)
+            : null,
         errorBorder: border,
         border: border,
       ),

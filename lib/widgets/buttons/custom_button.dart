@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_test_app/utils/styling.dart';
 import 'package:flutter_test_app/widgets/buttons/ink_well_button.dart';
 import 'package:flutter_test_app/widgets/row_with_padding.dart';
 import 'package:flutter_test_app/widgets/space.dart';
 
 class CustomButton extends StatelessWidget {
-  final BorderRadius? borderRadius;
   final VoidCallback onPressed;
   final String text;
   final IconData? iconData;
@@ -12,7 +12,6 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     required this.onPressed,
     required this.text,
-    this.borderRadius,
     this.iconData,
     super.key,
   });
@@ -22,7 +21,7 @@ class CustomButton extends StatelessWidget {
     return InkWellButton(
       transparent: false,
       onTap: onPressed,
-      borderRadius: borderRadius,
+      borderRadius: BorderRadius.circular(borderRadiusValue),
       child: RowWithPadding(
         padding: const EdgeInsets.symmetric(
           horizontal: 10,

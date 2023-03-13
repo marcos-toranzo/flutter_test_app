@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test_app/utils/iterable_utils.dart';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 
 class PasswordValidator {
   final FormFieldValidator<String> validator;
@@ -63,7 +65,7 @@ class PasswordValidator {
   }
 }
 
-class FormValidators {
+abstract class FormFieldValidators {
   static FormFieldValidator<String> email(String errorMessage) {
     return (value) {
       if (value == null) return errorMessage;
@@ -88,6 +90,13 @@ class FormValidators {
     return chain(validators.mapList((validator) => validator.validator));
   }
 
+  static FormFieldValidator<String> exactLength({
+    required String errorMessage,
+    required int length,
+  }) {
+    return (value) => value?.length == length ? null : errorMessage;
+  }
+
   static FormFieldValidator<String> chain(
     List<FormFieldValidator<String>> validators,
   ) {
@@ -99,5 +108,23 @@ class FormValidators {
 
       return null;
     };
+  }
+}
+
+abstract class FormFieldFormatters {
+  static TextInputFormatter cardNumber() {
+    return CreditCardNumberInputFormatter();
+  }
+
+  static TextInputFormatter cardExpirationDate() {
+    return CreditCardExpirationDateFormatter();
+  }
+
+  static TextInputFormatter cardCvc() {
+    return CreditCardCvcInputFormatter();
+  }
+
+  static TextInputFormatter numbersOnly() {
+    return FilteringTextInputFormatter.digitsOnly;
   }
 }

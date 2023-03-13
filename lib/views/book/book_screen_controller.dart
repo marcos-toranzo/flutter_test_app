@@ -11,29 +11,27 @@ class BookScreenController extends GetxController {
   final _book = Rx<Book?>(null);
   Book? get book => _book.value;
 
-  final VoidCallback? _onErrorFetchingBook;
-  final String _bookId;
-  final CartController _cartController;
+  final VoidCallback? onErrorFetchingBook;
+  final String bookId;
+  final CartController cartController;
 
   BookScreenController({
-    required String bookId,
-    required CartController cartController,
-    void Function()? onErrorFetchingBook,
-  })  : _bookId = bookId,
-        _onErrorFetchingBook = onErrorFetchingBook,
-        _cartController = cartController;
+    required this.bookId,
+    required this.cartController,
+    this.onErrorFetchingBook,
+  });
 
   @override
   void onInit() {
     super.onInit();
 
-    _loadBooks(onError: _onErrorFetchingBook);
+    _loadBooks(onError: onErrorFetchingBook);
   }
 
   Future<void> _loadBooks({VoidCallback? onError}) async {
     _isLoading.value = true;
 
-    final bookFetchingResult = await BookRepository.fetchBook(_bookId);
+    final bookFetchingResult = await BookRepository.fetchBook(bookId);
 
     if (bookFetchingResult.success) {
       _book.value = bookFetchingResult.data!;
@@ -45,7 +43,7 @@ class BookScreenController extends GetxController {
   }
 
   void onRefresh({VoidCallback? onError}) {
-    _loadBooks(onError: onError ?? _onErrorFetchingBook);
+    _loadBooks(onError: onError ?? onErrorFetchingBook);
   }
 
   Future<void> onAddToCart({
@@ -54,7 +52,7 @@ class BookScreenController extends GetxController {
   }) async {
     _isLoading.value = true;
 
-    await _cartController.addBook(
+    await cartController.addBook(
       book!.id,
       onError: onError,
       onSuccess: onSuccess,

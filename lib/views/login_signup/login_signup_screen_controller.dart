@@ -3,12 +3,12 @@ import 'package:flutter_test_app/controllers/auth_controller.dart';
 import 'package:get/get.dart';
 
 class LoginSignUpScreenController extends GetxController {
-  final AuthController _authController;
+  final AuthController authController;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final repeatPasswordController = TextEditingController();
 
-  LoginSignUpScreenController(this._authController);
+  LoginSignUpScreenController({required this.authController});
 
   @override
   void onClose() {
@@ -22,7 +22,7 @@ class LoginSignUpScreenController extends GetxController {
   bool get isLogingIn => _isLogingIn.value;
 
   final _isLoading = false.obs;
-  bool get isLoading => _authController.isLoading || _isLoading.value;
+  bool get isLoading => authController.isLoading || _isLoading.value;
 
   void onSubmit({
     VoidCallback? onError,
@@ -40,9 +40,9 @@ class LoginSignUpScreenController extends GetxController {
     }) function;
 
     if (isLogingIn) {
-      function = _authController.login;
+      function = authController.login;
     } else {
-      function = _authController.register;
+      function = authController.register;
     }
 
     await function(

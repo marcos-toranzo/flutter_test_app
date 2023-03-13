@@ -10,7 +10,7 @@ import 'package:flutter_test_app/utils/types.dart';
 final _volumesEndpoint = '${Environment.googleBooksApiBaseUrl}'
     '${Environment.googleBooksApiVolumesEndpoint}';
 
-class BookRepository {
+abstract class BookRepository {
   static Future<ApiResponse<List<Book>>> searchBooks({
     required String searchTerm,
     int? maxResults,
