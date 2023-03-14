@@ -5,7 +5,7 @@ import 'package:flutter_test_app/utils/notifications.dart';
 import 'package:flutter_test_app/views/category/category_screen_controller.dart';
 import 'package:flutter_test_app/widgets/book/book_preview.dart';
 import 'package:flutter_test_app/widgets/custom_appbar.dart';
-import 'package:flutter_test_app/widgets/page_with_loader.dart';
+import 'package:flutter_test_app/widgets/screen_with_loader.dart';
 import 'package:get/get.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -31,33 +31,30 @@ class CategoryScreen extends StatelessWidget {
       () {
         final books = controller.bookCategory?.books;
 
-        return PageWithLoader(
-          loaderText: translations.loading,
-          showLoader: controller.isLoading,
-          child: Scaffold(
-            appBar: CustomAppBar(
-              titleText: translations.categoryName(categoryName),
-              onRefresh: controller.onRefresh,
-            ),
-            body: books != null
-                ? GridView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    padding: const EdgeInsets.all(8),
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 130,
-                      mainAxisExtent: 200,
-                      crossAxisSpacing: 8.0,
-                      mainAxisSpacing: 8.0,
-                    ),
-                    itemCount: books.length,
-                    itemBuilder: (_, index) => BookPreview(
-                      key: Key('book#${books[index].id}'),
-                      book: books[index],
-                    ),
-                  )
-                : null,
+        return ScreenWithLoader(
+          isLoading: controller.isLoading,
+          appBar: CustomAppBar(
+            titleText: translations.categoryName(categoryName),
+            onRefresh: controller.onRefresh,
+            isRefreshing: controller.isLoading,
           ),
+          body: books != null
+              ? GridView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.all(8),
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 130,
+                    mainAxisExtent: 200,
+                    crossAxisSpacing: 8.0,
+                    mainAxisSpacing: 8.0,
+                  ),
+                  itemCount: books.length,
+                  itemBuilder: (_, index) => BookPreview(
+                    key: Key('book#${books[index].id}'),
+                    book: books[index],
+                  ),
+                )
+              : null,
         );
       },
     );

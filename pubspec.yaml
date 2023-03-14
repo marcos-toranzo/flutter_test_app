@@ -24,6 +24,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   flutter_localized_locales: ^2.0.4
   flutter_multi_formatter: ^2.10.2
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:

@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test_app/utils/styling.dart';
+import 'package:flutter_test_app/widgets/buttons/ink_well_button.dart';
 
 class WideButton extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final String text;
   final IconData? iconData;
   final VoidCallback onPressed;
+  final bool enabled;
 
   const WideButton({
     super.key,
     this.padding,
     this.iconData,
+    this.enabled = true,
     required this.text,
     required this.onPressed,
   });
@@ -22,21 +25,13 @@ class WideButton extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         height: 50,
-        child: TextButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(
-              Theme.of(context).primaryColor,
-            ),
-            overlayColor: MaterialStateProperty.all<Color>(
-              Colors.black26,
-            ),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(borderRadiusValue),
-              ),
-            ),
-          ),
-          onPressed: onPressed,
+        child: InkWellButton(
+          elevation: enabled ? 10 : 0,
+          borderRadius: BorderRadius.circular(borderRadiusValue),
+          onTap: enabled ? onPressed : () {},
+          backgroundColor: enabled
+              ? Theme.of(context).primaryColor
+              : Theme.of(context).disabledColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

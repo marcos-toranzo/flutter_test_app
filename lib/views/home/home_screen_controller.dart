@@ -24,6 +24,8 @@ class HomeScreenController extends GetxController {
   Future<void> _loadBooks({VoidCallback? onError}) async {
     _isLoading.value = true;
 
+    _bookCategories.value = [];
+
     const categories = [
       'Fiction',
       'Sports',
@@ -35,8 +37,6 @@ class HomeScreenController extends GetxController {
       'Crime',
     ];
 
-    final bookCategoriesFetched = <BookCategory>[];
-
     for (var category in categories) {
       final categoryBooksResult = await BookRepository.searchBooks(
         searchTerm: category,
@@ -46,20 +46,19 @@ class HomeScreenController extends GetxController {
       if (categoryBooksResult.success) {
         final categoryBooks = categoryBooksResult.data!;
 
-        bookCategoriesFetched.add(
+        _bookCategories.value = [
+          ..._bookCategories,
           BookCategory(
             name: category,
             books: categoryBooks,
           ),
-        );
+        ];
       } else {
         onError?.call();
         _isLoading.value = false;
         return;
       }
     }
-
-    _bookCategories.value = bookCategoriesFetched;
 
     _isLoading.value = false;
   }

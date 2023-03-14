@@ -11,7 +11,7 @@ import 'package:flutter_test_app/views/cart/cart_screen_controller.dart';
 import 'package:flutter_test_app/views/checkout/checkout_screen.dart';
 import 'package:flutter_test_app/widgets/custom_appbar.dart';
 import 'package:flutter_test_app/widgets/cutom_text.dart';
-import 'package:flutter_test_app/widgets/page_with_loader.dart';
+import 'package:flutter_test_app/widgets/screen_with_loader.dart';
 import 'package:get/get.dart';
 
 class CartScreen extends StatelessWidget {
@@ -35,52 +35,57 @@ class CartScreen extends StatelessWidget {
     );
 
     return Obx(
-      () => PageWithLoader(
-        loaderText: translations.loading,
-        showLoader: controller.isLoading,
-        child: Scaffold(
-          appBar: CustomAppBar(
-            titleText: translations.cart,
-            onRefresh: controller.onRefresh,
-            showCartButton: false,
-          ),
-          floatingActionButton: _cartController.totalCount > 0
-              ? CartCheckoutFAB(
-                  controller: controller,
-                  onPressed: () {
-                    routingService.pushRoute(
-                      context: context,
-                      routeName: CheckoutScreen.routeName,
-                      routeArguments: RouteArguments(
-                        transition: ScreenTransitions.slide,
-                        toPay: controller.total,
-                      ),
-                    );
-                  },
-                )
-              : null,
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          body: controller.isLoading
-              ? null
-              : (controller.cartBooksEntries.isNotEmpty
-                  ? ListView(
-                      physics: const BouncingScrollPhysics(),
-                      padding: const EdgeInsets.only(
-                        top: 8.0,
-                        right: 8.0,
-                        left: 8.0,
-                        bottom: 100,
-                      ),
-                      children: controller.cartBooksEntries.mapList(
-                        (entry) => Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: CartEntryWidget(entry: entry),
-                        ),
-                      ),
-                    )
-                  : Center(child: OnBackgroundText(translations.cartIsEmpty))),
+      () => ScreenWithLoader(
+        isLoading: controller.isLoading,
+        appBar: CustomAppBar(
+          titleText: translations.cart,
+          onRefresh: controller.onRefresh,
+          showCartButton: false,
+          isRefreshing: controller.isLoading,
         ),
+        floatingActionButton:
+            !controller.isLoading && _cartController.totalCount > 0
+                ? CartCheckoutFAB(
+                    enabled: !controller.isEditingCount,
+                    controller: controller,
+                    onPressed: () {
+                      routingService.pushRoute(
+                        context: context,
+                        routeName: CheckoutScreen.routeName,
+                        routeArguments: RouteArguments(
+                          transition: ScreenTransitions.slide,
+                          toPay: controller.total,
+                        ),
+                      );
+                    },
+                  )
+                : null,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        body: !controller.isLoading && controller.cartBooksEntries.isEmpty
+            ? Center(child: OnBackgroundText(translations.cartIsEmpty))
+            : ListView(
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.only(
+                  top: 8.0,
+                  right: 8.0,
+                  left: 8.0,
+                  bottom: 100,
+                ),
+                children: controller.cartBooksEntries.mapList(
+                  (entry) => Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: CartEntryWidget(
+                      entry: entry,
+                      onRemoveBookError: () {
+                        showSnackBar(
+                          context: context,
+                          text: translations.errorRemovingFromCart,
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
       ),
     );
   }

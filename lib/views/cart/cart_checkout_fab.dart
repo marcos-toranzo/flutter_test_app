@@ -8,10 +8,12 @@ import 'package:flutter_test_app/widgets/cutom_text.dart';
 class CartCheckoutFAB extends StatelessWidget {
   final CartScreenController controller;
   final VoidCallback onPressed;
+  final bool enabled;
 
   const CartCheckoutFAB({
     required this.controller,
     required this.onPressed,
+    this.enabled = true,
     super.key,
   });
 
@@ -49,6 +51,7 @@ class CartCheckoutFAB extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 16.0),
             child: WideButton(
+              enabled: enabled,
               padding: const EdgeInsets.symmetric(horizontal: 40),
               text: translations.checkout,
               onPressed: onPressed,

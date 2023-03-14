@@ -9,12 +9,14 @@ class AddRemoveBook extends StatelessWidget {
   final VoidCallback onMinusPressed;
   final VoidCallback onPlusPressed;
   final VoidCallback onRemovePressed;
+  final bool isEditingCount;
 
   const AddRemoveBook({
     required this.count,
     required this.onMinusPressed,
     required this.onPlusPressed,
     required this.onRemovePressed,
+    this.isEditingCount = false,
     super.key,
   });
 
@@ -29,11 +31,13 @@ class AddRemoveBook extends StatelessWidget {
           onMinusPressed: onMinusPressed,
           onPlusPressed: onPlusPressed,
           count: count,
+          isEditingCount: isEditingCount,
         ),
         CustomButton(
           onPressed: onRemovePressed,
           text: translations.remove,
           iconData: FontAwesomeIcons.solidTrashCan,
+          enabled: !isEditingCount,
         ),
       ],
     );

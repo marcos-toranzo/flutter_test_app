@@ -6,12 +6,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class BookCounter extends StatelessWidget {
   final VoidCallback onMinusPressed;
   final VoidCallback onPlusPressed;
+  final bool isEditingCount;
   final int count;
 
   const BookCounter({
     required this.onMinusPressed,
     required this.onPlusPressed,
     required this.count,
+    this.isEditingCount = false,
     super.key,
   });
 
@@ -23,7 +25,7 @@ class BookCounter extends StatelessWidget {
         CounterButton(
           onTap: onMinusPressed,
           iconData: FontAwesomeIcons.chevronLeft,
-          enabled: count > 1,
+          enabled: count > 1 && !isEditingCount,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -32,6 +34,7 @@ class BookCounter extends StatelessWidget {
         CounterButton(
           onTap: onPlusPressed,
           iconData: FontAwesomeIcons.chevronRight,
+          enabled: !isEditingCount,
         ),
       ],
     );

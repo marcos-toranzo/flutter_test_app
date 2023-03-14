@@ -18,34 +18,36 @@ abstract class CartRepository {
   }
 
   static Future<ApiResponse<Cart>> addBook(Id bookId) async {
-    return Future.delayed(
-      const Duration(seconds: 1),
-      () {
-        bool wasPresent = false;
+    bool wasPresent = false;
 
-        final newEntries = cart.entries.mapList(
-          (entry) {
-            if (entry.bookId == bookId) {
-              wasPresent = true;
+    final newEntries = cart.entries.mapList(
+      (entry) {
+        if (entry.bookId == bookId) {
+          wasPresent = true;
 
-              return CartEntry(
-                bookId: bookId,
-                count: entry.count + 1,
-              );
-            } else {
-              return entry;
-            }
-          },
-        );
-
-        if (!wasPresent) {
-          newEntries.add(CartEntry(bookId: bookId));
+          return CartEntry(
+            bookId: bookId,
+            count: entry.count + 1,
+          );
+        } else {
+          return entry;
         }
+      },
+    );
 
-        cart = Cart(
-          id: cart.id,
-          entries: newEntries,
-        );
+    if (!wasPresent) {
+      newEntries.add(CartEntry(bookId: bookId));
+    }
+
+    final newCart = Cart(
+      id: cart.id,
+      entries: newEntries,
+    );
+
+    return Future.delayed(
+      const Duration(seconds: 3),
+      () {
+        cart = newCart;
 
         return ApiResponse(
           success: true,
@@ -56,30 +58,32 @@ abstract class CartRepository {
   }
 
   static Future<ApiResponse<Cart>> removeBook(
-    Id bookId, [
+    Id bookId, {
     int count = 1,
-  ]) async {
+  }) async {
+    final newEntries = cart.entries.mapWhereList(
+      (entry) {
+        if (entry.bookId == bookId) {
+          return CartEntry(
+            bookId: bookId,
+            count: entry.count - count,
+          );
+        } else {
+          return entry;
+        }
+      },
+      (entry) => entry.count > 0,
+    );
+
+    final newCart = Cart(
+      id: cart.id,
+      entries: newEntries,
+    );
+
     return Future.delayed(
       const Duration(seconds: 1),
       () {
-        final newEntries = cart.entries.mapWhereList(
-          (entry) {
-            if (entry.bookId == bookId) {
-              return CartEntry(
-                bookId: bookId,
-                count: entry.count - count,
-              );
-            } else {
-              return entry;
-            }
-          },
-          (entry) => entry.count > 0,
-        );
-
-        cart = Cart(
-          id: cart.id,
-          entries: newEntries,
-        );
+        cart = newCart;
 
         return ApiResponse(
           success: true,
@@ -90,12 +94,14 @@ abstract class CartRepository {
   }
 
   static Future<ApiResponse<Cart>> empty() async {
+    final newCart = Cart(
+      id: cart.id,
+    );
+
     return Future.delayed(
       const Duration(seconds: 1),
       () {
-        cart = Cart(
-          id: cart.id,
-        );
+        cart = newCart;
 
         return ApiResponse(
           success: true,

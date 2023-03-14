@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test_app/utils/styling.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class BookImage extends StatelessWidget {
   final String? imageUrl;
@@ -21,6 +22,13 @@ class BookImage extends StatelessWidget {
   Widget build(BuildContext context) {
     final borderRadius = BorderRadius.circular(borderRadiusValue);
 
+    final imagePlaceholder = Image.asset(
+      'assets/images/book_cover_placeholder.png',
+      width: width,
+      height: height,
+      fit: fit,
+    );
+
     return Material(
       borderRadius: borderRadius,
       elevation: elevation,
@@ -28,18 +36,25 @@ class BookImage extends StatelessWidget {
       child: ClipRRect(
         borderRadius: borderRadius,
         child: imageUrl != null
-            ? Image.network(
-                imageUrl!,
-                width: width,
+            ? CachedNetworkImage(
+                imageUrl: imageUrl!,
                 height: height,
+                width: width,
                 fit: fit,
+                placeholder: (_, __) => SizedBox(
+                  height: height,
+                  width: width,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      imagePlaceholder,
+                      const CircularProgressIndicator(),
+                    ],
+                  ),
+                ),
+                errorWidget: (_, __, ___) => imagePlaceholder,
               )
-            : Image.asset(
-                'assets/images/book_cover_placeholder.png',
-                width: width,
-                height: height,
-                fit: fit,
-              ),
+            : imagePlaceholder,
       ),
     );
   }
