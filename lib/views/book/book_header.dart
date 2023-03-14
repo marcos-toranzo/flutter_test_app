@@ -29,6 +29,8 @@ class BookHeader extends StatelessWidget {
           padding: const EdgeInsets.only(top: 100.0),
           child: BookImage(
             imageUrl: imageLink,
+            height: 200,
+            width: 140,
             elevation: 0,
             fit: BoxFit.cover,
           ),

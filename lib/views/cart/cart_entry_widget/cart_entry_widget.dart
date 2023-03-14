@@ -57,7 +57,9 @@ class CartEntryWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             padding: const EdgeInsets.all(12),
             children: [
-              BookImage(imageUrl: book.imageLink),
+              BookImage(
+                imageUrl: book.imageLink,
+              ),
               const Space.horizontal(10),
               Expanded(
                 child: Column(
