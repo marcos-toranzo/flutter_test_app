@@ -9,19 +9,26 @@ class CustomButton extends StatelessWidget {
   final String text;
   final IconData? iconData;
   final bool enabled;
+  final double iconSize;
+  final bool transparent;
+  final Color? backgroundColor;
 
   const CustomButton({
     required this.onPressed,
     required this.text,
     this.iconData,
+    this.iconSize = 10,
     this.enabled = true,
+    this.backgroundColor,
+    this.transparent = false,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWellButton(
-      transparent: false,
+      transparent: transparent,
+      backgroundColor: backgroundColor,
       onTap: enabled ? onPressed : () {},
       borderRadius: BorderRadius.circular(borderRadiusValue),
       child: RowWithPadding(
@@ -43,7 +50,7 @@ class CustomButton extends StatelessWidget {
             const Space.horizontal(5),
             Icon(
               iconData,
-              size: 10,
+              size: iconSize,
               color: enabled
                   ? Theme.of(context).primaryColor
                   : Theme.of(context).disabledColor,

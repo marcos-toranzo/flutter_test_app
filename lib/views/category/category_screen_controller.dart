@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test_app/api/book_repository.dart';
+import 'package:flutter_test_app/models/book.dart';
 import 'package:flutter_test_app/utils/book_category.dart';
+import 'package:flutter_test_app/utils/sorting.dart';
 import 'package:get/get.dart';
 
 class CategoryScreenController extends GetxController {
@@ -9,6 +11,8 @@ class CategoryScreenController extends GetxController {
 
   final _bookCategory = Rx<BookCategory?>(null);
   BookCategory? get bookCategory => _bookCategory.value;
+
+  List<Book> _unorderedBooks = [];
 
   final VoidCallback? onErrorFetchingBooks;
   final String categoryName;
@@ -39,6 +43,8 @@ class CategoryScreenController extends GetxController {
         name: categoryName,
         books: categoryBooks,
       );
+
+      _unorderedBooks = categoryBooks;
     } else {
       onError?.call();
     }
@@ -48,5 +54,16 @@ class CategoryScreenController extends GetxController {
 
   void onRefresh({VoidCallback? onError}) {
     _loadBooks(onError: onError ?? onErrorFetchingBooks);
+  }
+
+  void onSortByPrice(SortOrder sortOrder) {
+    final sortedBooks = sortOrder == SortOrder.none
+        ? _unorderedBooks
+        : sortBooksByPrice(_bookCategory.value!.books, sortOrder);
+
+    _bookCategory.value = BookCategory(
+      name: _bookCategory.value!.name,
+      books: sortedBooks,
+    );
   }
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test_app/api/book_repository.dart';
+import 'package:flutter_test_app/models/book.dart';
 import 'package:flutter_test_app/utils/book_category.dart';
+import 'package:flutter_test_app/utils/iterable_utils.dart';
+import 'package:flutter_test_app/utils/sorting.dart';
 import 'package:get/get.dart';
 
 class HomeScreenController extends GetxController {
@@ -9,6 +12,8 @@ class HomeScreenController extends GetxController {
 
   final _bookCategories = RxList<BookCategory>([]);
   List<BookCategory> get bookCategories => _bookCategories;
+
+  Map<String, List<Book>> _unorderedBookCategories = {};
 
   final VoidCallback? onErrorFetchingBooks;
 
@@ -25,6 +30,7 @@ class HomeScreenController extends GetxController {
     _isLoading.value = true;
 
     _bookCategories.value = [];
+    _unorderedBookCategories = {};
 
     const categories = [
       'Fiction',
@@ -53,6 +59,8 @@ class HomeScreenController extends GetxController {
             books: categoryBooks,
           ),
         ];
+
+        _unorderedBookCategories[category] = categoryBooks;
       } else {
         onError?.call();
         _isLoading.value = false;
@@ -65,5 +73,25 @@ class HomeScreenController extends GetxController {
 
   void onRefresh({VoidCallback? onError}) {
     _loadBooks(onError: onError ?? onErrorFetchingBooks);
+  }
+
+  void onSortByPrice({
+    required SortOrder sortOrder,
+    required String bookCategoryName,
+  }) {
+    _bookCategories.value = bookCategories.mapList((category) {
+      if (category.name == bookCategoryName) {
+        final sortedBooks = sortOrder == SortOrder.none
+            ? _unorderedBookCategories[category.name]!
+            : sortBooksByPrice(category.books, sortOrder);
+
+        return BookCategory(
+          name: category.name,
+          books: sortedBooks,
+        );
+      } else {
+        return category;
+      }
+    });
   }
 }

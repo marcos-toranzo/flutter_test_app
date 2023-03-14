@@ -19,5 +19,25 @@ class Currency {
     return formatter.format(amount);
   }
 
+  int compareTo(Currency other) {
+    return this > other ? 1 : (this < other ? -1 : 0);
+  }
+
+  bool operator >(Currency other) {
+    return amount > other.amount;
+  }
+
+  bool operator <(Currency other) {
+    return amount < other.amount;
+  }
+
+  bool operator >=(Currency other) {
+    return amount >= other.amount;
+  }
+
+  bool operator <=(Currency other) {
+    return amount <= other.amount;
+  }
+
   static const String defaultCode = 'EUR';
 }
