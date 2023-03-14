@@ -23,8 +23,9 @@ class FlutterTestApp extends StatelessWidget {
   FlutterTestApp({super.key}) {
     Get.put(AuthController());
     Get.put(CartController());
-    _appConfigurationController =
-        Get.put(AppConfigurationController(Localization.supportedLocales));
+    _appConfigurationController = Get.put(
+      AppConfigurationController(Localization.supportedLocales),
+    );
   }
 
   @override
