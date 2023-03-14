@@ -41,7 +41,7 @@ class CartScreenController extends GetxController {
   Future<void> _loadBooks({VoidCallback? onError}) async {
     _isLoading.value = true;
 
-    final newCartBookEntries = <CartBookEntry>[];
+    _cartBooksEntries.value = [];
 
     for (var entry in cartController.cart!.entries) {
       final bookFetchingResult = await BookRepository.fetchBook(entry.bookId);
@@ -49,20 +49,19 @@ class CartScreenController extends GetxController {
       if (bookFetchingResult.success) {
         final book = bookFetchingResult.data!;
 
-        newCartBookEntries.add(
+        _cartBooksEntries.value = [
+          ..._cartBooksEntries,
           CartBookEntry(
             book: book,
             count: entry.count,
           ),
-        );
+        ];
       } else {
         onError?.call();
         _isLoading.value = false;
         return;
       }
     }
-
-    _cartBooksEntries.value = newCartBookEntries;
 
     _isLoading.value = false;
   }

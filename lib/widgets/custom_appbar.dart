@@ -11,6 +11,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget>? actions;
   final VoidCallback? onRefresh;
   final bool showCartButton;
+  final bool isRefreshing;
 
   final CartController _cartController = Get.find();
 
@@ -19,6 +20,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actions,
     this.showCartButton = true,
     this.onRefresh,
+    this.isRefreshing = false,
     super.key,
   });
 
@@ -82,7 +84,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         title: Text(titleText),
         actions: [
           if (actions != null) ...actions!,
-          if (onRefresh != null)
+          if (isRefreshing)
+            const Padding(
+              padding: EdgeInsets.only(right: 12.0),
+              child: SizedBox(
+                height: 20,
+                width: 20,
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          if (!isRefreshing && onRefresh != null)
             IconButton(
               onPressed: onRefresh,
               icon: const Icon(FontAwesomeIcons.arrowsRotate),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test_app/utils/styling.dart';
+import 'package:flutter_test_app/widgets/buttons/ink_well_button.dart';
 
 class WideButton extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
@@ -22,21 +23,11 @@ class WideButton extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         height: 50,
-        child: TextButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(
-              Theme.of(context).primaryColor,
-            ),
-            overlayColor: MaterialStateProperty.all<Color>(
-              Colors.black26,
-            ),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(borderRadiusValue),
-              ),
-            ),
-          ),
-          onPressed: onPressed,
+        child: InkWellButton(
+          elevation: 10,
+          borderRadius: BorderRadius.circular(borderRadiusValue),
+          onTap: onPressed,
+          backgroundColor: Theme.of(context).primaryColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
