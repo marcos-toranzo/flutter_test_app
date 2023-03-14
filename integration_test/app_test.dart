@@ -1,11 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_test_app/app_configuration.dart';
 import 'package:flutter_test_app/services/network_service/network_service.dart';
-import 'package:flutter_test_app/views/home/book_category_preview.dart';
 import 'package:flutter_test_app/views/login_signup/login_signup_form/email_form_field.dart';
 import 'package:flutter_test_app/views/login_signup/login_signup_form/password_form_field.dart';
 import 'package:flutter_test_app/widgets/buttons/wide_button.dart';
-import 'package:flutter_test_app/widgets/custom_appbar.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:flutter_test_app/main.dart' as app;
@@ -521,7 +519,7 @@ const _bookCategoriesResults = {
                 ],
                 "publisher": "Pablo Garde",
                 "publishedDate": "2022-09-25",
-                "description": "Un capitán y una soldado del Ejército de Tierra español acaban en un mundo de fantasía como el de las obras de ficción que tanto les gustan. Con un carro de combate y su equipo de campaña, tendrán que buscar la forma de encajar en un mundo más complicado de lo que pensaban. Realismo militar, un gran espíritu ochentero y frikismo variopinto se unen en una tragicomedia de acción y aventuras que nace del \"Ten cuidado con lo que deseas\".",
+                "description": "Un capitán y una soldado del Ejército de Tierra español acaban en un mundo de fantasía como el de las obras de ficción que tanto les gustan. Con un carro de combate y su equipo de campaña, tendrán que buscar la forma de encajar en un mundo más complicado de lo que pensaban. Realismo militar, un gran espíritu ochentero y frikismo variopinto se unen en una tragicomedia de acción y aventuras que nace del "Ten cuidado con lo que deseas".",
                 "readingModes": {
                     "text": false,
                     "image": true
