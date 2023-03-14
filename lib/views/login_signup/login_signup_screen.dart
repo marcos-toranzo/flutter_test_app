@@ -68,6 +68,7 @@ class LoginSignUpScreen extends StatelessWidget {
                     Column(
                       children: [
                         WideButton(
+                          elevation: 0,
                           text: controller.isLogingIn
                               ? translations.toLogin
                               : translations.toSignUp,
