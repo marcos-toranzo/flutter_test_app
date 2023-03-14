@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test_app/app_configuration.dart';
+import 'package:flutter_test_app/controllers/cart_controller.dart';
 import 'package:flutter_test_app/utils/notifications.dart';
 import 'package:flutter_test_app/views/home/home_screen.dart';
 import 'package:flutter_test_app/views/login_signup/login_signup_form/login_signup_form.dart';
@@ -17,6 +18,7 @@ class LoginSignUpScreen extends StatelessWidget {
   static const routeName = '/login_signup';
 
   final AuthController _authController = Get.find();
+  final CartController _cartController = Get.find();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -31,6 +33,15 @@ class LoginSignUpScreen extends StatelessWidget {
     final translations = AppTranslations.of(context);
 
     const verticalPadding = 100.0;
+
+    onError() {
+      showSnackBar(
+        context: context,
+        text: controller.isLogingIn
+            ? translations.errorLogingIn
+            : translations.errorSigningUp,
+      );
+    }
 
     return DoubleDismissScreen(
       child: Obx(
@@ -75,14 +86,7 @@ class LoginSignUpScreen extends StatelessWidget {
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               controller.onSubmit(
-                                onError: () {
-                                  showSnackBar(
-                                    context: context,
-                                    text: controller.isLogingIn
-                                        ? translations.errorLogingIn
-                                        : translations.errorSigningUp,
-                                  );
-                                },
+                                onError: onError,
                                 onInvalidCredentials: () {
                                   showSnackBar(
                                     context: context,
@@ -90,9 +94,15 @@ class LoginSignUpScreen extends StatelessWidget {
                                   );
                                 },
                                 onSuccess: () {
-                                  routingService.popAndPushRoute(
-                                    context: context,
-                                    routeName: HomeScreen.routeName,
+                                  _cartController.fetchCart(
+                                    id: _authController.user!.cartId,
+                                    onError: onError,
+                                    onSuccess: () {
+                                      routingService.popAndPushRoute(
+                                        context: context,
+                                        routeName: HomeScreen.routeName,
+                                      );
+                                    },
                                   );
                                 },
                               );
