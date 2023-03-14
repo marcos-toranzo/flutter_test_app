@@ -6,6 +6,8 @@
 
 ### Flutter test app.
 
+Answers to the theoretical test are in the file [`ANSWERS.md`](ANSWERS.md).
+
 ## SDK
 
 Flutter: 3.7.7 (stable).
