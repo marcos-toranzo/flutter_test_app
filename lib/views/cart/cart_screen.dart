@@ -44,7 +44,7 @@ class CartScreen extends StatelessWidget {
           isRefreshing: controller.isLoading,
         ),
         floatingActionButton:
-            !controller.isLoading && _cartController.totalCount > 0
+            !controller.isLoading && controller.cartBooksEntries.isNotEmpty
                 ? CartCheckoutFAB(
                     enabled: !controller.isEditingCount,
                     controller: controller,

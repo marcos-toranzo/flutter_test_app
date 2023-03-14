@@ -49,71 +49,67 @@ class BookCategoryPreview extends StatelessWidget {
     }
 
     return SimpleCard(
-      elevation: 0.5,
       borderRadius: borderRadius,
-      child: InkWellButton(
-        onTap: goToCategoryView,
-        borderRadius: borderRadius,
-        child: ColumnWithPadding(
-          padding: EdgeInsets.only(top: 10, bottom: paddingValue),
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            RowWithPadding(
-              padding: EdgeInsets.symmetric(horizontal: paddingValue),
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: HorizontallyScrollableText.onBackground(
-                    translations.categoryName(bookCategory.name),
-                    style: theme.textTheme.titleLarge,
-                  ),
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (onSort != null) SortByPriceButton(onSort: onSort!),
-                  ],
-                ),
-              ],
-            ),
-            const Space.vertical(12),
-            SizedBox(
-              height: 200,
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: bookCategory.books.length + 1,
-                itemBuilder: (_, index) => Padding(
-                  padding: EdgeInsets.only(
-                    right: index == bookCategory.books.length
-                        ? paddingValue
-                        : paddingValue / 2,
-                    left: index == 0 ? paddingValue : paddingValue / 2,
-                  ),
-                  child: index < bookCategory.books.length
-                      ? BookPreview(
-                          key: Key('book#${bookCategory.books[index].id}'),
-                          book: bookCategory.books[index],
-                        )
-                      : InkWellButton(
-                          transparent: false,
-                          onTap: goToCategoryView,
-                          borderRadius: borderRadius,
-                          child: SizedBox(
-                            width: 100,
-                            child: Icon(
-                              FontAwesomeIcons.chevronRight,
-                              color: theme.primaryColor,
-                            ),
-                          ),
-                        ),
+      onTap: goToCategoryView,
+      child: ColumnWithPadding(
+        padding: EdgeInsets.only(top: 10, bottom: paddingValue),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          RowWithPadding(
+            padding: EdgeInsets.symmetric(horizontal: paddingValue),
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: HorizontallyScrollableText.onBackground(
+                  translations.categoryName(bookCategory.name),
+                  style: theme.textTheme.titleLarge,
                 ),
               ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (onSort != null) SortByPriceButton(onSort: onSort!),
+                ],
+              ),
+            ],
+          ),
+          const Space.vertical(12),
+          SizedBox(
+            height: 200,
+            child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: bookCategory.books.length + 1,
+              itemBuilder: (_, index) => Padding(
+                padding: EdgeInsets.only(
+                  right: index == bookCategory.books.length
+                      ? paddingValue
+                      : paddingValue / 2,
+                  left: index == 0 ? paddingValue : paddingValue / 2,
+                ),
+                child: index < bookCategory.books.length
+                    ? BookPreview(
+                        key: Key('book#${bookCategory.books[index].id}'),
+                        book: bookCategory.books[index],
+                      )
+                    : InkWellButton(
+                        transparent: false,
+                        onTap: goToCategoryView,
+                        borderRadius: borderRadius,
+                        child: SizedBox(
+                          width: 100,
+                          child: Icon(
+                            FontAwesomeIcons.chevronRight,
+                            color: theme.primaryColor,
+                          ),
+                        ),
+                      ),
+              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

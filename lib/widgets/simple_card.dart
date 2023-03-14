@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_test_app/widgets/buttons/ink_well_button.dart';
 
 class SimpleCard extends StatelessWidget {
   final Widget child;
   final BorderRadius? borderRadius;
   final double elevation;
+  final VoidCallback? onTap;
 
   const SimpleCard({
     required this.child,
     this.borderRadius,
-    this.elevation = 0.0,
+    this.onTap,
+    this.elevation = 0.5,
     super.key,
   });
 
@@ -23,7 +26,13 @@ class SimpleCard extends StatelessWidget {
           color: Theme.of(context).cardColor.withAlpha(255),
           borderRadius: borderRadius,
         ),
-        child: child,
+        child: onTap != null
+            ? InkWellButton(
+                borderRadius: borderRadius,
+                onTap: onTap,
+                child: child,
+              )
+            : child,
       ),
     );
   }

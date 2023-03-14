@@ -90,7 +90,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: SizedBox(
                 height: 20,
                 width: 20,
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(strokeWidth: 2),
               ),
             ),
           if (!isRefreshing && onRefresh != null)

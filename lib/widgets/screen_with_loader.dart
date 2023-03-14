@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_test_app/widgets/column_with_padding.dart';
+import 'package:flutter_test_app/widgets/row_with_padding.dart';
 
 class ScreenWithLoader extends StatelessWidget {
   final Widget? body;
@@ -30,26 +32,27 @@ class ScreenWithLoader extends StatelessWidget {
         children: [
           if (body != null) body!,
           if (isLoading)
-            Row(
+            RowWithPadding(
+              padding: const EdgeInsets.only(top: 10),
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context)
-                        .scaffoldBackgroundColor
-                        .withAlpha(200),
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(30),
-                      bottomRight: Radius.circular(30),
-                    ),
-                  ),
-                  child: Column(
+                Material(
+                  color:
+                      Theme.of(context).scaffoldBackgroundColor.withAlpha(200),
+                  borderRadius: BorderRadius.circular(100),
+                  elevation: 10,
+                  child: ColumnWithPadding(
+                    padding: const EdgeInsets.all(10),
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CircularProgressIndicator(
-                        color: Theme.of(context).primaryColor,
+                      SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
+                          color: Theme.of(context).primaryColor,
+                          strokeWidth: 2,
+                        ),
                       ),
                     ],
                   ),
