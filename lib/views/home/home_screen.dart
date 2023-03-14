@@ -52,6 +52,12 @@ class HomeScreen extends StatelessWidget {
                 child: BookCategoryPreview(
                   bookCategory: bookCategory,
                   paddingValue: paddingValue,
+                  onSort: (sortOrder) {
+                    controller.onSortByPrice(
+                      sortOrder: sortOrder,
+                      bookCategoryName: bookCategory.name,
+                    );
+                  },
                 ),
               ),
             ),
