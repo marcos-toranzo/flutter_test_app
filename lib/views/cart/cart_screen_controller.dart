@@ -12,7 +12,10 @@ class CartScreenController extends GetxController {
   final CartController cartController;
 
   final _isLoading = false.obs;
-  bool get isLoading => _isLoading.value || cartController.isLoading;
+  bool get isLoading => _isLoading.value;
+
+  final _isEditingCount = false.obs;
+  bool get isEditingCount => _isEditingCount.value;
 
   final _cartBooksEntries = RxList<CartBookEntry>([]);
   List<CartBookEntry> get cartBooksEntries => _cartBooksEntries;
@@ -73,26 +76,55 @@ class CartScreenController extends GetxController {
   Future<bool> addBook(
     Id id, {
     VoidCallback? onError,
-  }) =>
-      cartController.addBook(
-        id,
-        onError: onError,
-        onSuccess: () {
-          onRefresh(onError: onError);
-        },
-      );
+  }) async {
+    _isEditingCount.value = true;
+
+    final cartBooksEntriesBefore = [..._cartBooksEntries];
+
+    _cartBooksEntries.value = _cartBooksEntries.mapList(
+      (entry) => entry.book.id == id
+          ? CartBookEntry(book: entry.book, count: entry.count + 1)
+          : entry,
+    );
+
+    final result = await cartController.addBook(
+      id,
+      onError: () {
+        _cartBooksEntries.value = cartBooksEntriesBefore;
+        onError?.call();
+      },
+    );
+
+    _isEditingCount.value = false;
+    return result;
+  }
 
   Future<bool> removeBook(
     Id id, {
     int count = 1,
     VoidCallback? onError,
-  }) =>
-      cartController.removeBook(
-        id,
-        count: count,
-        onError: onError,
-        onSuccess: () {
-          onRefresh(onError: onError);
-        },
-      );
+  }) async {
+    _isEditingCount.value = true;
+
+    final cartBooksEntriesBefore = [..._cartBooksEntries];
+
+    _cartBooksEntries.value = _cartBooksEntries.mapWhereList(
+      (entry) => entry.book.id == id
+          ? CartBookEntry(book: entry.book, count: entry.count - count)
+          : entry,
+      (entry) => entry.count > 0,
+    );
+
+    final result = await cartController.removeBook(
+      id,
+      count: count,
+      onError: () {
+        _cartBooksEntries.value = cartBooksEntriesBefore;
+        onError?.call();
+      },
+    );
+
+    _isEditingCount.value = false;
+    return result;
+  }
 }

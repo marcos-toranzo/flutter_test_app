@@ -8,11 +8,13 @@ class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String text;
   final IconData? iconData;
+  final bool enabled;
 
   const CustomButton({
     required this.onPressed,
     required this.text,
     this.iconData,
+    this.enabled = true,
     super.key,
   });
 
@@ -20,7 +22,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWellButton(
       transparent: false,
-      onTap: onPressed,
+      onTap: enabled ? onPressed : () {},
       borderRadius: BorderRadius.circular(borderRadiusValue),
       child: RowWithPadding(
         padding: const EdgeInsets.symmetric(
@@ -31,13 +33,21 @@ class CustomButton extends StatelessWidget {
           Text(
             text,
             style: TextStyle(
-              color: Theme.of(context).primaryColor,
+              color: enabled
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).disabledColor,
               fontWeight: FontWeight.w500,
             ),
           ),
           if (iconData != null) ...[
             const Space.horizontal(5),
-            Icon(iconData, size: 10, color: Theme.of(context).primaryColor),
+            Icon(
+              iconData,
+              size: 10,
+              color: enabled
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).disabledColor,
+            ),
           ]
         ],
       ),

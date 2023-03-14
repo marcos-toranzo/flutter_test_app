@@ -7,11 +7,13 @@ class WideButton extends StatelessWidget {
   final String text;
   final IconData? iconData;
   final VoidCallback onPressed;
+  final bool enabled;
 
   const WideButton({
     super.key,
     this.padding,
     this.iconData,
+    this.enabled = true,
     required this.text,
     required this.onPressed,
   });
@@ -24,10 +26,12 @@ class WideButton extends StatelessWidget {
         width: double.infinity,
         height: 50,
         child: InkWellButton(
-          elevation: 10,
+          elevation: enabled ? 10 : 0,
           borderRadius: BorderRadius.circular(borderRadiusValue),
-          onTap: onPressed,
-          backgroundColor: Theme.of(context).primaryColor,
+          onTap: enabled ? onPressed : () {},
+          backgroundColor: enabled
+              ? Theme.of(context).primaryColor
+              : Theme.of(context).disabledColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

@@ -48,7 +48,9 @@ class CartController extends GetxController {
   }) async {
     _isLoading.value = true;
 
-    final response = await CartRepository.addBook(id);
+    final response = await CartRepository.addBook(
+      id,
+    );
 
     if (response.success) {
       _cart.value = response.data!;
@@ -73,7 +75,10 @@ class CartController extends GetxController {
   }) async {
     _isLoading.value = true;
 
-    final response = await CartRepository.removeBook(id, count);
+    final response = await CartRepository.removeBook(
+      id,
+      count: count,
+    );
 
     if (response.success) {
       _cart.value = response.data!;

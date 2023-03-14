@@ -19,10 +19,15 @@ import 'package:get/get.dart';
 
 class CartEntryWidget extends StatelessWidget {
   final CartBookEntry entry;
+  final VoidCallback? onRemoveBookError;
 
   final CartScreenController _cartScreenController = Get.find();
 
-  CartEntryWidget({required this.entry, super.key});
+  CartEntryWidget({
+    required this.entry,
+    this.onRemoveBookError,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +79,7 @@ class CartEntryWidget extends StatelessWidget {
                         const Space.vertical(10),
                         AddRemoveBook(
                           count: entry.count,
+                          isEditingCount: _cartScreenController.isEditingCount,
                           onMinusPressed: () {
                             _cartScreenController.removeBook(
                               book.id,
@@ -100,12 +106,7 @@ class CartEntryWidget extends StatelessWidget {
                             _cartScreenController.removeBook(
                               book.id,
                               count: entry.count,
-                              onError: () {
-                                showSnackBar(
-                                  context: context,
-                                  text: translations.errorAddingToCart,
-                                );
-                              },
+                              onError: onRemoveBookError,
                             );
                           },
                         ),

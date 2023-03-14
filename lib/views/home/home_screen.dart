@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test_app/utils/iterable_utils.dart';
 import 'package:flutter_test_app/utils/localization.dart';
 import 'package:flutter_test_app/utils/notifications.dart';
-import 'package:flutter_test_app/utils/styling.dart';
 import 'package:flutter_test_app/views/home/book_category_preview.dart';
 import 'package:flutter_test_app/views/home/home_screen_controller.dart';
-import 'package:flutter_test_app/widgets/column_with_padding.dart';
 import 'package:flutter_test_app/widgets/custom_appbar.dart';
 import 'package:flutter_test_app/widgets/custom_drawer.dart';
 import 'package:flutter_test_app/widgets/double_dismiss_screen.dart';
 import 'package:flutter_test_app/widgets/screen_with_loader.dart';
-import 'package:flutter_test_app/widgets/space.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {

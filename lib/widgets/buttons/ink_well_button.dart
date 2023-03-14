@@ -4,12 +4,12 @@ class InkWellButton extends StatelessWidget {
   final double elevation;
   final BorderRadius? borderRadius;
   final bool transparent;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final Widget child;
   final Color? backgroundColor;
 
   const InkWellButton({
-    required this.onTap,
+    this.onTap,
     required this.child,
     this.elevation = 0.0,
     this.borderRadius,
