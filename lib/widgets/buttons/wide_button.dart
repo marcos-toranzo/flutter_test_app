@@ -8,11 +8,13 @@ class WideButton extends StatelessWidget {
   final IconData? iconData;
   final VoidCallback onPressed;
   final bool enabled;
+  final double elevation;
 
   const WideButton({
     super.key,
     this.padding,
     this.iconData,
+    this.elevation = 10,
     this.enabled = true,
     required this.text,
     required this.onPressed,
@@ -26,7 +28,7 @@ class WideButton extends StatelessWidget {
         width: double.infinity,
         height: 50,
         child: InkWellButton(
-          elevation: enabled ? 10 : 0,
+          elevation: enabled ? elevation : 0,
           borderRadius: BorderRadius.circular(borderRadiusValue),
           onTap: enabled ? onPressed : () {},
           backgroundColor: enabled

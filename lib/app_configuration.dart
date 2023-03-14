@@ -9,9 +9,9 @@ import 'package:flutter_test_app/services/storage_service/shared_preferences_sto
 import 'package:flutter_test_app/services/storage_service/storage_service.dart';
 import 'package:flutter_test_app/utils/logging.dart';
 
-final NetworkService networkService = HttpNetworkService();
-final StorageService<String> storageService = SharedPreferencesStorageService();
-final StorageService<String> secureStorageService =
+NetworkService networkService = HttpNetworkService();
+StorageService<String> storageService = SharedPreferencesStorageService();
+StorageService<String> secureStorageService =
     FlutterSecureStorageStorageService();
 final RoutingService routingService = GetXRoutingService();
 final Logger logger = kDebugMode ? DebugLogger() : ReleaseLogger();
