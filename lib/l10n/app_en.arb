@@ -120,6 +120,8 @@
   },
   "name": "Name",
   "notForSale": "NOT FOR SALE",
+  "notImplemented": "Not Implemented",
+  "notInTheScopeOfTheTest": "Not in the scope of the test.",
   "ok": "Ok",
   "password": "Password",
   "passwordsDontMatch": "Passwords don't match",

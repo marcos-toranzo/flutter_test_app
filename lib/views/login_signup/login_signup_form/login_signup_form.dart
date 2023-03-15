@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_test_app/app_configuration.dart';
 import 'package:flutter_test_app/utils/localization.dart';
 import 'package:flutter_test_app/utils/validators.dart';
 import 'package:flutter_test_app/views/login_signup/login_signup_form/email_form_field.dart';
 import 'package:flutter_test_app/views/login_signup/login_signup_form/password_form_field.dart';
+import 'package:flutter_test_app/widgets/buttons/wide_button.dart';
 import 'package:flutter_test_app/widgets/form_fields/custom_form.dart';
 import 'package:flutter_test_app/widgets/form_fields/custom_text_form_field.dart';
 
@@ -87,9 +89,24 @@ class LoginSignUpForm extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: TextButton(
-              // TODO: go to Forgot your password flow.
-              // NOT IN THE SCOPE OF THE TEST
-              onPressed: () {},
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) => AlertDialog(
+                    title: Text(translations.notImplemented),
+                    content: Text(translations.notInTheScopeOfTheTest),
+                    actions: [
+                      WideButton(
+                        onPressed: () {
+                          routingService.popRoute(context);
+                        },
+                        text: translations.ok,
+                      ),
+                    ],
+                  ),
+                );
+              },
               child: Text(
                 translations.forgotYourPassowrd,
                 textAlign: TextAlign.center,

@@ -120,6 +120,8 @@
   },
   "name": "Nombre",
   "notForSale": "NO EN VENTA",
+  "notImplemented": "No implementado",
+  "notInTheScopeOfTheTest": "No se encuentra en los objetivos de este test.",
   "ok": "Ok",
   "password": "Contraseña",
   "passwordsDontMatch": "Las contraseñas no son iguales",
