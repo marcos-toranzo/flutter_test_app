@@ -11,8 +11,8 @@ Answers to the theoretical test are in the file [`ANSWERS.md`](ANSWERS.md).
 Time wasn't enough to get everything done. So:
 
 - Only login works and with the hardcoded user. 
-  - Email: 'user@email.com'
-  - Password: anything-not-empty
+  - Email: `user@email.com`
+  - Password: `<anything-not-empty>`
 - Only one user defined in the repository.
 - Cart resets on new session or on reload.
 - The repositories (except BookRepository) use `Future.delayed` to simulate real fetching.
