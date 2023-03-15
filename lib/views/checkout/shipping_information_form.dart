@@ -49,6 +49,7 @@ class ShippingInformationForm extends StatelessWidget {
           formKey: formKey,
           fields: [
             CustomTextFormField(
+              key: const ValueKey('shippingInfoFormNameField'),
               controller: nameController,
               hintText: translations.name,
               position: TextFormFieldPosition.top,
@@ -59,6 +60,7 @@ class ShippingInformationForm extends StatelessWidget {
               ],
             ),
             CustomTextFormField(
+              key: const ValueKey('shippingInfoFormAddressField'),
               controller: addressController,
               hintText: translations.addressLine,
               position: TextFormFieldPosition.center,
@@ -69,6 +71,7 @@ class ShippingInformationForm extends StatelessWidget {
               ],
             ),
             CustomTextFormField(
+              key: const ValueKey('shippingInfoFormCountryField'),
               controller: countryController,
               hintText: translations.country,
               position: TextFormFieldPosition.center,
@@ -83,6 +86,7 @@ class ShippingInformationForm extends StatelessWidget {
               children: [
                 Expanded(
                   child: CustomTextFormField(
+                    key: const ValueKey('shippingInfoFormCityField'),
                     controller: cityController,
                     hintText: translations.city,
                     position: TextFormFieldPosition.bottomLeft,
@@ -95,6 +99,7 @@ class ShippingInformationForm extends StatelessWidget {
                 ),
                 Expanded(
                   child: CustomTextFormField(
+                    key: const ValueKey('shippingInfoFormZipCodeField'),
                     controller: zipCodeController,
                     hintText: translations.zipCode,
                     position: TextFormFieldPosition.bottomRight,

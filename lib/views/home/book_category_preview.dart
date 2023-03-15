@@ -91,7 +91,7 @@ class BookCategoryPreview extends StatelessWidget {
                 ),
                 child: index < bookCategory.books.length
                     ? BookPreview(
-                        key: Key('book#${bookCategory.books[index].id}'),
+                        key: ValueKey('book#${bookCategory.books[index].id}'),
                         book: bookCategory.books[index],
                       )
                     : InkWellButton(

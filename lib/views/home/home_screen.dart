@@ -40,6 +40,7 @@ class HomeScreen extends StatelessWidget {
           ),
           drawer: CustomDrawer(),
           body: ListView(
+            key: const ValueKey('bookCategoriesListView'),
             padding: const EdgeInsets.only(top: 12),
             physics: const BouncingScrollPhysics(),
             children: controller.bookCategories.mapList(
@@ -50,6 +51,7 @@ class HomeScreen extends StatelessWidget {
                   right: 10,
                 ),
                 child: BookCategoryPreview(
+                  key: ValueKey('bookCategory#${bookCategory.name}'),
                   bookCategory: bookCategory,
                   paddingValue: paddingValue,
                   onSort: (sortOrder) {

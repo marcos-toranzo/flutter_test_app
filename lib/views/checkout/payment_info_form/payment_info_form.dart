@@ -44,6 +44,7 @@ class PaymentInfoForm extends StatelessWidget {
               position: TextFormFieldPosition.top,
             ),
             CustomTextFormField(
+              key: const ValueKey('paymentInfoFormCardHolderNameField'),
               controller: cardHolderNameController,
               hintText: translations.cardHolderName,
               position: TextFormFieldPosition.center,

@@ -70,6 +70,7 @@ class CheckoutScreen extends StatelessWidget {
               ),
               const Space.vertical(60),
               WideButton(
+                key: const ValueKey('payButton'),
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 text: '${translations.pay} ${toPay.format()}',
                 onPressed: () {
@@ -94,6 +95,8 @@ class CheckoutScreen extends StatelessWidget {
                             content: Text(translations.paymentSuccessful),
                             actions: [
                               WideButton(
+                                key: const ValueKey(
+                                    'purchaseSuccessfulOkButton'),
                                 onPressed: () {
                                   routingService.popUntil(
                                     context: context,
