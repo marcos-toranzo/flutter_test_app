@@ -24,6 +24,12 @@ class _DoubleDismissScreenState extends State<DoubleDismissScreen> {
   Timer? _timer;
 
   @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final translations = AppTranslations.of(context);
 

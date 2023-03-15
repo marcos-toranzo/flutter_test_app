@@ -27,8 +27,6 @@ class Environment {
 
   static String get googleBooksApiBaseUrl =>
       _getVariable('GOOGLE_BOOKS_API_BASE_URL');
-  static String get googleBooksApiVolumesEndpoint =>
-      _getVariable('GOOGLE_BOOKS_API_VOLUMES_ENDPOINT');
   static String get googleBooksApiKey => _getVariable('GOOGLE_BOOKS_API_KEY');
 
   static String get userIdKey => _getVariable('USER_ID_KEY');

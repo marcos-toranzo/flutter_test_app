@@ -5,6 +5,8 @@ import 'package:flutter_test_app/widgets/app_logo.dart';
 import 'package:flutter_test_app/widgets/cutom_text.dart';
 import 'package:flutter_test_app/widgets/space.dart';
 
+import '../../test_utils/widget_finders.dart';
+
 void main() {
   testWidgets('AppLogo should not show text', (tester) async {
     await tester.pumpWidget(_getAppLogo(size: 100, includeText: false));
@@ -27,11 +29,9 @@ void main() {
 
     await tester.pumpWidget(_getAppLogo(size: size));
 
-    final svgPictureFinder = find.byType(SvgPicture);
+    final findWidgetByType = findAndGetWidgetByType(find, tester);
 
-    expect(svgPictureFinder, findsOneWidget);
-
-    final svgPicture = tester.widget(svgPictureFinder) as SvgPicture;
+    final SvgPicture svgPicture = findWidgetByType();
 
     expect(svgPicture.pictureProvider is ExactAssetPicture, true);
     expect(
@@ -48,11 +48,9 @@ void main() {
 
     await tester.pumpWidget(_getAppLogo(size: size));
 
-    final columnFinder = find.byType(Column);
+    final findWidgetByType = findAndGetWidgetByType(find, tester);
 
-    expect(columnFinder, findsOneWidget);
-
-    final column = tester.widget(columnFinder) as Column;
+    final Column column = findWidgetByType();
 
     expect(column.children.length, 3);
 

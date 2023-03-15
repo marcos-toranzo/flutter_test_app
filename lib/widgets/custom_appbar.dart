@@ -31,6 +31,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     final total = _cartController.totalCount;
 
     return IconButton(
+      key: const ValueKey('cartButton'),
       onPressed: () {
         routingService.pushRoute(
           context: context,
@@ -95,6 +96,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           if (!isRefreshing && onRefresh != null)
             IconButton(
+              key: const ValueKey('refreshButton'),
               onPressed: onRefresh,
               icon: const Icon(FontAwesomeIcons.arrowsRotate),
             ),

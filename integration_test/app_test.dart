@@ -15,10 +15,10 @@ import 'package:integration_test/integration_test.dart';
 
 import 'package:flutter_test_app/main.dart' as app;
 
-import 'mocks/mock_network_service.dart';
-import 'mocks/mock_secure_storage_service.dart';
-import 'mocks/mock_storage_service.dart';
-import 'utils/widget_finders.dart';
+import '../test_utils/mocks/mock_network_service.dart';
+import '../test_utils/mocks/mock_secure_storage_service.dart';
+import '../test_utils/mocks/mock_storage_service.dart';
+import '../test_utils/widget_finders.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();

@@ -15,6 +15,7 @@ Time wasn't enough to get everything done. So:
   - Password: anything-not-empty
 - Only one user defined in the repository.
 - Cart resets on new session or on reload.
+- The repositories (except BookRepository) use `Future.delayed` to simulate real fetching.
 
 ## SDK
 

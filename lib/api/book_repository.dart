@@ -7,8 +7,7 @@ import 'package:flutter_test_app/utils/errors.dart';
 import 'package:flutter_test_app/utils/status_codes.dart';
 import 'package:flutter_test_app/utils/types.dart';
 
-final _volumesEndpoint = '${Environment.googleBooksApiBaseUrl}'
-    '${Environment.googleBooksApiVolumesEndpoint}';
+final _volumesEndpoint = '${Environment.googleBooksApiBaseUrl}/volumes';
 
 abstract class BookRepository {
   static Future<ApiResponse<List<Book>>> searchBooks({
