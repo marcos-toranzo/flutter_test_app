@@ -10,10 +10,7 @@ abstract class CartRepository {
   static Future<ApiResponse<Cart>> fetchCart(Id id) async {
     return Future.delayed(
       const Duration(seconds: 1),
-      () => ApiResponse(
-        success: true,
-        data: cart,
-      ),
+      () => SuccessApiResponse(data: cart),
     );
   }
 
@@ -49,10 +46,7 @@ abstract class CartRepository {
       () {
         cart = newCart;
 
-        return ApiResponse(
-          success: true,
-          data: cart,
-        );
+        return SuccessApiResponse(data: cart);
       },
     );
   }
@@ -85,10 +79,7 @@ abstract class CartRepository {
       () {
         cart = newCart;
 
-        return ApiResponse(
-          success: true,
-          data: cart,
-        );
+        return SuccessApiResponse(data: cart);
       },
     );
   }
@@ -103,10 +94,7 @@ abstract class CartRepository {
       () {
         cart = newCart;
 
-        return ApiResponse(
-          success: true,
-          data: cart,
-        );
+        return SuccessApiResponse(data: cart);
       },
     );
   }

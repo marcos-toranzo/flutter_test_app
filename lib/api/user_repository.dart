@@ -14,10 +14,7 @@ abstract class UserRepository {
   static Future<ApiResponse<User>> fetchUser() async {
     return Future.delayed(
       const Duration(seconds: 1),
-      () => ApiResponse(
-        success: true,
-        data: user,
-      ),
+      () => SuccessApiResponse(data: user),
     );
   }
 }

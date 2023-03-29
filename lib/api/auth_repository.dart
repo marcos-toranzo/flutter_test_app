@@ -13,12 +13,9 @@ abstract class AuthRepository {
       const Duration(seconds: 1),
       () {
         if (email == user.email) {
-          return ApiResponse(success: true, data: user.id);
+          return SuccessApiResponse(data: user.id);
         }
-        return const ApiResponse(
-          success: false,
-          errorCode: Errors.invalidCredentials,
-        );
+        return const ErrorApiResponse(errorCode: Error.invalidCredentials);
       },
     );
   }

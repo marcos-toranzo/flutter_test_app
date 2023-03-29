@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter_test_app/utils/status_codes.dart';
+import 'package:flutter_test_app/utils/status_code.dart';
 import 'package:http/http.dart';
 import 'package:flutter_test_app/app_configuration.dart';
 import 'package:flutter_test_app/services/network_service/network_service.dart';
 
 const _timeoutDuration = Duration(seconds: 5);
 
-Response _timeoutResponse() => Response('timeout', timeoutStatusCode);
+Response _timeoutResponse() => Response('timeout', StatusCode.timeout.code);
 
 typedef HttpMethod = Future<Response> Function(
   Uri url, {

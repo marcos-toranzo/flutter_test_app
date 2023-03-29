@@ -1,4 +1,5 @@
-enum Errors {
+enum Error {
   invalidCredentials,
   httpRequestTimeout,
+  unknown,
 }

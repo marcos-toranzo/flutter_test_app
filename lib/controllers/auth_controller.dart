@@ -65,7 +65,7 @@ class AuthController extends GetxController {
 
         return true;
       }
-    } else if (response.errorCode == Errors.invalidCredentials) {
+    } else if (response.errorCode == Error.invalidCredentials) {
       onInvalidCredentials?.call();
       _isLoading.value = false;
 
@@ -105,7 +105,7 @@ class AuthController extends GetxController {
 
         return true;
       }
-    } else if (response.errorCode == Errors.invalidCredentials) {
+    } else if (response.errorCode == Error.invalidCredentials) {
       onInvalidCredentials?.call();
       _isLoading.value = false;
 

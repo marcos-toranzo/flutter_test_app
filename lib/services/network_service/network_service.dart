@@ -40,7 +40,7 @@ class ApiResponse<T> {
   final T? data;
   final bool success;
   final String? errorMessage;
-  final Errors? errorCode;
+  final Error? errorCode;
 
   const ApiResponse({
     this.data,
@@ -48,4 +48,18 @@ class ApiResponse<T> {
     this.errorMessage,
     this.errorCode,
   });
+}
+
+class SuccessApiResponse<T> extends ApiResponse<T> {
+  const SuccessApiResponse({
+    super.data,
+  }) : super(success: true);
+}
+
+class ErrorApiResponse<T> extends ApiResponse<T> {
+  const ErrorApiResponse({
+    super.errorCode,
+    super.errorMessage,
+  })  : assert(errorCode != null || errorMessage != null),
+        super(success: false);
 }
