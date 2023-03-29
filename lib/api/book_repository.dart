@@ -5,7 +5,6 @@ import 'package:flutter_test_app/models/book.dart';
 import 'package:flutter_test_app/services/network_service/network_service.dart';
 import 'package:flutter_test_app/utils/errors.dart';
 import 'package:flutter_test_app/utils/status_code.dart';
-import 'package:flutter_test_app/utils/types.dart';
 import 'package:flutter_test_app/utils/iterable_utils.dart';
 
 final _volumesEndpoint = '${Environment.googleBooksApiBaseUrl}/volumes';
@@ -46,7 +45,7 @@ abstract class BookRepository {
     }
   }
 
-  static Future<ApiResponse<Book>> fetchBook(Id id) async {
+  static Future<ApiResponse<Book>> fetchBook(String id) async {
     try {
       final response = await networkService.get('$_volumesEndpoint/$id');
 

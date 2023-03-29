@@ -1,14 +1,9 @@
+import 'package:flutter_test_app/models/cart_entry.dart';
 import 'package:flutter_test_app/models/model.dart';
-import 'package:flutter_test_app/utils/types.dart';
-
-class CartEntry {
-  final Id bookId;
-  final int count;
-
-  const CartEntry({required this.bookId, this.count = 1});
-}
 
 class Cart extends Model {
+  static const String tableName = 'carts';
+
   final List<CartEntry> entries;
 
   const Cart({

@@ -42,7 +42,7 @@ class CartController extends GetxController {
   }
 
   Future<bool> addBook(
-    Id id, {
+    String id, {
     VoidCallback? onError,
     VoidCallback? onSuccess,
   }) async {
@@ -68,7 +68,7 @@ class CartController extends GetxController {
   }
 
   Future<bool> removeBook(
-    Id id, {
+    String id, {
     int count = 1,
     VoidCallback? onError,
     VoidCallback? onSuccess,

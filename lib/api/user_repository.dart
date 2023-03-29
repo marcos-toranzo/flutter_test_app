@@ -4,10 +4,9 @@ import 'package:flutter_test_app/services/network_service/network_service.dart';
 
 //! DELETE: fetch user correctly from service
 final user = User(
-  id: 'user1',
+  id: 1,
   email: 'user@email.com',
   cartId: cart.id,
-  username: 'User',
 );
 
 abstract class UserRepository {

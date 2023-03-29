@@ -3,7 +3,6 @@ import 'package:flutter_test_app/api/book_repository.dart';
 import 'package:flutter_test_app/controllers/cart_controller.dart';
 import 'package:flutter_test_app/utils/currency.dart';
 import 'package:flutter_test_app/utils/iterable_utils.dart';
-import 'package:flutter_test_app/utils/types.dart';
 import 'package:flutter_test_app/views/cart/cart_book_entry.dart';
 import 'package:get/get.dart';
 
@@ -74,7 +73,7 @@ class CartScreenController extends GetxController {
   }
 
   Future<bool> addBook(
-    Id id, {
+    String id, {
     VoidCallback? onError,
   }) async {
     _isEditingCount.value = true;
@@ -100,7 +99,7 @@ class CartScreenController extends GetxController {
   }
 
   Future<bool> removeBook(
-    Id id, {
+    String id, {
     int count = 1,
     VoidCallback? onError,
   }) async {

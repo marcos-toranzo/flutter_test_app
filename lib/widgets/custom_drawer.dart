@@ -53,13 +53,6 @@ class CustomDrawer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 HorizontallyScrollableText(
-                  _authController.user?.username ?? '',
-                  style: TextStyle(
-                    fontSize: 28,
-                    color: theme.colorScheme.onPrimary,
-                  ),
-                ),
-                HorizontallyScrollableText(
                   _authController.user?.email ?? '',
                   style: TextStyle(
                     fontSize: 18,

@@ -2,7 +2,7 @@ import 'package:flutter_test_app/app_configuration.dart';
 import 'package:flutter_test_app/utils/types.dart';
 
 Future<void> storeUserId(Id id) async {
-  await secureStorageService.write(Environment.userIdKey, id);
+  await secureStorageService.write(Environment.userIdKey, id.toString());
 }
 
 Future<void> eraseUserId() async {

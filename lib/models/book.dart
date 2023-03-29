@@ -1,7 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-
-import 'package:flutter_test_app/models/model.dart';
 import 'package:flutter_test_app/utils/currency.dart';
 
 class BookRatings {
@@ -21,7 +18,8 @@ enum BookSaleability {
   forPreorder,
 }
 
-class Book extends Model {
+class Book {
+  final String id;
   final String? title;
   final List<String>? authors;
   final String? publisher;
@@ -36,7 +34,7 @@ class Book extends Model {
   final BookSaleability saleability;
 
   const Book({
-    required super.id,
+    required this.id,
     this.title,
     this.authors,
     this.publisher,

@@ -1,10 +1,11 @@
 import 'package:flutter_test_app/models/cart.dart';
+import 'package:flutter_test_app/models/cart_entry.dart';
 import 'package:flutter_test_app/services/network_service/network_service.dart';
 import 'package:flutter_test_app/utils/iterable_utils.dart';
 import 'package:flutter_test_app/utils/types.dart';
 
 //! DELETE: fetch cart correctly from service
-var cart = const Cart(id: 'cart1');
+var cart = const Cart(id: 2);
 
 abstract class CartRepository {
   static Future<ApiResponse<Cart>> fetchCart(Id id) async {
@@ -14,7 +15,7 @@ abstract class CartRepository {
     );
   }
 
-  static Future<ApiResponse<Cart>> addBook(Id bookId) async {
+  static Future<ApiResponse<Cart>> addBook(String bookId) async {
     bool wasPresent = false;
 
     final newEntries = cart.entries.mapList(
@@ -23,6 +24,8 @@ abstract class CartRepository {
           wasPresent = true;
 
           return CartEntry(
+            id: 1,
+            cartId: cart.id,
             bookId: bookId,
             count: entry.count + 1,
           );
@@ -33,7 +36,7 @@ abstract class CartRepository {
     );
 
     if (!wasPresent) {
-      newEntries.add(CartEntry(bookId: bookId));
+      newEntries.add(CartEntry(id: 1, cartId: cart.id, bookId: bookId));
     }
 
     final newCart = Cart(
@@ -52,13 +55,15 @@ abstract class CartRepository {
   }
 
   static Future<ApiResponse<Cart>> removeBook(
-    Id bookId, {
+    String bookId, {
     int count = 1,
   }) async {
     final newEntries = cart.entries.mapWhereList(
       (entry) {
         if (entry.bookId == bookId) {
           return CartEntry(
+            id: 1,
+            cartId: cart.id,
             bookId: bookId,
             count: entry.count - count,
           );

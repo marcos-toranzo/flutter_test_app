@@ -25,6 +25,8 @@ dependencies:
   flutter_localized_locales: ^2.0.4
   flutter_multi_formatter: ^2.10.2
   cached_network_image: ^3.2.3
+  sqflite: ^2.2.6
+  path: ^1.8.2
 
 dev_dependencies:
   integration_test:

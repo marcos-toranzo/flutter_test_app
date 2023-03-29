@@ -7,7 +7,7 @@ class LoggedUserMockedSecureStorageService extends StorageService<String> {
 
   @override
   Future<String?> read(String key) async {
-    return user.id;
+    return user.id.toString();
   }
 
   @override

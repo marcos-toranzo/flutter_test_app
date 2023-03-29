@@ -1,26 +1,30 @@
 import 'package:flutter_test_app/models/model.dart';
 import 'package:flutter_test_app/utils/types.dart';
 
-class User extends Model {
-  static const String tableName = 'users';
-  static const String columnEmail = 'email';
+class CartEntry extends Model {
+  static const String tableName = 'cartEntries';
+  static const String columnBookId = 'bookId';
   static const String columnCartId = 'cartId';
+  static const String columnCount = 'count';
 
-  final String email;
+  final String bookId;
   final Id cartId;
+  final int count;
 
-  const User({
+  const CartEntry({
     required super.id,
-    required this.email,
+    required this.bookId,
     required this.cartId,
+    this.count = 1,
   });
 
   @override
   Map<String, dynamic> toMap() {
     return {
       ...super.toMap(),
-      columnEmail: email,
+      columnBookId: bookId,
       columnCartId: cartId,
+      columnCount: count,
     };
   }
 }
