@@ -22,7 +22,7 @@ class AuthController extends GetxController {
     bool validToken = userId != null && userId.isNotEmpty;
 
     if (validToken) {
-      final userInfoResponse = await UserRepository.fetchUser();
+      final userInfoResponse = await UserRepository.fetchUser(id: userId);
 
       if (userInfoResponse.success) {
         _user.value = userInfoResponse.data!;
@@ -54,17 +54,13 @@ class AuthController extends GetxController {
     );
 
     if (response.success) {
-      final userInfoResponse = await UserRepository.fetchUser();
+      await storeUserId(response.data!.id);
 
-      if (userInfoResponse.success) {
-        await storeUserId(response.data!);
+      _user.value = response.data!;
+      onSuccess?.call();
+      _isLoading.value = false;
 
-        _user.value = userInfoResponse.data!;
-        onSuccess?.call();
-        _isLoading.value = false;
-
-        return true;
-      }
+      return true;
     } else if (response.errorCode == Error.invalidCredentials) {
       onInvalidCredentials?.call();
       _isLoading.value = false;
@@ -94,17 +90,13 @@ class AuthController extends GetxController {
     );
 
     if (response.success) {
-      final userInfoResponse = await UserRepository.fetchUser();
+      await storeUserId(response.data!.id);
 
-      if (userInfoResponse.success) {
-        await storeUserId(response.data!);
+      _user.value = response.data!;
+      onSuccess?.call();
+      _isLoading.value = false;
 
-        _user.value = userInfoResponse.data!;
-        onSuccess?.call();
-        _isLoading.value = false;
-
-        return true;
-      }
+      return true;
     } else if (response.errorCode == Error.invalidCredentials) {
       onInvalidCredentials?.call();
       _isLoading.value = false;

@@ -1,5 +1,4 @@
 import 'package:flutter_test_app/services/storage_service/storage_service.dart';
-import 'package:flutter_test_app/api/user_repository.dart';
 
 class LoggedUserMockedSecureStorageService extends StorageService<String> {
   @override
@@ -7,7 +6,7 @@ class LoggedUserMockedSecureStorageService extends StorageService<String> {
 
   @override
   Future<String?> read(String key) async {
-    return user.id.toString();
+    return '0';
   }
 
   @override

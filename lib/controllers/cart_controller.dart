@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test_app/api/cart_repository.dart';
 import 'package:flutter_test_app/models/cart.dart';
+import 'package:flutter_test_app/models/cart_entry.dart';
 import 'package:flutter_test_app/utils/iterable_utils.dart';
 import 'package:flutter_test_app/utils/types.dart';
 import 'package:get/get.dart';
@@ -49,11 +50,25 @@ class CartController extends GetxController {
     _isLoading.value = true;
 
     final response = await CartRepository.addBook(
-      id,
+      cartId: cart!.id,
+      bookId: id,
     );
 
     if (response.success) {
-      _cart.value = response.data!;
+      final newEntry = response.data;
+
+      late final List<CartEntry> newEntries;
+
+      if (newEntry == null) {
+        newEntries = cart!.entries.mapList(
+          (entry) =>
+              entry.bookId == id ? entry.copyWithCount(entry.count + 1) : entry,
+        );
+      } else {
+        newEntries = [...cart!.entries, newEntry];
+      }
+
+      _cart.value = cart!.copyWithEntries(newEntries);
 
       onSuccess?.call();
       _isLoading.value = false;
@@ -76,12 +91,27 @@ class CartController extends GetxController {
     _isLoading.value = true;
 
     final response = await CartRepository.removeBook(
-      id,
+      cartId: cart!.id,
+      bookId: id,
       count: count,
     );
 
     if (response.success) {
-      _cart.value = response.data!;
+      final involvedEntry = response.data;
+
+      late final List<CartEntry> newEntries;
+
+      if (involvedEntry == null) {
+        newEntries = cart!.entries.whereList((entry) => entry.bookId != id);
+      } else {
+        newEntries = cart!.entries.mapList(
+          (entry) => entry.bookId == id
+              ? entry.copyWithCount(entry.count - count)
+              : entry,
+        );
+      }
+
+      _cart.value = cart!.copyWithEntries(newEntries);
 
       onSuccess?.call();
       _isLoading.value = false;
@@ -101,10 +131,10 @@ class CartController extends GetxController {
   }) async {
     _isLoading.value = true;
 
-    final response = await CartRepository.empty();
+    final response = await CartRepository.empty(cart!.id);
 
     if (response.success) {
-      _cart.value = response.data!;
+      _cart.value = cart!.copyWithEntries([]);
 
       onSuccess?.call();
       _isLoading.value = false;

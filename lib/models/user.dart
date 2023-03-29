@@ -6,14 +6,19 @@ class User extends Model {
   static const String columnEmail = 'email';
   static const String columnCartId = 'cartId';
 
-  final String email;
-  final Id cartId;
+  late final String email;
+  late final Id cartId;
 
-  const User({
-    required super.id,
+  User({
+    super.id,
     required this.email,
     required this.cartId,
   });
+
+  User.fromMap(Map<String, dynamic> map) : super.fromMap(map) {
+    email = map[columnEmail] as String;
+    cartId = map[columnCartId] as Id;
+  }
 
   @override
   Map<String, dynamic> toMap() {
