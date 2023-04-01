@@ -14,6 +14,14 @@ extension IterableHandling<K> on Iterable<K> {
     return map(toElement).whereList(test, growable: growable);
   }
 
+  List<T> whereMapList<T>(
+    bool Function(K) test,
+    T Function(K) toElement, {
+    bool growable = true,
+  }) {
+    return where(test).mapList(toElement, growable: growable);
+  }
+
   List<K> whereList(
     bool Function(K) test, {
     bool growable = true,
