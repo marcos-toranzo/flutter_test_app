@@ -14,6 +14,7 @@ import 'package:flutter_test_app/widgets/screen_with_loader.dart';
 import 'package:get/get.dart';
 
 import '../../test_utils/mocks/logged_user_mock_secure_storage_service.dart';
+import '../../test_utils/mocks/mock_database_service.dart';
 import '../../test_utils/mocks/mock_network_service.dart';
 import '../../test_utils/mocks/mock_storage_service.dart';
 import '../../test_utils/widget_finders.dart';
@@ -23,6 +24,7 @@ void main() {
     networkService = MockNetworkService();
     secureStorageService = LoggedUserMockedSecureStorageService();
     storageService = MockStorageService();
+    databaseService = MockDatabaseService();
 
     await initConfig();
 

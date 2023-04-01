@@ -1,6 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_test_app/app_configuration.dart';
+import 'package:flutter_test_app/models/cart.dart';
+import 'package:flutter_test_app/models/password.dart';
+import 'package:flutter_test_app/models/user.dart';
 import 'package:flutter_test_app/views/cart/cart_checkout_fab.dart';
 import 'package:flutter_test_app/views/checkout/payment_info_form/card_cvv_form_field.dart';
 import 'package:flutter_test_app/views/checkout/payment_info_form/card_expiration_date_form_field.dart';
@@ -15,6 +18,7 @@ import 'package:integration_test/integration_test.dart';
 
 import 'package:flutter_test_app/main.dart' as app;
 
+import '../test_utils/mocks/data.dart';
 import '../test_utils/mocks/mock_network_service.dart';
 import '../test_utils/mocks/mock_secure_storage_service.dart';
 import '../test_utils/mocks/mock_storage_service.dart';
@@ -26,11 +30,24 @@ void main() {
   group('end-to-end test', () {
     testWidgets('Log in, go to book, add to cart, checkout, pay',
         (tester) async {
-      app.main();
+      await app.main();
 
       networkService = MockNetworkService();
       secureStorageService = MockSecureStorageService();
       storageService = MockStorageService();
+
+      await databaseService.insert(
+        tableName: Cart.tableName,
+        model: mockCart,
+      );
+      await databaseService.insert(
+        tableName: User.tableName,
+        model: mockUser,
+      );
+      await databaseService.insert(
+        tableName: Password.tableName,
+        model: mockPassword,
+      );
 
       // main is async. We have to wait.
       await tester.pump(const Duration(seconds: 5));
@@ -43,8 +60,8 @@ void main() {
       final PasswordFormField passwordFormField = findWidgetByType();
       final WideButton loginButton = findWidgetByType();
 
-      emailFormField.controller.text = 'user@email.com';
-      passwordFormField.controller.text = 'a';
+      emailFormField.controller.text = mockUser.email;
+      passwordFormField.controller.text = mockPassword.value;
 
       loginButton.onPressed();
 

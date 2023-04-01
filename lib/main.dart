@@ -12,7 +12,7 @@ import 'package:flutter_test_app/views/login_signup/login_signup_screen.dart';
 import 'package:flutter_test_app/widgets/app_logo.dart';
 import 'package:flutter_test_app/widgets/space.dart';
 
-void main() async {
+Future<void> main() async {
   await initConfig();
   runApp(FlutterTestApp());
 }
