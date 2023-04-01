@@ -6,6 +6,10 @@
 
 ### Flutter test app.
 
+This app uses [Google Books API](https://developers.google.com/books) for fetching the books. For the rest, it uses [sqflite](https://pub.dev/packages/sqflite) package for storing users, passwords, carts and cart entries.
+
+It stores the user Id on each login/register to access the app directly the next time the user opens the app, without having to login again. This is intended to simulate the storing of access, refresh and id tokens obtained through some OAuth service of sorts.
+
 ## SDK
 
 Flutter: 3.7.7 (stable).
