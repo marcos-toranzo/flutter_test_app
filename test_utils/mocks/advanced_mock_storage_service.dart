@@ -10,7 +10,7 @@ class AdvancedMockStorageService extends StorageService<String> {
 
   @override
   Future<String?> read(String key) async {
-    _data[key];
+    return _data[key];
   }
 
   @override
