@@ -13,6 +13,7 @@ import 'package:flutter_test_app/widgets/custom_drawer.dart';
 import 'package:flutter_test_app/widgets/screen_with_loader.dart';
 import 'package:get/get.dart';
 
+import '../../test_utils/mocks/data.dart';
 import '../../test_utils/mocks/logged_user_mock_secure_storage_service.dart';
 import '../../test_utils/mocks/mock_database_service.dart';
 import '../../test_utils/mocks/mock_network_service.dart';
